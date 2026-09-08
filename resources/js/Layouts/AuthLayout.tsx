@@ -12,6 +12,7 @@ type AuthLayoutProps = {
     footerPrompt?: string;
     footerAction?: string;
     footerActionHref?: string;
+    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 };
 
 export default function AuthLayout({
@@ -22,9 +23,11 @@ export default function AuthLayout({
     footerPrompt,
     footerAction,
     footerActionHref = '#',
+    onSubmit,
 }: AuthLayoutProps) {
-    function preventSubmit(event: FormEvent<HTMLFormElement>) {
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        onSubmit?.(event);
     }
 
     return (
@@ -55,7 +58,7 @@ export default function AuthLayout({
                             <p className="max-w-md text-base leading-6 text-slate-500">{description}</p>
                         </div>
 
-                        <form className="space-y-5" onSubmit={preventSubmit}>
+                        <form className="space-y-5" onSubmit={handleSubmit}>
                             {children}
                         </form>
 
