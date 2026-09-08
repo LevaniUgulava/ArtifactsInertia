@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
@@ -19,8 +20,10 @@ class SetLocale
         $available_locales = config('app.available_locales');
         if($lang && in_array($lang, $available_locales)) {
             app()->setLocale($lang);
+            URL::defaults(['lang' => $lang]);
+
         }
-        $request->offsetUnset('lang');
+        $request->route()->forgetParameter('lang');
 
         return $next($request);
     }

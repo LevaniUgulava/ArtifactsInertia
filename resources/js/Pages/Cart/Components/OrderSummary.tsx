@@ -1,4 +1,6 @@
+import { Link } from '@inertiajs/react';
 import { LockKeyholeIcon } from 'lucide-react';
+import { checkout } from '@/routes';
 
 const currency = new Intl.NumberFormat('en-US', {
     currency: 'USD',
@@ -65,10 +67,9 @@ export function OrderSummary({ discount, onApplyPromo, onPromoCodeChange, promoA
                 <span className="text-lg font-bold text-stone-950">{currency.format(total)}</span>
             </div>
 
-            <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-stone-900 px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-60" disabled type="button">
+            <Link className="mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-stone-900 px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-stone-700" href={checkout.url()}>
                 Proceed to Checkout
-            </button>
-            <p className="mt-2 text-center text-[10px] text-stone-400">Checkout will be available soon.</p>
+            </Link>
 
             <div className="mt-6 flex items-center gap-2 text-[10px] text-stone-500">
                 <LockKeyholeIcon aria-hidden="true" className="shrink-0 text-[#b38145]" size={14} />

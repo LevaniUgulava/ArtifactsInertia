@@ -72,7 +72,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('verification')->with('status', 'verification-link-sent');
+        return redirect()->route('verification.notice')->with('status', 'verification-link-sent');
     }
 
     /**
@@ -85,7 +85,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         if (! $request->user()->hasVerifiedEmail()) {
-            return redirect()->route('verification')->with('status', 'verification-required');
+            return redirect()->route('verification.notice')->with('status', 'verification-required');
         }
 
         return redirect('/');
@@ -117,7 +117,7 @@ class AuthController extends Controller
     {
         $request->user()->sendEmailVerificationNotification();
 
-        return redirect()->route('verification')->with('status', 'verification-link-sent');
+        return redirect()->route('verification.notice')->with('status', 'verification-link-sent');
     }
 
     /**
