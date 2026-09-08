@@ -220,116 +220,6 @@ registerForm.head = (args?: { lang?: string | number } | [lang: string | number 
 register.form = registerForm
 
 /**
-* @see \App\Http\Controllers\Auth\AuthController::verification
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-export const verification = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: verification.url(args, options),
-    method: 'get',
-})
-
-verification.definition = {
-    methods: ["get","head"],
-    url: '/{lang?}/verification',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verification
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-verification.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { lang: args }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            lang: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-    validateParameters(args, [
-        "lang",
-    ])
-
-    const parsedArgs = {
-        lang: args?.lang ?? 'en',
-    }
-
-    return verification.definition.url
-            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verification
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-verification.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: verification.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verification
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-verification.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: verification.url(args, options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verification
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-const verificationForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: verification.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verification
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-verificationForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: verification.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verification
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-verificationForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: verification.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-verification.form = verificationForm
-
-/**
 * @see \App\Http\Controllers\CartController::cart
 * @see app/Http/Controllers/CartController.php:13
 * @param lang - Default: 'en'
@@ -660,6 +550,116 @@ accountForm.head = (args?: { lang?: string | number } | [lang: string | number ]
 account.form = accountForm
 
 /**
+* @see \App\Http\Controllers\CheckoutController::checkout
+* @see app/Http/Controllers/CheckoutController.php:17
+* @param lang - Default: 'en'
+* @route '/{lang?}/checkout'
+*/
+export const checkout = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: checkout.url(args, options),
+    method: 'get',
+})
+
+checkout.definition = {
+    methods: ["get","head"],
+    url: '/{lang?}/checkout',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\CheckoutController::checkout
+* @see app/Http/Controllers/CheckoutController.php:17
+* @param lang - Default: 'en'
+* @route '/{lang?}/checkout'
+*/
+checkout.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { lang: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            lang: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "lang",
+    ])
+
+    const parsedArgs = {
+        lang: args?.lang ?? 'en',
+    }
+
+    return checkout.definition.url
+            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CheckoutController::checkout
+* @see app/Http/Controllers/CheckoutController.php:17
+* @param lang - Default: 'en'
+* @route '/{lang?}/checkout'
+*/
+checkout.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: checkout.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\CheckoutController::checkout
+* @see app/Http/Controllers/CheckoutController.php:17
+* @param lang - Default: 'en'
+* @route '/{lang?}/checkout'
+*/
+checkout.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: checkout.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\CheckoutController::checkout
+* @see app/Http/Controllers/CheckoutController.php:17
+* @param lang - Default: 'en'
+* @route '/{lang?}/checkout'
+*/
+const checkoutForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: checkout.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\CheckoutController::checkout
+* @see app/Http/Controllers/CheckoutController.php:17
+* @param lang - Default: 'en'
+* @route '/{lang?}/checkout'
+*/
+checkoutForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: checkout.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\CheckoutController::checkout
+* @see app/Http/Controllers/CheckoutController.php:17
+* @param lang - Default: 'en'
+* @route '/{lang?}/checkout'
+*/
+checkoutForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: checkout.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+checkout.form = checkoutForm
+
+/**
 * @see \App\Http\Controllers\Auth\AuthController::logout
 * @see app/Http/Controllers/Auth/AuthController.php:126
 * @route '/logout'
@@ -716,7 +716,117 @@ logoutForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 logout.form = logoutForm
 
 /**
-* @see routes/web.php:10
+* @see \App\Http\Controllers\CatalogController::catalog
+* @see app/Http/Controllers/CatalogController.php:14
+* @param lang - Default: 'en'
+* @route '/{lang?}/catalog'
+*/
+export const catalog = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: catalog.url(args, options),
+    method: 'get',
+})
+
+catalog.definition = {
+    methods: ["get","head"],
+    url: '/{lang?}/catalog',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\CatalogController::catalog
+* @see app/Http/Controllers/CatalogController.php:14
+* @param lang - Default: 'en'
+* @route '/{lang?}/catalog'
+*/
+catalog.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { lang: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            lang: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "lang",
+    ])
+
+    const parsedArgs = {
+        lang: args?.lang ?? 'en',
+    }
+
+    return catalog.definition.url
+            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CatalogController::catalog
+* @see app/Http/Controllers/CatalogController.php:14
+* @param lang - Default: 'en'
+* @route '/{lang?}/catalog'
+*/
+catalog.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: catalog.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\CatalogController::catalog
+* @see app/Http/Controllers/CatalogController.php:14
+* @param lang - Default: 'en'
+* @route '/{lang?}/catalog'
+*/
+catalog.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: catalog.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\CatalogController::catalog
+* @see app/Http/Controllers/CatalogController.php:14
+* @param lang - Default: 'en'
+* @route '/{lang?}/catalog'
+*/
+const catalogForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: catalog.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\CatalogController::catalog
+* @see app/Http/Controllers/CatalogController.php:14
+* @param lang - Default: 'en'
+* @route '/{lang?}/catalog'
+*/
+catalogForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: catalog.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\CatalogController::catalog
+* @see app/Http/Controllers/CatalogController.php:14
+* @param lang - Default: 'en'
+* @route '/{lang?}/catalog'
+*/
+catalogForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: catalog.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+catalog.form = catalogForm
+
+/**
+* @see routes/web.php:15
 * @param lang - Default: 'en'
 * @route '/{lang?}'
 */
@@ -731,7 +841,7 @@ home.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:10
+* @see routes/web.php:15
 * @param lang - Default: 'en'
 * @route '/{lang?}'
 */
@@ -762,7 +872,7 @@ home.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 }
 
 /**
-* @see routes/web.php:10
+* @see routes/web.php:15
 * @param lang - Default: 'en'
 * @route '/{lang?}'
 */
@@ -772,7 +882,7 @@ home.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 })
 
 /**
-* @see routes/web.php:10
+* @see routes/web.php:15
 * @param lang - Default: 'en'
 * @route '/{lang?}'
 */
@@ -782,7 +892,7 @@ home.head = (args?: { lang?: string | number } | [lang: string | number ] | stri
 })
 
 /**
-* @see routes/web.php:10
+* @see routes/web.php:15
 * @param lang - Default: 'en'
 * @route '/{lang?}'
 */
@@ -792,7 +902,7 @@ const homeForm = (args?: { lang?: string | number } | [lang: string | number ] |
 })
 
 /**
-* @see routes/web.php:10
+* @see routes/web.php:15
 * @param lang - Default: 'en'
 * @route '/{lang?}'
 */
@@ -802,7 +912,7 @@ homeForm.get = (args?: { lang?: string | number } | [lang: string | number ] | s
 })
 
 /**
-* @see routes/web.php:10
+* @see routes/web.php:15
 * @param lang - Default: 'en'
 * @route '/{lang?}'
 */

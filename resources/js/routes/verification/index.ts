@@ -1,5 +1,115 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
 /**
+* @see \App\Http\Controllers\Auth\AuthController::notice
+* @see app/Http/Controllers/Auth/AuthController.php:37
+* @param lang - Default: 'en'
+* @route '/{lang?}/verification'
+*/
+export const notice = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: notice.url(args, options),
+    method: 'get',
+})
+
+notice.definition = {
+    methods: ["get","head"],
+    url: '/{lang?}/verification',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Auth\AuthController::notice
+* @see app/Http/Controllers/Auth/AuthController.php:37
+* @param lang - Default: 'en'
+* @route '/{lang?}/verification'
+*/
+notice.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { lang: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            lang: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "lang",
+    ])
+
+    const parsedArgs = {
+        lang: args?.lang ?? 'en',
+    }
+
+    return notice.definition.url
+            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Auth\AuthController::notice
+* @see app/Http/Controllers/Auth/AuthController.php:37
+* @param lang - Default: 'en'
+* @route '/{lang?}/verification'
+*/
+notice.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: notice.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Auth\AuthController::notice
+* @see app/Http/Controllers/Auth/AuthController.php:37
+* @param lang - Default: 'en'
+* @route '/{lang?}/verification'
+*/
+notice.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: notice.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\Auth\AuthController::notice
+* @see app/Http/Controllers/Auth/AuthController.php:37
+* @param lang - Default: 'en'
+* @route '/{lang?}/verification'
+*/
+const noticeForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: notice.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Auth\AuthController::notice
+* @see app/Http/Controllers/Auth/AuthController.php:37
+* @param lang - Default: 'en'
+* @route '/{lang?}/verification'
+*/
+noticeForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: notice.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Auth\AuthController::notice
+* @see app/Http/Controllers/Auth/AuthController.php:37
+* @param lang - Default: 'en'
+* @route '/{lang?}/verification'
+*/
+noticeForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: notice.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+notice.form = noticeForm
+
+/**
 * @see \App\Http\Controllers\Auth\AuthController::verify
 * @see app/Http/Controllers/Auth/AuthController.php:97
 * @param lang - Default: 'en'
@@ -170,6 +280,7 @@ sendForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
 send.form = sendForm
 
 const verification = {
+    notice: Object.assign(notice, notice),
     verify: Object.assign(verify, verify),
     send: Object.assign(send, send),
 }
