@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implementation Planning"
+  short_description: "Create clear implementation plans"
+  default_prompt: "Use $planning to prepare an implementation plan for this request."
