@@ -16,14 +16,14 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $lang = $request->query('lang');
-        $available_locales = config('app.available_locales');
-        if($lang && in_array($lang, $available_locales)) {
+        $lang = $request->route('lang');
+        $availableLocales = config('app.available_locales', ['en']);
+        if ($lang && in_array($lang, $availableLocales, true)) {
             app()->setLocale($lang);
             URL::defaults(['lang' => $lang]);
 
+            $request->route()->forgetParameter('lang');
         }
-        $request->route()->forgetParameter('lang');
 
         return $next($request);
     }

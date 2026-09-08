@@ -94,7 +94,7 @@ class AuthController extends Controller
     /**
      * Mark the user's email as verified via the signed link.
      */
-    public function verifyEmail(Request $request, string $lang, User $user, string $hash): RedirectResponse
+    public function verifyEmail(User $user, string $hash): RedirectResponse
     {
         abort_if(
             ! hash_equals($hash, sha1($user->getEmailForVerification())),
