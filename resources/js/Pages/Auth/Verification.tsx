@@ -1,5 +1,6 @@
 import { router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { login } from '@/routes';
 import verification from '@/routes/verification';
@@ -12,6 +13,7 @@ type VerificationPageProps = {
 };
 
 export default function Verification() {
+    const { t } = useTranslation('auth');
     const { auth, status } = usePage<VerificationPageProps>().props;
     const [processing, setProcessing] = useState(false);
     const [resent, setResent] = useState(false);
@@ -27,15 +29,15 @@ export default function Verification() {
 
     return (
         <AuthLayout
-            description="We've sent a verification link to your email address. Check your inbox and click the link to finish setting up your account."
-            footerAction="Back to Sign In"
+            description={t('verification.description')}
+            footerAction={t('verification.footerAction')}
             footerActionHref={login.url()}
-            footerPrompt="Already have an account?"
-            title="Check Your Email"
+            footerPrompt={t('verification.footerPrompt')}
+            title={t('verification.title')}
         >
             {(status === 'verification-link-sent' || status === 'verification-required' || resent) && (
                 <p className="rounded-md border border-green-600/30 bg-green-50 px-4 py-3 text-sm leading-6 text-green-800">
-                    A verification link has been sent to your email address. Please check your inbox (and spam folder) and click the link to verify your account.
+                    {t('verification.sentMessage')}
                 </p>
             )}
 
@@ -46,7 +48,7 @@ export default function Verification() {
                     type="button"
                     onClick={resend}
                 >
-                    {processing ? 'Resending…' : resent ? 'Verification link sent' : 'Resend Verification Email'}
+                    {processing ? t('verification.resending') : resent ? t('verification.resent') : t('verification.resend')}
                 </button>
             )}
         </AuthLayout>

@@ -1,4 +1,4 @@
-import { Head, router } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import RootLayout from '@/Layouts/RootLayout';
 import { catalog as catalogRoute } from '@/routes';
@@ -27,6 +27,8 @@ type CatalogPageProps = {
 };
 
 function Catalog({ catalog }: CatalogPageProps) {
+    const { props } = usePage();
+    const lang = (props.locale as string) ?? 'en';
     const [filters, setFilters] = useState<FilterState>(catalog.activeFilters);
 
     const navigate = (state: Partial<CatalogQueryState>) => {
@@ -41,7 +43,7 @@ function Catalog({ catalog }: CatalogPageProps) {
             page: state.page ?? 1,
         };
 
-        router.get(catalogRoute.url({ lang: 'en' }, { query }), {}, { preserveScroll: true, preserveState: true });
+        router.get(catalogRoute.url({ lang }, { query }), {}, { preserveScroll: true, preserveState: true });
     };
 
     const clearFilters = () => {

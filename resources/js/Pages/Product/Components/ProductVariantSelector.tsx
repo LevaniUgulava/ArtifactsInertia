@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { ProductColor, ProductSize } from './ProductTypes';
 
 type ProductVariantSelectorProps = {
@@ -11,14 +12,16 @@ type ProductVariantSelectorProps = {
 };
 
 export function ProductVariantSelector({ colors, sizes, selectedColor, selectedSize, onColorChange, onSizeChange, onSizeChart }: ProductVariantSelectorProps) {
+    const { t } = useTranslation(['product', 'catalog']);
+
     return (
         <div className="space-y-6 border-t border-stone-200 pt-6">
             <fieldset className="space-y-3">
-                <legend className="text-xs font-semibold text-stone-950">Color</legend>
+                <legend className="text-xs font-semibold text-stone-950">{t('color', { ns: 'catalog' })}</legend>
                 <div className="flex gap-3">
                     {colors.map((color) => (
                         <button
-                            aria-label={`Select ${color.label}`}
+                            aria-label={t('selectColor', { name: color.label })}
                             aria-pressed={selectedColor === color.value}
                             className={`size-5 rounded-full border-2 p-0.5 transition ${selectedColor === color.value ? 'border-amber-700 ring-1 ring-amber-700 ring-offset-2' : 'border-transparent'}`}
                             key={color.value}
@@ -33,8 +36,8 @@ export function ProductVariantSelector({ colors, sizes, selectedColor, selectedS
 
             <fieldset className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <legend className="text-xs font-semibold text-stone-950">Size</legend>
-                    <button className="text-[10px] text-amber-700 underline underline-offset-4" onClick={onSizeChart} type="button">Size Chart</button>
+                    <legend className="text-xs font-semibold text-stone-950">{t('size', { ns: 'catalog' })}</legend>
+                    <button className="text-[10px] text-amber-700 underline underline-offset-4" onClick={onSizeChart} type="button">{t('sizeGuide')}</button>
                 </div>
                 <div className="flex flex-wrap gap-2">
                     {sizes.map((size) => (

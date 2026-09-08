@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ProfileLayout from '@/Layouts/ProfileLayout';
 import { CartBenefits } from '@/Pages/Cart/Components/CartBenefits';
 import { CartItemRow, type CartItem } from '@/Pages/Cart/Components/CartItemRow';
@@ -21,6 +22,7 @@ const currency = new Intl.NumberFormat('en-US', {
 });
 
 function Cart({ cart }: CartPageProps) {
+    const { t } = useTranslation('cart');
     const [items, setItems] = useState(cart.items);
     const [promoCode, setPromoCode] = useState('');
     const [promoApplied, setPromoApplied] = useState(false);
@@ -52,22 +54,22 @@ function Cart({ cart }: CartPageProps) {
 
     return (
         <>
-            <Head title="Shopping Cart | Atelier Street" />
+            <Head title={`${t('title')} | Atelier Street`} />
 
             <div className="mx-auto w-full max-w-[1440px] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
                 <div className="mb-7 flex items-end justify-between gap-5">
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-bold tracking-tight text-stone-950 sm:text-3xl">Shopping Cart</h1>
-                        <p className="text-xs text-stone-500">{itemCount} {itemCount === 1 ? 'item' : 'items'}</p>
+                        <h1 className="text-2xl font-bold tracking-tight text-stone-950 sm:text-3xl">{t('title')}</h1>
+                        <p className="text-xs text-stone-500">{t('item', { count: itemCount })}</p>
                     </div>
                     <Link className="hidden text-xs font-semibold text-[#b38145] transition hover:text-stone-950 sm:block" href={home.url()}>
-                        Continue Shopping
+                        {t('continueShopping')}
                     </Link>
                 </div>
 
                 {items.length > 0 ? (
                     <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px] xl:items-start">
-                        <section aria-label="Cart items" className="space-y-4">
+                        <section aria-label={t('cartItemsLabel')} className="space-y-4">
                             {items.map((item) => (
                                 <CartItemRow
                                     item={item}
@@ -78,7 +80,7 @@ function Cart({ cart }: CartPageProps) {
                                 />
                             ))}
                             <Link className="inline-flex text-xs font-semibold text-[#b38145] transition hover:text-stone-950 sm:hidden" href={home.url()}>
-                                ← Continue Shopping
+                                ← {t('continueShopping')}
                             </Link>
                         </section>
 

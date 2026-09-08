@@ -1,5 +1,6 @@
 import { Head } from '@inertiajs/react';
 import type { FormEvent, ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { home } from '@/routes';
 
 const editorialImage = 'https://images.unsplash.com/photo-1506629905607-d405b7a30db5?auto=format&fit=crop&w=1600&q=85';
@@ -25,6 +26,8 @@ export default function AuthLayout({
     footerActionHref = '#',
     onSubmit,
 }: AuthLayoutProps) {
+    const { t } = useTranslation('common');
+
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         onSubmit?.(event);
@@ -45,7 +48,7 @@ export default function AuthLayout({
                                 Atelier Street
                             </div>
                             <p className="max-w-md text-base leading-7 text-stone-200 sm:text-lg">
-                                Where elevated streetwear meets considered design.
+                                {t('brandTagline')}
                             </p>
                         </div>
                     </div>
@@ -66,7 +69,7 @@ export default function AuthLayout({
                             <>
                                 <div className="my-9 flex items-center gap-4 text-xs text-slate-400">
                                     <span className="h-px flex-1 bg-slate-200" />
-                                    Or continue with
+                                    {t('orContinueWith')}
                                     <span className="h-px flex-1 bg-slate-200" />
                                 </div>
                                 <div className="grid gap-4 sm:grid-cols-2">
@@ -90,13 +93,13 @@ export default function AuthLayout({
                         )}
 
                         <p className="mx-auto mt-12 max-w-md text-center text-xs leading-5 text-slate-400">
-                            Join Atelier Street for exclusive access to limited drops, curated collections, and a seamless shopping experience.
+                            {t('joinPitch')}
                         </p>
 
-                        <nav aria-label="Auth footer navigation" className="mt-10 flex justify-center gap-5 text-xs text-slate-400">
-                            <a className="hover:text-slate-700" href={home.url()}>Homepage</a>
-                            <a className="hover:text-slate-700" href="#profile">Profile</a>
-                            <a className="hover:text-slate-700" href="#checkout">Checkout</a>
+                        <nav aria-label={t('footerNav')} className="mt-10 flex justify-center gap-5 text-xs text-slate-400">
+                            <a className="hover:text-slate-700" href={home.url()}>{t('homepage')}</a>
+                            <a className="hover:text-slate-700" href="#profile">{t('profile')}</a>
+                            <a className="hover:text-slate-700" href="#checkout">{t('checkout')}</a>
                         </nav>
                     </div>
                 </section>

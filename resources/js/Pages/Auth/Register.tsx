@@ -1,4 +1,5 @@
 import { useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { AuthInput } from '@/Components/Auth/AuthInput';
 import { login } from '@/routes';
@@ -6,6 +7,7 @@ import register from '@/routes/register';
 import type { FormEvent } from 'react';
 
 export default function Register() {
+    const { t } = useTranslation(['auth', 'common']);
     const form = useForm({
         username: '',
         email: '',
@@ -20,22 +22,22 @@ export default function Register() {
 
     return (
         <AuthLayout
-            description="Create an account for exclusive drops, saved items, and faster checkout."
-            footerAction="Sign In"
+            description={t('register.description')}
+            footerAction={t('register.footerAction')}
             footerActionHref={login.url()}
-            footerPrompt="Already have an account?"
+            footerPrompt={t('register.footerPrompt')}
             onSubmit={handleSubmit}
             showSocial
-            title="Create Account"
+            title={t('register.title')}
         >
             <AuthInput
                 autoComplete="username"
                 error={form.errors.username}
-                label="Username"
+                label={t('register.username')}
                 name="username"
                 onBlur={() => form.validate('username')}
                 onChange={(e) => form.setData('username', e.target.value)}
-                placeholder="your username"
+                placeholder={t('register.usernamePlaceholder')}
                 type="text"
                 valid={form.valid('username')}
                 value={form.data.username}
@@ -43,7 +45,7 @@ export default function Register() {
             <AuthInput
                 autoComplete="email"
                 error={form.errors.email}
-                label="Email Address"
+                label={t('email')}
                 name="email"
                 onBlur={() => form.validate('email')}
                 onChange={(e) => form.setData('email', e.target.value)}
@@ -55,7 +57,7 @@ export default function Register() {
             <AuthInput
                 autoComplete="new-password"
                 error={form.errors.password}
-                label="Password"
+                label={t('password')}
                 name="password"
                 onBlur={() => form.validate('password')}
                 onChange={(e) => form.setData('password', e.target.value)}
@@ -67,7 +69,7 @@ export default function Register() {
             <AuthInput
                 autoComplete="new-password"
                 error={form.errors.password_confirmation}
-                label="Confirm Password"
+                label={t('passwordConfirmation')}
                 name="password_confirmation"
                 onBlur={() => form.validate('password_confirmation')}
                 onChange={(e) => form.setData('password_confirmation', e.target.value)}
@@ -82,7 +84,7 @@ export default function Register() {
                 disabled={form.processing}
                 type="submit"
             >
-                {form.processing ? 'Creating Account…' : 'Create Account'}
+                {form.processing ? t('register.processing') : t('register.submit')}
             </button>
         </AuthLayout>
     );

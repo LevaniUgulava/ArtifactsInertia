@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { ColorOption, FilterOption, FilterState } from './CatalogTypes';
 
 type CatalogFiltersProps = {
@@ -14,16 +15,20 @@ type CatalogFiltersProps = {
 };
 
 function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFiltersProps) {
+    const { t } = useTranslation('catalog');
+
     const toggleValue = (key: 'categories' | 'sizes' | 'colors' | 'collections', option: string) => {
         const values = value[key].includes(option) ? value[key].filter((item) => item !== option) : [...value[key], option];
 
         onChange({ ...value, [key]: values });
     };
 
+    const categoryLabel = (category: FilterOption) => t(`cat_${category.value}`, { defaultValue: category.label });
+
     return (
         <div className="space-y-7 text-xs text-stone-700">
             <fieldset className="space-y-3">
-                <legend className="font-semibold text-stone-950">Category</legend>
+                <legend className="font-semibold text-stone-950">{t('category')}</legend>
                 <div className="space-y-2.5">
                     {filters.categories.map((category) => (
                         <label className="flex items-center gap-2.5" key={category.value}>
@@ -33,14 +38,14 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
                                 onChange={() => toggleValue('categories', category.value)}
                                 type="checkbox"
                             />
-                            {category.label}
+                            {categoryLabel(category)}
                         </label>
                     ))}
                 </div>
             </fieldset>
 
             <fieldset className="space-y-3 border-t border-stone-200 pt-6">
-                <legend className="font-semibold text-stone-950">Size</legend>
+                <legend className="font-semibold text-stone-950">{t('size')}</legend>
                 <div className="grid grid-cols-5 gap-1 text-center text-[10px]">
                     {filters.sizes.map((size) => (
                         <button
@@ -56,11 +61,11 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
             </fieldset>
 
             <fieldset className="space-y-3 border-t border-stone-200 pt-6">
-                <legend className="font-semibold text-stone-950">Color</legend>
+                <legend className="font-semibold text-stone-950">{t('color')}</legend>
                 <div className="flex flex-wrap gap-3">
                     {filters.colors.map((color) => (
                         <button
-                            aria-label={color.label}
+                            aria-label={t(`color_${color.value}`, { defaultValue: color.label })}
                             aria-pressed={value.colors.includes(color.value)}
                             className={`size-5 rounded-full border-2 p-0.5 transition ${value.colors.includes(color.value) ? 'border-amber-700 ring-1 ring-amber-700 ring-offset-2' : 'border-transparent'}`}
                             key={color.value}
@@ -74,7 +79,7 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
             </fieldset>
 
             <fieldset className="space-y-3 border-t border-stone-200 pt-6">
-                <legend className="font-semibold text-stone-950">Price Range</legend>
+                <legend className="font-semibold text-stone-950">{t('priceRange')}</legend>
                 <div className="flex items-center justify-between text-[10px] text-stone-500">
                     <span>$50</span>
                     <span>$2,500</span>
@@ -88,10 +93,11 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
             </fieldset>
 
             <fieldset className="space-y-3 border-t border-stone-200 pt-6">
-                <legend className="font-semibold text-stone-950">Collection</legend>
+                <legend className="font-semibold text-stone-950">{t('collection')}</legend>
                 <div className="space-y-2.5">
                     {filters.collections.map((collection) => {
                         const valueKey = collection.toLowerCase().replace("'", '').replace(' ', '-');
+                        const label = collection === "Women's" ? t('womenS') : collection === "Men's" ? t('menS') : t('all');
 
                         return (
                             <label className="flex items-center gap-2.5" key={collection}>
@@ -101,7 +107,7 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
                                     onChange={() => toggleValue('collections', valueKey)}
                                     type="checkbox"
                                 />
-                                {collection}
+                                {label}
                             </label>
                         );
                     })}
@@ -110,10 +116,10 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
 
             <div className="space-y-3 border-t border-stone-200 pt-6">
                 <button className="w-full bg-[#b58a52] px-4 py-3 text-xs font-semibold text-white transition hover:bg-[#9d7442]" onClick={onApply} type="button">
-                    Apply Filters
+                    {t('applyFilters')}
                 </button>
                 <button className="w-full text-xs text-stone-500 transition hover:text-stone-950" onClick={onClear} type="button">
-                    Clear All
+                    {t('clearAll')}
                 </button>
             </div>
         </div>
@@ -121,13 +127,15 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
 }
 
 export function CatalogFilters(props: CatalogFiltersProps) {
+    const { t } = useTranslation('catalog');
+
     return (
         <>
             <aside className="hidden lg:block">
                 <FilterPanel {...props} />
             </aside>
             <details className="border-y border-stone-200 py-4 lg:hidden">
-                <summary className="cursor-pointer text-xs font-semibold text-stone-950">Filters</summary>
+                <summary className="cursor-pointer text-xs font-semibold text-stone-950">{t('filters')}</summary>
                 <div className="pt-6">
                     <FilterPanel {...props} />
                 </div>

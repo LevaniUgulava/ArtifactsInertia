@@ -1,19 +1,22 @@
-const benefits = [
-    {
-        description: 'Every piece is curated with materials designed to last beyond a single season.',
-        title: 'Artisan Craftsmanship',
-    },
-    {
-        description: 'A wardrobe foundation shaped by timeless fabrics and understated details.',
-        title: 'Elevated Essentials',
-    },
-    {
-        description: 'Small batches, considered finishes, and pieces made to be worn on repeat.',
-        title: 'Limited Drops',
-    },
-];
+import { useTranslation } from 'react-i18next';
 
 export function Footer() {
+    const { t } = useTranslation('footer');
+
+    const benefits = [
+        {
+            description: t('artisanCraftsmanship.description'),
+            title: t('artisanCraftsmanship.title'),
+        },
+        {
+            description: t('elevatedEssentials.description'),
+            title: t('elevatedEssentials.title'),
+        },
+        {
+            description: t('limitedDrops.description'),
+            title: t('limitedDrops.title'),
+        },
+    ];
     return (
         <footer className="bg-stone-950 text-stone-100">
             <div className="mx-auto grid max-w-[1920px] gap-10 px-5 py-14 sm:px-8 sm:py-16 lg:px-12 2xl:px-16 2xl:py-24 md:grid-cols-3">

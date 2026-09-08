@@ -1,42 +1,45 @@
 import { BellIcon, CreditCardIcon, MapPinIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { SectionHeading } from '@/Pages/Profile/Components/SectionHeading';
 
 const settings = [
     {
-        title: 'Address Book',
+        title: 'addressBook',
         icon: MapPinIcon,
-        lines: ['47 Rue de la Paix', 'Paris, 75002', 'France'],
-        action: 'Edit Addresses',
+        lines: ['addressLine1', 'addressLine2', 'addressLine3'],
+        action: 'editAddresses',
     },
     {
-        title: 'Payment Methods',
+        title: 'paymentMethods',
         icon: CreditCardIcon,
-        lines: ['Visa ending in 4829', 'Expires 09/2026', 'Default payment method'],
-        action: 'Manage Payments',
+        lines: ['paymentLine1', 'paymentLine2', 'paymentLine3'],
+        action: 'managePayments',
     },
     {
-        title: 'Preferences',
+        title: 'preferences',
         icon: BellIcon,
-        lines: ['Email notifications: On', 'Language: English', 'Currency: EUR (€)'],
-        action: 'Edit Settings',
+        lines: ['preferenceLine1', 'preferenceLine2', 'preferenceLine3'],
+        action: 'editSettings',
     },
 ];
 
 export function AccountSettings() {
+    const { t } = useTranslation('profile');
+
     return (
         <section>
-            <SectionHeading title="Account Settings" />
+            <SectionHeading title={t('settings')} />
             <div className="grid gap-4 lg:grid-cols-3">
                 {settings.map(({ action, icon: Icon, lines, title }) => (
                     <article className="rounded-lg border border-stone-200 bg-white p-5" key={title}>
                         <div className="flex items-center gap-2 text-xs font-semibold text-stone-900">
                             <Icon aria-hidden="true" className="text-[#b38145]" size={14} strokeWidth={1.8} />
-                            {title}
+                            {t(title)}
                         </div>
                         <div className="mt-5 space-y-1 text-[10px] leading-4 text-stone-500">
-                            {lines.map((line) => <p key={line}>{line}</p>)}
+                            {lines.map((line) => <p key={line}>{t(line)}</p>)}
                         </div>
-                        <button className="mt-5 text-[10px] font-medium text-[#b38145] transition hover:text-stone-950" type="button">{action}</button>
+                        <button className="mt-5 text-[10px] font-medium text-[#b38145] transition hover:text-stone-950" type="button">{t(action)}</button>
                     </article>
                 ))}
             </div>

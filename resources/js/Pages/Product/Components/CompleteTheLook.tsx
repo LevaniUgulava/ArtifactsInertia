@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import type { Recommendation } from './ProductTypes';
 
 export function CompleteTheLook({ recommendations }: { recommendations: Recommendation[] }) {
+    const { t } = useTranslation('product');
+
     return (
         <section className="space-y-5 border-t border-stone-200 pt-8">
-            <h2 className="text-lg font-semibold text-stone-950">Complete the Look</h2>
+            <h2 className="text-lg font-semibold text-stone-950">{t('completeTheLook')}</h2>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
                 {recommendations.map((item) => (
                     <article className="min-w-0" key={item.slug}>

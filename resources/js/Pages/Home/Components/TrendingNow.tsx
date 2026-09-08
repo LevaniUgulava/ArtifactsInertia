@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ProductGrid, type Product } from '@/Pages/Home/Components/ProductGrid';
 import { SectionTitle } from '@/Pages/Home/Components/SectionTitle';
 
@@ -20,12 +21,14 @@ const trendingProducts: Product[] = [
 ];
 
 export function TrendingNow() {
+    const { t } = useTranslation('home');
+
     return (
         <section className="bg-stone-100" id="trending">
             <div className="mx-auto max-w-[1920px] px-5 py-14 sm:px-8 sm:py-20 lg:px-12 2xl:px-16 2xl:py-28">
                 <div className="mb-8 flex items-end justify-between gap-6 sm:mb-10">
-                    <SectionTitle eyebrow="What the community is wearing." title="Trending Now" />
-                    <span className="text-xs font-semibold tracking-wide text-amber-700">SEE MORE →</span>
+                    <SectionTitle eyebrow={t('trendingNow.eyebrow')} title={t('trendingNow.title')} />
+                    <span className="text-xs font-semibold tracking-wide text-amber-700">{t('seeMore', { ns: 'common' })} →</span>
                 </div>
                 <div className="mx-auto max-w-6xl">
                     <ProductGrid products={trendingProducts} />

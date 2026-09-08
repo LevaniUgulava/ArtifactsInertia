@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "season": "AUTUMN / WINTER 2024",
+    "title": "Elevated essentials",
+    "description": "Where streetwear meets craftsmanship. Discover pieces designed for those who refuse to compromise.",
+    "shopWomen": "SHOP WOMEN",
+    "shopMen": "SHOP MEN"
+  },
+  "newArrivals": {
+    "eyebrow": "Fresh drops, selected quantities.",
+    "title": "New Arrivals"
+  },
+  "trendingNow": {
+    "eyebrow": "What the community is wearing.",
+    "title": "Trending Now"
+  },
+  "women": {
+    "title": "Women",
+    "description": "Architectural silhouettes, refined edge."
+  },
+  "men": {
+    "title": "Men",
+    "description": "Urban luxury, modern form."
+  },
+  "exploreCollection": "EXPLORE COLLECTION"
+}

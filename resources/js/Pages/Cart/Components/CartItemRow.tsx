@@ -1,4 +1,5 @@
 import { HeartIcon, Trash2Icon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { QuantityControl } from '@/Pages/Cart/Components/QuantityControl';
 
 const currency = new Intl.NumberFormat('en-US', {
@@ -25,6 +26,8 @@ type CartItemRowProps = {
 };
 
 export function CartItemRow({ item, onQuantityChange, onRemove, onSave }: CartItemRowProps) {
+    const { t } = useTranslation('cart');
+
     return (
         <article className="grid gap-4 rounded-lg border border-stone-200 bg-white p-4 sm:grid-cols-[104px_minmax(0,1fr)_auto] sm:gap-5 sm:p-5">
             <img alt={item.name} className="aspect-square w-24 rounded-md object-cover sm:w-[104px]" src={item.image} />
@@ -36,9 +39,9 @@ export function CartItemRow({ item, onQuantityChange, onRemove, onSave }: CartIt
                         <p className="text-sm font-semibold text-stone-950 sm:hidden">{currency.format(item.price)}</p>
                     </div>
                     <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-stone-500">
-                        <span>Size: {item.size}</span>
+                        <span>{t('sizeLabel', { size: item.size })}</span>
                         <span className="inline-flex items-center gap-2">
-                            Color:
+                            {t('colorLabel')}:
                             <span aria-hidden="true" className="size-3 rounded-full border border-stone-200" style={{ backgroundColor: item.colorHex }} />
                             {item.color}
                         </span>
@@ -49,11 +52,11 @@ export function CartItemRow({ item, onQuantityChange, onRemove, onSave }: CartIt
                     <QuantityControl onChange={(quantity) => onQuantityChange(item.id, quantity)} value={item.quantity} />
                     <button className="inline-flex items-center gap-1.5 text-xs text-stone-400 transition hover:text-stone-950" type="button" onClick={() => onSave(item.id)}>
                         <HeartIcon aria-hidden="true" size={14} strokeWidth={1.8} />
-                        Save for later
+                        {t('saveForLater')}
                     </button>
                     <button className="inline-flex items-center gap-1.5 text-xs text-red-400 transition hover:text-red-600" type="button" onClick={() => onRemove(item.id)}>
                         <Trash2Icon aria-hidden="true" size={14} strokeWidth={1.8} />
-                        Remove
+                        {t('remove')}
                     </button>
                 </div>
             </div>

@@ -1,16 +1,18 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ProductImage } from './ProductTypes';
 
 export function ProductGallery({ images }: { images: ProductImage[] }) {
+    const { t } = useTranslation('product');
     const [selectedIndex, setSelectedIndex] = useState(0);
     const selectedImage = images[selectedIndex] ?? images[0];
 
     return (
         <div className="grid gap-3 sm:grid-cols-[3.5rem_minmax(0,1fr)]">
-            <div aria-label="Product images" className="order-2 flex gap-2 overflow-x-auto sm:order-1 sm:flex-col">
+            <div aria-label={t('productImages')} className="order-2 flex gap-2 overflow-x-auto sm:order-1 sm:flex-col">
                 {images.map((image, index) => (
                     <button
-                        aria-label={`Show product image ${index + 1}`}
+                        aria-label={t('showImage', { number: index + 1 })}
                         aria-pressed={selectedIndex === index}
                         className={`size-14 shrink-0 overflow-hidden border-2 transition sm:size-16 ${selectedIndex === index ? 'border-amber-700' : 'border-transparent hover:border-stone-300'}`}
                         key={image.src}

@@ -1,4 +1,5 @@
 import { useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { AuthInput } from '@/Components/Auth/AuthInput';
 import { register } from '@/routes';
@@ -7,6 +8,7 @@ import password from '@/routes/password';
 import type { FormEvent } from 'react';
 
 export default function Login() {
+    const { t } = useTranslation(['auth', 'common']);
     const form = useForm({
         email: '',
         password: '',
@@ -19,18 +21,18 @@ export default function Login() {
 
     return (
         <AuthLayout
-            description="Sign in to access exclusive drops, saved items, and faster checkout."
-            footerAction="Create Account"
+            description={t('login.description')}
+            footerAction={t('login.footerAction')}
             footerActionHref={register.url()}
-            footerPrompt="Don't have an account?"
+            footerPrompt={t('login.footerPrompt')}
             onSubmit={handleSubmit}
             showSocial
-            title="Welcome Back"
+            title={t('login.title')}
         >
             <AuthInput
                 autoComplete="email"
                 error={form.errors.email}
-                label="Email Address"
+                label={t('email')}
                 name="email"
                 onBlur={() => form.validate('email')}
                 onChange={(e) => form.setData('email', e.target.value)}
@@ -42,7 +44,7 @@ export default function Login() {
             <AuthInput
                 autoComplete="current-password"
                 error={form.errors.password}
-                label="Password"
+                label={t('password')}
                 name="password"
                 onBlur={() => form.validate('password')}
                 onChange={(e) => form.setData('password', e.target.value)}
@@ -54,7 +56,7 @@ export default function Login() {
 
             <div className="flex justify-end">
                 <a className="text-sm text-amber-700 hover:underline" href={password.update.url()}>
-                    Forgot password?
+                    {t('forgotPassword')}
                 </a>
             </div>
 
@@ -63,7 +65,7 @@ export default function Login() {
                 disabled={form.processing}
                 type="submit"
             >
-                {form.processing ? 'Signing In…' : 'Sign In'}
+                {form.processing ? t('login.processing') : t('login.submit')}
             </button>
         </AuthLayout>
     );

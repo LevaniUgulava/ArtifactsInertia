@@ -1,0 +1,18 @@
+{
+  "search": "Search",
+  "openBag": "Open bag",
+  "openMenu": "Open menu",
+  "primaryNav": "Primary navigation",
+  "signIn": "Sign in",
+  "signOut": "Sign out",
+  "navigation": {
+    "newArrivals": "New arrivals",
+    "women": "Women",
+    "men": "Men",
+    "essentials": "Essentials"
+  },
+  "lang": {
+    "en": "EN",
+    "ka": "KA"
+  }
+}

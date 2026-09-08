@@ -1,5 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import { useMemo, useState, type FormEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import CheckoutLayout from '@/Layouts/CheckoutLayout';
 import { CheckoutBenefits } from '@/Pages/Checkout/Components/CheckoutBenefits';
 import { CheckoutBreadcrumb } from '@/Pages/Checkout/Components/CheckoutBreadcrumb';
@@ -32,6 +33,7 @@ type CheckoutPageProps = {
 const currency = new Intl.NumberFormat('en-US', { currency: 'EUR', style: 'currency' });
 
 function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
+    const { t } = useTranslation('checkout');
     const form = useForm({
         first_name: checkoutData.customer.first_name,
         last_name: checkoutData.customer.last_name,
@@ -69,10 +71,10 @@ function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
 
     return (
         <>
-            <Head title="Checkout | Atelier Street" />
+            <Head title={`${t('title')} | Atelier Street`} />
             <div className="mx-auto w-full max-w-[1440px] px-5 py-7 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
                 <CheckoutBreadcrumb />
-                {status === 'checkout-validated' && <p className="mt-5 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-800">Your checkout details were validated. Payment processing is not configured yet.</p>}
+                {status === 'checkout-validated' && <p className="mt-5 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-800">{t('validatedNotice')}</p>}
 
                 <form className="mt-7 grid gap-7 xl:grid-cols-[minmax(0,1fr)_420px] xl:items-start" onSubmit={submit}>
                     <div className="flex flex-col gap-6">
@@ -101,7 +103,7 @@ function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
                     </div>
                 </form>
 
-                <p className="mt-7 text-[10px] text-stone-400">Prices shown in EUR. Secure checkout protected by industry-standard encryption.</p>
+                <p className="mt-7 text-[10px] text-stone-400">{t('eurNote')}</p>
             </div>
         </>
     );

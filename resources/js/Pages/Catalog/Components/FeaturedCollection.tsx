@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 type FeaturedCollectionProps = {
     featured: {
         eyebrow: string;
@@ -8,6 +10,8 @@ type FeaturedCollectionProps = {
 };
 
 export function FeaturedCollection({ featured }: FeaturedCollectionProps) {
+    const { t } = useTranslation('catalog');
+
     return (
         <section className="relative isolate min-h-64 overflow-hidden rounded-sm">
             <img alt="Model wearing an Atelier Street collection look" className="absolute inset-0 size-full object-cover" src={featured.image} />
@@ -17,7 +21,7 @@ export function FeaturedCollection({ featured }: FeaturedCollectionProps) {
                 <h2 className="mt-2 text-xl font-semibold text-stone-950">{featured.title}</h2>
                 <p className="mt-1 text-xs leading-5 text-stone-600">{featured.description}</p>
                 <button className="mt-4 text-xs font-semibold text-amber-700 underline decoration-amber-300 underline-offset-4" type="button">
-                    Explore Now →
+                    {t('exploreNow')}
                 </button>
             </div>
         </section>

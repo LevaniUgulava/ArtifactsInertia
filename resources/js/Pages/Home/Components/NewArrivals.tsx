@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ProductGrid, type Product } from '@/Pages/Home/Components/ProductGrid';
 import { SectionTitle } from '@/Pages/Home/Components/SectionTitle';
 
@@ -25,12 +26,14 @@ const newArrivals: Product[] = [
 ];
 
 export function NewArrivals() {
+    const { t } = useTranslation('home');
+
     return (
         <section className="mx-auto max-w-[1920px] px-5 py-14 sm:px-8 sm:py-20 lg:px-12 2xl:px-16 2xl:py-28" id="new-arrivals">
             <div className="mb-8 flex items-end justify-between gap-6 sm:mb-10">
-                <SectionTitle eyebrow="Fresh drops, selected quantities." title="New Arrivals" />
+                <SectionTitle eyebrow={t('newArrivals.eyebrow')} title={t('newArrivals.title')} />
                 <a className="text-xs font-semibold tracking-wide text-amber-700 underline-offset-4 hover:underline" href="#trending">
-                    VIEW ALL →
+                    {t('viewAll', { ns: 'common' })} →
                 </a>
             </div>
             <ProductGrid products={newArrivals} />

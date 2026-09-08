@@ -1,11 +1,16 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import productRoutes from '@/routes/product';
 import type { CatalogProduct } from './CatalogTypes';
 
 export function CatalogProductCard({ product }: { product: CatalogProduct }) {
+    const { t } = useTranslation('catalog');
+    const { props } = usePage();
+    const lang = (props.locale as string) ?? 'en';
+
     return (
         <article className="group min-w-0">
-            <Link aria-label={`View ${product.name}`} className="block" href={productRoutes.show.url({ lang: 'en', product: product.id })}>
+            <Link aria-label={t('viewProduct', { name: product.name })} className="block" href={productRoutes.show.url({ lang, product: product.id })}>
             <div className="relative aspect-[4/5] overflow-hidden bg-stone-100">
                 <img alt={product.name} className="size-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" src={product.image} />
                 {product.badge ? <span className="absolute left-3 top-3 text-[9px] font-semibold uppercase tracking-widest text-white">{product.badge}</span> : null}
@@ -15,7 +20,7 @@ export function CatalogProductCard({ product }: { product: CatalogProduct }) {
                 <p className="text-[10px] text-stone-500">{product.category} · {product.collection}</p>
                 <div className="flex items-center justify-between gap-3">
                     <p className="text-xs font-semibold text-stone-950">{product.price}</p>
-                    <div aria-label={`Available colors for ${product.name}`} className="flex gap-1">
+                    <div aria-label={t('availableColors', { name: product.name })} className="flex gap-1">
                         {product.colors.map((color) => <span aria-hidden="true" className="size-2 rounded-full border border-black/10" key={color} style={{ backgroundColor: color }} />)}
                     </div>
                 </div>
