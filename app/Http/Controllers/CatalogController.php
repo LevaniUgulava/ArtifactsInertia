@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CatalogProductResource;
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\CollectionResource;
+use App\Http\Resources\ColorResource;
+use App\Models\Category;
+use App\Models\Collection as ProductCollection;
+use App\Models\Product;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -9,51 +17,34 @@ use Inertia\Response;
 class CatalogController extends Controller
 {
     /**
-     * Show the public catalog collection.
+     * Show the public product catalog.
      */
     public function index(Request $request): Response
     {
         $sort = $request->string('sort')->toString();
         $sort = in_array($sort, ['newest', 'price-low', 'price-high'], true) ? $sort : 'newest';
-
-        $page = max(1, min($request->integer('page', 1), 8));
+        $page = max(1, $request->integer('page', 1));
+        $collection = ProductCollection::query()
+            ->withCount('products')
+            ->where('slug', 'fall-winter-collection')
+            ->firstOrFail();
+        $products = Product::query()
+            ->with(['variants.media', 'categories', 'collections'])
+            ->whereHas('collections', fn ($query) => $query->whereKey($collection->getKey()))
+            ->withMin('variants', 'price')
+            ->when($sort === 'price-low', fn ($query) => $query->orderBy('variants_min_price'))
+            ->when($sort === 'price-high', fn ($query) => $query->orderByDesc('variants_min_price'))
+            ->when($sort === 'newest', fn ($query) => $query->latest())
+            ->paginate(6, ['*'], 'page', $page);
 
         return Inertia::render('Catalog/Catalog', [
             'catalog' => [
-                'collection' => [
-                    'name' => 'Fall/Winter Collection',
-                    'count' => 48,
-                    'featured' => [
-                        'eyebrow' => 'Featured Collection',
-                        'title' => 'The Artisan Edit',
-                        'description' => 'Handcrafted pieces from Italian ateliers, designed to transcend seasons.',
-                        'image' => 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1600&q=85',
-                    ],
-                    'editorial' => [
-                        'eyebrow' => 'Editorial',
-                        'title' => 'The Art of Layering',
-                        'description' => 'Discover how our design team approaches transitional dressing — combining texture, proportion, and intention in every piece.',
-                        'image' => 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=720&q=85',
-                    ],
-                ],
+                'collection' => (new CollectionResource($collection))->resolve($request),
                 'filters' => [
-                    'categories' => [
-                        ['value' => 'dresses', 'label' => 'Dresses'],
-                        ['value' => 'outerwear', 'label' => 'Outerwear'],
-                        ['value' => 'tops', 'label' => 'Tops'],
-                        ['value' => 'bottoms', 'label' => 'Bottoms'],
-                        ['value' => 'knitwear', 'label' => 'Knitwear'],
-                    ],
-                    'sizes' => ['XS', 'S', 'M', 'L', 'XL'],
-                    'colors' => [
-                        ['value' => 'black', 'label' => 'Black', 'hex' => '#171717'],
-                        ['value' => 'ivory', 'label' => 'Ivory', 'hex' => '#f5f0e6'],
-                        ['value' => 'camel', 'label' => 'Camel', 'hex' => '#a16207'],
-                        ['value' => 'teal', 'label' => 'Teal', 'hex' => '#315c5b'],
-                        ['value' => 'navy', 'label' => 'Navy', 'hex' => '#1e3a5f'],
-                        ['value' => 'red', 'label' => 'Red', 'hex' => '#9f1239'],
-                    ],
-                    'collections' => ["Women's", "Men's", 'All'],
+                    'categories' => CategoryResource::collection(Category::query()->orderBy('name')->get())->resolve($request),
+                    'sizes' => Variant::query()->distinct()->orderBy('size')->pluck('size')->all(),
+                    'colors' => ColorResource::collection(Variant::query()->select(['color', 'color_label', 'color_hex'])->distinct()->orderBy('color')->get())->resolve($request),
+                    'collections' => ProductCollection::query()->orderBy('name')->pluck('name')->all(),
                 ],
                 'activeFilters' => [
                     'categories' => $this->queryArray($request, 'category'),
@@ -64,91 +55,22 @@ class CatalogController extends Controller
                     'maxPrice' => $request->integer('maxPrice', 2500),
                 ],
                 'sort' => $sort,
-                'products' => $this->products(),
+                'products' => CatalogProductResource::collection($products->getCollection())->resolve($request),
                 'pagination' => [
-                    'currentPage' => $page,
-                    'lastPage' => 8,
-                    'perPage' => 6,
-                    'total' => 48,
+                    'currentPage' => $products->currentPage(),
+                    'lastPage' => $products->lastPage(),
+                    'perPage' => $products->perPage(),
+                    'total' => $products->total(),
                 ],
             ],
         ]);
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     private function queryArray(Request $request, string $key): array
     {
         $values = $request->input($key, []);
 
         return is_array($values) ? array_values(array_filter($values, 'is_string')) : [];
-    }
-
-    /**
-     * @return list<array<string, mixed>>
-     */
-    private function products(): array
-    {
-        return [
-            [
-                'id' => 'structured-wool-overcoat',
-                'name' => 'Structured Wool Overcoat',
-                'category' => 'Outerwear',
-                'collection' => "Men's",
-                'price' => '$1,290',
-                'badge' => 'New',
-                'colors' => ['#262626'],
-                'image' => 'https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=900&q=85',
-            ],
-            [
-                'id' => 'pearl-button-silk-blouse',
-                'name' => 'Pearl Button Silk Blouse',
-                'category' => 'Tops',
-                'collection' => "Women's",
-                'price' => '$485',
-                'badge' => 'Trending',
-                'colors' => ['#f5f0e6', '#171717'],
-                'image' => 'https://images.unsplash.com/photo-1605763240000-7e93b172d754?auto=format&fit=crop&w=900&q=85',
-            ],
-            [
-                'id' => 'cashmere-turtleneck',
-                'name' => 'Cashmere Turtleneck',
-                'category' => 'Knitwear',
-                'collection' => "Women's",
-                'price' => '$620',
-                'colors' => ['#315c5b', '#9f1239'],
-                'image' => 'https://images.unsplash.com/photo-1548883354-94bcfe321cbb?auto=format&fit=crop&w=900&q=85',
-            ],
-            [
-                'id' => 'pinstripe-tailored-blazer',
-                'name' => 'Pinstripe Tailored Blazer',
-                'category' => 'Outerwear',
-                'collection' => "Men's",
-                'price' => '$890',
-                'badge' => 'New',
-                'colors' => ['#171717', '#1e3a5f'],
-                'image' => 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=85',
-            ],
-            [
-                'id' => 'pleated-midi-skirt',
-                'name' => 'Pleated Midi Skirt',
-                'category' => 'Bottoms',
-                'collection' => "Women's",
-                'price' => '$420',
-                'colors' => ['#c69768', '#f5f0e6', '#315c5b'],
-                'image' => 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=85',
-            ],
-            [
-                'id' => 'belted-camel-trench',
-                'name' => 'Belted Camel Trench',
-                'category' => 'Outerwear',
-                'collection' => "Men's",
-                'price' => '$1,450',
-                'badge' => 'Trending',
-                'colors' => ['#c69768', '#262626'],
-                'image' => 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=85',
-            ],
-        ];
     }
 }

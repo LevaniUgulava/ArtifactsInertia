@@ -15,8 +15,7 @@ type CatalogPageProps = {
         collection: {
             name: string;
             count: number;
-            featured: { eyebrow: string; title: string; description: string; image: string };
-            editorial: { eyebrow: string; title: string; description: string; image: string };
+            image: string;
         };
         filters: { categories: FilterOption[]; sizes: string[]; colors: ColorOption[]; collections: string[] };
         activeFilters: FilterState;
@@ -60,9 +59,9 @@ function Catalog({ catalog }: CatalogPageProps) {
                     <CatalogFilters filters={catalog.filters} onApply={() => navigate({ page: 1 })} onChange={setFilters} onClear={clearFilters} value={filters} />
                     <div className="min-w-0 space-y-8">
                         <CollectionHeader count={catalog.collection.count} name={catalog.collection.name} onSortChange={(sort) => navigate({ sort, page: 1 })} sort={catalog.sort} />
-                        <FeaturedCollection featured={catalog.collection.featured} />
+                        <FeaturedCollection featured={{ image: catalog.collection.image }} />
                         <CatalogProductGrid products={catalog.products} />
-                        <EditorialBanner editorial={catalog.collection.editorial} />
+                        <EditorialBanner editorial={{ image: catalog.collection.image }} />
                         <CatalogPagination currentPage={catalog.pagination.currentPage} lastPage={catalog.pagination.lastPage} onNavigate={(page) => navigate({ page })} />
                     </div>
                 </div>

@@ -1,5 +1,9 @@
 <?php
 
+use Database\Seeders\CatalogSeeder;
+
+beforeEach(fn () => $this->seed(CatalogSeeder::class));
+
 it('renders the public catalog page with collection products and filters', function () {
     $this->get('/en/catalog')
         ->assertInertia(fn ($page) => $page
