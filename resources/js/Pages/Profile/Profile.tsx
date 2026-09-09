@@ -18,7 +18,7 @@ type ProfilePageProps = {
 
 function Profile({ profile }: ProfilePageProps) {
     return (
-        <div className="mx-auto w-full max-w-[1440px] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+        <div className="mx-auto w-full max-w-360 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
             <ProfileOverview
                 avatarUrl={profile.avatarUrl}
                 email={profile.email}
