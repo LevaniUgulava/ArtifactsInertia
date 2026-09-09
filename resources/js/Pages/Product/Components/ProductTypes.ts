@@ -25,13 +25,6 @@ export type ProductDetail = {
     bullets?: string[];
 };
 
-export type Recommendation = {
-    slug: string;
-    name: string;
-    price: string;
-    image: string;
-};
-
 export type ProductData = {
     slug: string;
     name: string;
@@ -45,5 +38,4 @@ export type ProductData = {
     sizes: ProductSize[];
     benefits: ProductBenefit[];
     details: ProductDetail[];
-    recommendations: Recommendation[];
 };

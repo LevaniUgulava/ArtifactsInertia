@@ -1,5 +1,9 @@
 <?php
 
+use Database\Seeders\CatalogSeeder;
+
+beforeEach(fn () => $this->seed(CatalogSeeder::class));
+
 it('renders the public product detail page', function () {
     $this->get('/en/products/cashmere-wrap-coat')
         ->assertInertia(fn ($page) => $page
@@ -9,7 +13,7 @@ it('renders the public product detail page', function () {
             ->has('product.images', 4)
             ->has('product.colors', 4)
             ->has('product.sizes', 5)
-            ->has('product.recommendations', 4));
+        );
 });
 
 it('returns not found for an unknown product slug', function () {

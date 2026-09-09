@@ -1,6 +1,5 @@
 import { Head } from '@inertiajs/react';
 import RootLayout from '@/Layouts/RootLayout';
-import { CompleteTheLook } from './Components/CompleteTheLook';
 import { ProductBreadcrumb } from './Components/ProductBreadcrumb';
 import { ProductDetails } from './Components/ProductDetails';
 import { ProductGallery } from './Components/ProductGallery';
@@ -19,7 +18,6 @@ function Product({ product }: { product: ProductData }) {
                 </div>
                 <div className="mt-12 space-y-10">
                     <ProductDetails details={product.details} />
-                    <CompleteTheLook recommendations={product.recommendations} />
                 </div>
             </main>
         </>
