@@ -5,3 +5,4 @@ Before planning or editing, find the row whose globs match the file's path and r
 | Applies to | Rule file |
 | --- | --- |
 | app/Http/Middleware/SetLocale.php | .ai/rules/middleware.md |
+| app/Models/Product.php | .ai/rules/models.md |
