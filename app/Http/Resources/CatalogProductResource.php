@@ -19,7 +19,7 @@ class CatalogProductResource extends JsonResource
             'name' => $this->resource->name,
             'category' => $this->resource->categories->first()?->name ?? '',
             'collection' => $this->resource->collections->first()?->name ?? '',
-            'price' => $this->resource->startingPrice() === null ? '' : '$'.$this->resource->startingPrice(),
+            'price' => $this->resource->startingPrice() === null ? '' : '₾'.$this->resource->startingPrice(),
             'badge' => $this->resource->badge,
             'colors' => $this->resource->variants->unique('color_hex')->pluck('color_hex')->values()->all(),
             'image' => $this->resource->imageUrls()[0]['src'] ?? '',

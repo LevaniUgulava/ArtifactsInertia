@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react';
+import { brandTitle } from '@/Components/Brand/Brand';
 import RootLayout from '@/Layouts/RootLayout';
 import { ProductBreadcrumb } from './Components/ProductBreadcrumb';
 import { ProductDetails } from './Components/ProductDetails';
@@ -9,7 +10,7 @@ import type { ProductData } from './Components/ProductTypes';
 function Product({ product }: { product: ProductData }) {
     return (
         <>
-            <Head title={product.name} />
+            <Head title={brandTitle(product.name)} />
             <main className="mx-auto max-w-[1920px] px-5 py-6 sm:px-8 sm:py-10 lg:px-12 2xl:px-16">
                 <ProductBreadcrumb category={product.category} name={product.name} />
                 <div className="mt-5 grid gap-8 lg:grid-cols-2 lg:gap-12 2xl:gap-20">

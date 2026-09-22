@@ -81,15 +81,15 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
             <fieldset className="space-y-3 border-t border-stone-200 pt-6">
                 <legend className="font-semibold text-stone-950">{t('priceRange')}</legend>
                 <div className="flex items-center justify-between text-[10px] text-stone-500">
-                    <span>$50</span>
-                    <span>$2,500</span>
+                    <span>₾50</span>
+                    <span>₾2,500</span>
                 </div>
                 <div className="relative h-1 rounded-full bg-stone-200">
                     <span className="absolute inset-x-0 h-1 rounded-full bg-stone-400" />
                     <span className="absolute left-0 size-3 -translate-y-1 rounded-full border-2 border-white bg-stone-700 shadow" />
                     <span className="absolute right-0 size-3 -translate-y-1 rounded-full border-2 border-white bg-stone-700 shadow" />
                 </div>
-                <p className="font-semibold text-stone-950">${value.minPrice.toLocaleString()} – ${value.maxPrice.toLocaleString()}</p>
+                <p className="font-semibold text-stone-950">₾{value.minPrice.toLocaleString()} – ₾{value.maxPrice.toLocaleString()}</p>
             </fieldset>
 
             <fieldset className="space-y-3 border-t border-stone-200 pt-6">

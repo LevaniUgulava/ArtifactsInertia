@@ -11,7 +11,7 @@ export function FeaturedCollection({ featured }: FeaturedCollectionProps) {
 
     return (
         <section className="relative isolate min-h-64 overflow-hidden rounded-sm">
-            <img alt="Model wearing an Atelier Street collection look" className="absolute inset-0 size-full object-cover" src={featured.image} />
+            <img alt="Model wearing an ARTIFACTS collection look" className="absolute inset-0 size-full object-cover" src={featured.image} />
             <div className="absolute inset-0 bg-black/25" />
             <div className="absolute left-6 top-6 max-w-xs bg-white/90 p-5 backdrop-blur-sm sm:left-8 sm:top-8 sm:p-6">
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-amber-700">{t('featuredEyebrow')}</p>

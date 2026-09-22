@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { brandTitle } from '@/Components/Brand/Brand';
 import { Header } from '@/Layouts/Header/Header';
 
 export default function CheckoutLayout({ children }: { children: ReactNode }) {
@@ -8,9 +9,9 @@ export default function CheckoutLayout({ children }: { children: ReactNode }) {
 
     return (
         <>
-            <Head title={`${t('title')} | Atelier Street`} />
+            <Head title={brandTitle(t('title'))} />
 
-            <div className="min-h-screen bg-[#fafafa] font-sans text-stone-950">
+            <div className="min-h-screen bg-brand-stone font-sans text-brand-charcoal">
                 <Header />
                 <main>{children}</main>
             </div>

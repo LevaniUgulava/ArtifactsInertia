@@ -24,22 +24,44 @@ class CatalogController extends Controller
         $sort = $request->string('sort')->toString();
         $sort = in_array($sort, ['newest', 'price-low', 'price-high'], true) ? $sort : 'newest';
         $page = max(1, $request->integer('page', 1));
+        $search = $request->string('q')->trim()->toString();
+        $collectionParam = $request->input('collection');
+        $collectionSlug = is_string($collectionParam) ? $collectionParam : '';
         $collection = ProductCollection::query()
             ->withCount('products')
-            ->where('slug', 'fall-winter-collection')
+            ->when($collectionSlug !== '', fn ($query) => $query->where('slug', $collectionSlug))
             ->firstOrFail();
         $products = Product::query()
             ->with(['variants.media', 'categories', 'collections'])
-            ->whereHas('collections', fn ($query) => $query->whereKey($collection->getKey()))
+            ->when(
+                $collectionSlug !== '',
+                fn ($query) => $query->whereHas('collections', fn ($collectionQuery) => $collectionQuery->whereKey($collection->getKey()))
+            )
+            ->when($search !== '', fn ($query) => $query->where(function ($searchQuery) use ($search): void {
+                $searchQuery->where('name', 'like', "%{$search}%")
+                    ->orWhere('eyebrow', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('spu', 'like', "%{$search}%")
+                    ->orWhereHas('categories', fn ($categoryQuery) => $categoryQuery->where('name', 'like', "%{$search}%"))
+                    ->orWhereHas('collections', fn ($collectionQuery) => $collectionQuery->where('name', 'like', "%{$search}%"));
+            }))
             ->withMin('variants', 'price')
             ->when($sort === 'price-low', fn ($query) => $query->orderBy('variants_min_price'))
             ->when($sort === 'price-high', fn ($query) => $query->orderByDesc('variants_min_price'))
             ->when($sort === 'newest', fn ($query) => $query->latest())
             ->paginate(6, ['*'], 'page', $page);
 
+        $collectionData = $collectionSlug !== ''
+            ? (new CollectionResource($collection))->resolve($request)
+            : [
+                'name' => '',
+                'count' => $products->total(),
+                'image' => '',
+            ];
+
         return Inertia::render('Catalog/Catalog', [
             'catalog' => [
-                'collection' => (new CollectionResource($collection))->resolve($request),
+                'collection' => $collectionData,
                 'filters' => [
                     'categories' => CategoryResource::collection(Category::query()->orderBy('name')->get())->resolve($request),
                     'sizes' => Variant::query()->distinct()->orderBy('size')->pluck('size')->all(),
@@ -55,6 +77,7 @@ class CatalogController extends Controller
                     'maxPrice' => $request->integer('maxPrice', 2500),
                 ],
                 'sort' => $sort,
+                'search' => $search,
                 'products' => CatalogProductResource::collection($products->getCollection())->resolve($request),
                 'pagination' => [
                     'currentPage' => $products->currentPage(),

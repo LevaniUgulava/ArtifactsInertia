@@ -1,6 +1,7 @@
 import { Head, useForm } from '@inertiajs/react';
 import { useMemo, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { brandTitle } from '@/Components/Brand/Brand';
 import CheckoutLayout from '@/Layouts/CheckoutLayout';
 import { CheckoutBenefits } from '@/Pages/Checkout/Components/CheckoutBenefits';
 import { CheckoutBreadcrumb } from '@/Pages/Checkout/Components/CheckoutBreadcrumb';
@@ -30,7 +31,7 @@ type CheckoutPageProps = {
     };
 };
 
-const currency = new Intl.NumberFormat('en-US', { currency: 'EUR', style: 'currency' });
+const currency = new Intl.NumberFormat('en-US', { currency: 'GEL', currencyDisplay: 'narrowSymbol', style: 'currency' });
 
 function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
     const { t } = useTranslation('checkout');
@@ -71,7 +72,7 @@ function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
 
     return (
         <>
-            <Head title={`${t('title')} | Atelier Street`} />
+            <Head title={brandTitle(t('title'))} />
             <div className="mx-auto w-full max-w-[1440px] px-5 py-7 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
                 <CheckoutBreadcrumb />
                 {status === 'checkout-validated' && <p className="mt-5 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-800">{t('validatedNotice')}</p>}

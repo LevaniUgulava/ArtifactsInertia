@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { QuantityControl } from '@/Pages/Cart/Components/QuantityControl';
 
 const currency = new Intl.NumberFormat('en-US', {
-    currency: 'USD',
+    currency: 'GEL',
+    currencyDisplay: 'narrowSymbol',
     style: 'currency',
 });
 

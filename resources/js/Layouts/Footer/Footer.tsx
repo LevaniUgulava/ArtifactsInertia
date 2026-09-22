@@ -18,7 +18,7 @@ export function Footer() {
         },
     ];
     return (
-        <footer className="bg-stone-950 text-stone-100">
+        <footer className="bg-brand-charcoal text-brand-stone">
             <div className="mx-auto grid max-w-[1920px] gap-10 px-5 py-14 sm:px-8 sm:py-16 lg:px-12 2xl:px-16 2xl:py-24 md:grid-cols-3">
                 {benefits.map((benefit) => (
                     <section className="space-y-3" key={benefit.title}>

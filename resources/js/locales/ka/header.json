@@ -1,16 +1,13 @@
 {
   "search": "ძიება",
+  "clearSearch": "ძიების გასუფთავება",
+  "searchPlaceholder": "მოძებნე პროდუქტები…",
+  "closeSearch": "დახურე ძებნა",
   "openBag": "ჩანთის გახსნა",
-  "openMenu": "მენიუს გახსნა",
-  "primaryNav": "ძირითადი ნავიგაცია",
+  "language": "ენა",
   "signIn": "შესვლა",
+  "signUp": "ანგარიშის შექმნა",
   "signOut": "გასვლა",
-  "navigation": {
-    "newArrivals": "ახალი დამატებები",
-    "women": "ქალები",
-    "men": "კაცები",
-    "essentials": "აუცილებელი"
-  },
   "lang": {
     "en": "EN",
     "ka": "KA"

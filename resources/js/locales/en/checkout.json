@@ -38,7 +38,7 @@
   "cvv": "CVV",
   "terms": "I agree to the terms and conditions",
   "placeOrder": "Place Order",
-  "freeShippingDetail": "Free shipping on orders over $500",
+  "freeShippingDetail": "Free shipping on orders over ₾500",
   "easyReturnsDetail": "Easy returns within 30 days",
   "securePayment": "Secure payment",
   "maskedNotice": "Payment details are masked in this preview and are not sent to the application.",
@@ -63,5 +63,5 @@
   "success": "Order placed successfully!",
   "processing": "Placing Order…",
   "validatedNotice": "Your checkout details were validated. Payment processing is not configured yet.",
-  "eurNote": "Prices shown in EUR. Secure checkout protected by industry-standard encryption."
+  "eurNote": "Prices shown in Georgian Lari (₾). Secure checkout protected by industry-standard encryption."
 }

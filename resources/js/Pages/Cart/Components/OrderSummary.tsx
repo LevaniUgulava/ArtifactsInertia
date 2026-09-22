@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { checkout } from '@/routes';
 
 const currency = new Intl.NumberFormat('en-US', {
-    currency: 'USD',
+    currency: 'GEL',
+    currencyDisplay: 'narrowSymbol',
     style: 'currency',
 });
 

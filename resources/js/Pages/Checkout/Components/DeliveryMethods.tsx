@@ -14,7 +14,7 @@ type DeliveryMethodsProps = {
     onChange: (id: string) => void;
 };
 
-const currency = new Intl.NumberFormat('en-US', { currency: 'EUR', style: 'currency' });
+const currency = new Intl.NumberFormat('en-US', { currency: 'GEL', currencyDisplay: 'narrowSymbol', style: 'currency' });
 
 export function DeliveryMethods({ methods, onChange, selected }: DeliveryMethodsProps) {
     const { t } = useTranslation('checkout');

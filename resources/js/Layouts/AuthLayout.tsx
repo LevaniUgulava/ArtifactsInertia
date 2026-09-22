@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import type { FormEvent, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { BrandLockup, brand, brandTitle } from '@/Components/Brand/Brand';
 import { home } from '@/routes';
 
 const editorialImage = 'https://images.unsplash.com/photo-1506629905607-d405b7a30db5?auto=format&fit=crop&w=1600&q=85';
@@ -35,18 +36,15 @@ export default function AuthLayout({
 
     return (
         <>
-            <Head title={`${title} | Atelier Street`} />
+            <Head title={brandTitle(title)} />
 
             <div className="min-h-screen bg-white font-sans text-stone-950 lg:grid lg:grid-cols-[1.08fr_0.92fr]">
                 <aside className="relative isolate min-h-88 overflow-hidden bg-stone-900 text-white sm:min-h-120 lg:min-h-screen">
-                    <img alt="Atelier Street fashion editorial" className="absolute inset-0 size-full object-cover opacity-80" src={editorialImage} />
+                    <img alt={`${brand.name} fashion editorial`} className="absolute inset-0 size-full object-cover opacity-80" src={editorialImage} />
                     <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/15 to-black/10" />
                     <div className="relative flex min-h-88 flex-col justify-end p-6 sm:min-h-120 sm:p-10 lg:min-h-screen lg:p-14 2xl:p-20">
                         <div className="max-w-lg space-y-4">
-                            <div className="flex items-center gap-3 text-xl font-semibold tracking-tight sm:text-2xl">
-                                <span className="grid size-9 place-items-center rounded-full bg-white text-sm text-stone-900">A</span>
-                                Atelier Street
-                            </div>
+                            <BrandLockup className="text-xl sm:text-2xl" tone="light" />
                             <p className="max-w-md text-base leading-7 text-stone-200 sm:text-lg">
                                 {t('brandTagline')}
                             </p>

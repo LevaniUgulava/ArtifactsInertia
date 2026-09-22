@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { brandTitle } from '@/Components/Brand/Brand';
 import ProfileLayout from '@/Layouts/ProfileLayout';
 import { CartBenefits } from '@/Pages/Cart/Components/CartBenefits';
 import { CartItemRow, type CartItem } from '@/Pages/Cart/Components/CartItemRow';
@@ -17,7 +18,8 @@ type CartPageProps = {
 };
 
 const currency = new Intl.NumberFormat('en-US', {
-    currency: 'USD',
+    currency: 'GEL',
+    currencyDisplay: 'narrowSymbol',
     style: 'currency',
 });
 
@@ -54,7 +56,7 @@ function Cart({ cart }: CartPageProps) {
 
     return (
         <>
-            <Head title={`${t('title')} | Atelier Street`} />
+            <Head title={brandTitle(t('title'))} />
 
             <div className="mx-auto w-full max-w-[1440px] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
                 <div className="mb-7 flex items-end justify-between gap-5">

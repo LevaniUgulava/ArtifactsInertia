@@ -1,22 +1,20 @@
 import { Link, usePage } from '@inertiajs/react';
-import { HomeIcon, LayoutGridIcon, LogOutIcon, PackageIcon, ShoppingBagIcon, UserRoundIcon, WalletCardsIcon } from 'lucide-react';
+import { HomeIcon, LogOutIcon, ShoppingBagIcon, UserRoundIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { cart, home, logout, profile } from '@/routes';
 import { LanguageSwitcher } from '@/Components/LanguageSwitcher';
 
-const navigationItems = [
-    { label: 'navHome', icon: HomeIcon, href: home.url(), paths: ['/en'] },
-    { label: 'navCatalog', icon: LayoutGridIcon, href: home.url(), paths: [] },
-    { label: 'navProducts', icon: PackageIcon, href: home.url(), paths: [] },
-    { label: 'navCart', icon: ShoppingBagIcon, href: cart.url(), paths: ['/cart'] },
-    { label: 'navCheckout', icon: WalletCardsIcon, href: home.url(), paths: [] },
-    { label: 'navProfile', icon: UserRoundIcon, href: profile.url(), paths: ['/profile', '/account'] },
-];
-
 export function ProfileSidebar() {
     const { t } = useTranslation('profile');
-    const { url } = usePage();
+    const { url, props } = usePage();
+    const lang = (props.locale as string) ?? 'en';
     const currentPath = url.split('?')[0];
+
+    const navigationItems = [
+        { label: 'navHome', icon: HomeIcon, href: home.url({ lang }), paths: ['/en'] },
+        { label: 'navCart', icon: ShoppingBagIcon, href: cart.url({ lang }), paths: ['/cart'] },
+        { label: 'navProfile', icon: UserRoundIcon, href: profile.url({ lang }), paths: ['/profile', '/account'] },
+    ];
 
     return (
         <aside className="w-full shrink-0 border-b border-stone-200 bg-[#f8f5f0] md:w-56 md:border-b-0 md:border-r lg:w-64">

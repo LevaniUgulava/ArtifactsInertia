@@ -23,15 +23,15 @@
   "promoCode": "Promo Code",
   "enterCode": "Enter code",
   "apply": "Apply",
-  "promoHint": "Use ATELIER25 for $25 off.",
+  "promoHint": "Use ATELIER25 for ₾25 off.",
   "promoApplied": "Promo code applied.",
   "secureCheckout": "Secure 256-bit SSL encrypted checkout",
   "secureCheckoutBenefit": "Secure checkout and protected payment",
   "easyReturnsBenefit": "Easy returns and exchanges",
-  "freeShippingBenefit": "Free shipping on orders over $500",
+  "freeShippingBenefit": "Free shipping on orders over ₾500",
   "proceedToCheckout": "Proceed to Checkout",
   "continueShopping": "Continue Shopping",
-  "freeShipping": "Free shipping on orders over $500",
+  "freeShipping": "Free shipping on orders over ₾500",
   "easyReturns": "Easy returns within 30 days",
   "securePayment": "100% secure payment"
 }

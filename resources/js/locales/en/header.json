@@ -1,16 +1,13 @@
 {
   "search": "Search",
+  "clearSearch": "Clear search",
+  "searchPlaceholder": "Search products…",
+  "closeSearch": "Close search",
   "openBag": "Open bag",
-  "openMenu": "Open menu",
-  "primaryNav": "Primary navigation",
+  "language": "Language",
   "signIn": "Sign in",
+  "signUp": "Create account",
   "signOut": "Sign out",
-  "navigation": {
-    "newArrivals": "New arrivals",
-    "women": "Women",
-    "men": "Men",
-    "essentials": "Essentials"
-  },
   "lang": {
     "en": "EN",
     "ka": "KA"

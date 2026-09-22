@@ -18,7 +18,7 @@ type CheckoutOrderSummaryProps = {
     processing: boolean;
 };
 
-const currency = new Intl.NumberFormat('en-US', { currency: 'EUR', style: 'currency' });
+const currency = new Intl.NumberFormat('en-US', { currency: 'GEL', currencyDisplay: 'narrowSymbol', style: 'currency' });
 
 export function CheckoutOrderSummary({ discount, items, onApplyPromo, onPromoCodeChange, onTermsChange, promoApplied, promoCode, processing, shipping, subtotal, tax, terms, total }: CheckoutOrderSummaryProps) {
     const { t } = useTranslation('checkout');

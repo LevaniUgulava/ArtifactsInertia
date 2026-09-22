@@ -1,9 +1,14 @@
-import { Link, usePage } from '@inertiajs/react';
-import { MenuIcon, SearchIcon, ShoppingBagIcon } from 'lucide-react';
+import { Link, router, usePage } from '@inertiajs/react';
+import { ChevronDownIcon, SearchIcon, ShoppingBagIcon, XIcon } from 'lucide-react';
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type KeyboardEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { home, login, profile } from '@/routes';
+import { brand } from '@/Components/Brand/Brand';
+import { cart, catalog, home, login, profile } from '@/routes';
 
 type SharedPageProps = {
+    locale?: string;
+    availableLocales?: string[];
+    catalog?: { search?: string };
     auth: {
         user: {
             name: string;
@@ -12,56 +17,162 @@ type SharedPageProps = {
     };
 };
 
+const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-2';
+
 export function Header() {
     const { t } = useTranslation('header');
-    const { auth } = usePage<SharedPageProps>().props;
+    const { props, url } = usePage<SharedPageProps>();
+    const { auth } = props;
+    const lang = (props.locale as string) ?? 'en';
+    const availableLocales = props.availableLocales ?? ['en'];
     const user = auth.user;
+    const activeSearch = (props.catalog?.search as string) ?? '';
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(activeSearch);
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
-    const navigationItems = [
-        t('navigation.newArrivals'),
-        t('navigation.women'),
-        t('navigation.men'),
-        t('navigation.essentials'),
-    ];
+    const toggleSearch = () => {
+        setSearchQuery(activeSearch);
+        setIsSearchOpen((open) => !open);
+    };
+
+    const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const targetLocale = e.target.value;
+
+        if (targetLocale === lang) {
+            return;
+        }
+
+        const [path, query = ''] = url.replace(/^https?:\/\/[^/]+/, '').split('?');
+        const segments = path.split('/').filter(Boolean);
+
+        if (segments[0] === lang) {
+            segments[0] = targetLocale;
+        } else {
+            segments.unshift(targetLocale);
+        }
+
+        router.visit(`/${segments.join('/')}${query ? `?${query}` : ''}`, { preserveScroll: true });
+    };
+
+    useEffect(() => {
+        if (isSearchOpen) {
+            searchInputRef.current?.focus();
+        }
+    }, [isSearchOpen]);
+
+    const closeSearch = () => {
+        setIsSearchOpen(false);
+        setSearchQuery(activeSearch);
+    };
+
+    const handleSearchKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Escape') {
+            closeSearch();
+        }
+    };
+
+    const submitSearch = (e: FormEvent) => {
+        e.preventDefault();
+        const query = searchQuery.trim();
+
+        router.get(catalog.url({ lang }, { query: query ? { q: query } : {} }), {}, { preserveScroll: true });
+        setIsSearchOpen(false);
+    };
 
     return (
-        <header className="border-b border-stone-200 bg-white">
-            <div className="mx-auto flex max-w-[1920px] items-center justify-between gap-5 px-4 py-4 sm:px-8 lg:px-12 2xl:px-16">
-                <Link className="flex items-center gap-2 text-sm font-semibold tracking-tight text-stone-950" href={home.url()}>
-                    <span className="grid size-5 place-items-center rounded-full bg-amber-700 text-[10px] text-white">A</span>
-                    Atelier Street
+        <header className="sticky top-0 z-50 border-b border-brand-olive/20 bg-brand-stone">
+            <div className="mx-auto flex max-w-[1920px] items-center justify-between gap-3 px-4 py-4 sm:gap-5 sm:px-8 lg:px-12 2xl:px-16">
+                <Link aria-label={brand.name} className="shrink-0 text-brand-charcoal" href={home.url({ lang })}>
+                    <span className="font-display text-lg tracking-[0.22em] sm:text-xl">{brand.name}</span>
                 </Link>
 
-                <nav aria-label={t('primaryNav')} className="hidden items-center gap-7 text-xs font-medium text-stone-600 md:flex">
-                    {navigationItems.map((item) => (
-                        <a className="transition hover:text-stone-950" href={`#${item.toLowerCase().replace(' ', '-')}`} key={item}>
-                            {item}
-                        </a>
-                    ))}
-                </nav>
+                <div className="flex items-center gap-2 text-brand-charcoal sm:gap-3">
+                    <div className="relative flex h-8 shrink-0 items-center">
+                        {isSearchOpen ? (
+                            <form className="flex w-56 shrink-0 items-center gap-1 rounded-full border border-brand-olive/45 bg-white px-2 py-1.5 shadow-sm ring-1 ring-brand-olive/10 focus-within:border-brand-charcoal focus-within:ring-brand-olive/20 sm:w-64 md:w-72" id="site-search" onSubmit={submitSearch} role="search">
+                                <button aria-label={t('search')} className="grid size-7 shrink-0 place-items-center rounded-full text-brand-olive/70 transition hover:bg-brand-stone hover:text-brand-charcoal" type="submit">
+                                    <SearchIcon aria-hidden="true" size={15} strokeWidth={1.8} />
+                                </button>
+                                <input
+                                    aria-label={t('search')}
+                                    className="min-w-0 flex-1 bg-transparent px-1 text-xs text-brand-charcoal outline-none placeholder:text-brand-olive/60"
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    onKeyDown={handleSearchKeyDown}
+                                    placeholder={t('searchPlaceholder')}
+                                    ref={searchInputRef}
+                                    type="search"
+                                    value={searchQuery}
+                                />
+                                {searchQuery ? (
+                                    <button
+                                        aria-label={t('clearSearch')}
+                                        className="grid size-7 shrink-0 place-items-center rounded-full text-brand-olive/70 transition hover:bg-brand-stone hover:text-brand-charcoal"
+                                        onClick={() => setSearchQuery('')}
+                                        type="button"
+                                    >
+                                        <XIcon aria-hidden="true" size={14} strokeWidth={1.8} />
+                                    </button>
+                                ) : null}
+                                <button aria-label={t('closeSearch')} className="grid size-7 shrink-0 place-items-center rounded-full text-brand-olive/70 transition hover:bg-brand-stone hover:text-brand-charcoal" onClick={closeSearch} type="button">
+                                    <XIcon aria-hidden="true" size={15} strokeWidth={1.8} />
+                                </button>
+                            </form>
+                        ) : (
+                            <button
+                                aria-expanded={false}
+                                aria-label={t('search')}
+                                className={`grid size-8 shrink-0 place-items-center rounded-full transition hover:bg-brand-olive/10 ${focusRing} focus-visible:outline-brand-charcoal`}
+                                onClick={toggleSearch}
+                                type="button"
+                            >
+                                <SearchIcon aria-hidden="true" size={17} strokeWidth={1.8} />
+                            </button>
+                        )}
+                    </div>
 
-                <div className="flex items-center gap-3 text-stone-700">
-                    <button aria-label={t('search')} className="grid size-8 place-items-center rounded-full transition hover:bg-stone-100" type="button">
-                        <SearchIcon aria-hidden="true" size={17} strokeWidth={1.8} />
-                    </button>
-                    <button aria-label={t('openBag')} className="grid size-8 place-items-center rounded-full transition hover:bg-stone-100" type="button">
-                        <ShoppingBagIcon aria-hidden="true" size={17} strokeWidth={1.8} />
-                    </button>
                     {user ? (
-                            <Link className="hidden items-center gap-2 border-l border-stone-200 pl-4 text-xs font-semibold text-stone-700 transition hover:text-stone-950 sm:flex" href={profile.url()}>
-                                <span className="grid size-8 place-items-center overflow-hidden rounded-full bg-stone-200">
+                        <>
+                            <Link aria-label={t('openBag')} className={`grid size-8 place-items-center rounded-full transition hover:bg-brand-olive/10 ${focusRing} focus-visible:outline-brand-charcoal`} href={cart.url({ lang })}>
+                                <ShoppingBagIcon aria-hidden="true" size={17} strokeWidth={1.8} />
+                            </Link>
+                            <Link className="hidden items-center gap-2 border-l border-brand-olive/20 pl-3 text-xs font-semibold text-brand-olive transition hover:text-brand-charcoal sm:flex sm:pl-4" href={profile.url({ lang })}>
+                                <span className="grid size-8 place-items-center overflow-hidden rounded-full bg-brand-taupe/30">
                                     <img alt="" className="size-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=85" />
                                 </span>
                                 <span className="max-w-32 truncate">{user.name}</span>
                             </Link>
-                        ) : (
-                        <Link className="hidden text-xs font-semibold text-stone-700 transition hover:text-stone-950 sm:block" href={login.url()}>
-                            {t('signIn')}
-                        </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                className={`hidden items-center rounded-full border border-brand-charcoal/15 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-charcoal transition hover:border-brand-charcoal/30 hover:bg-brand-charcoal/5 sm:inline-flex ${focusRing} focus-visible:outline-brand-charcoal`}
+                                href={login.url({ lang })}
+                            >
+                                {t('signIn')}
+                            </Link>
+                            <div className="relative shrink-0">
+                                <select
+                                    aria-label={t('language')}
+                                    className={`h-8 cursor-pointer appearance-none rounded-full border border-brand-charcoal/15 bg-transparent pl-3 pr-8 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-charcoal outline-none transition hover:border-brand-charcoal/30 hover:bg-brand-charcoal/5 ${focusRing} focus-visible:outline-brand-charcoal`}
+                                    onChange={handleLanguageChange}
+                                    value={lang}
+                                >
+                                    {availableLocales.map((locale) => (
+                                        <option key={locale} value={locale}>
+                                            {t(`lang.${locale}`, locale.toUpperCase())}
+                                        </option>
+                                    ))}
+                                </select>
+                                <ChevronDownIcon
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-brand-olive/70"
+                                    size={13}
+                                    strokeWidth={1.8}
+                                />
+                            </div>
+                        </>
                     )}
-                    <button aria-label={t('openMenu')} className="grid size-8 place-items-center rounded-full transition hover:bg-stone-100 md:hidden" type="button">
-                        <MenuIcon aria-hidden="true" size={18} strokeWidth={1.8} />
-                    </button>
                 </div>
             </div>
         </header>

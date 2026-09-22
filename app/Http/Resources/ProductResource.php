@@ -22,7 +22,7 @@ class ProductResource extends JsonResource
             'eyebrow' => $this->resource->eyebrow,
             'category' => $this->resource->categories->first()?->name ?? '',
             'collection' => $this->resource->collections->first()?->name ?? '',
-            'price' => $this->resource->startingPrice() === null ? '' : '$'.$this->resource->startingPrice(),
+            'price' => $this->resource->startingPrice() === null ? '' : '₾'.$this->resource->startingPrice(),
             'description' => $this->resource->description,
             'images' => $this->resource->imageUrls(),
             'colors' => $variants->unique('color')->map(fn ($variant): array => [

@@ -29,5 +29,6 @@ export type FilterState = {
 
 export type CatalogQueryState = FilterState & {
     sort: string;
+    search: string;
     page: number;
 };

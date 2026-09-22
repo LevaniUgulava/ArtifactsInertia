@@ -1,5 +1,7 @@
 {
   "showingProducts": "Showing {{count}} products",
+  "searchResults": "Search results for “{{query}}”",
+  "clearSearch": "Clear search",
   "sortBy": "Sort by:",
   "newest": "Newest",
   "priceLowToHigh": "Price: Low to High",

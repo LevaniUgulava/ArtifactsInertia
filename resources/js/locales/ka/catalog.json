@@ -1,5 +1,7 @@
 {
   "showingProducts": "ნაჩვენებია {{count}} პროდუქტი",
+  "searchResults": "ძიების შედეგები: “{{query}}”",
+  "clearSearch": "ძიების გასუფთავება",
   "sortBy": "დალაგება:",
   "newest": "უახლესი",
   "priceLowToHigh": "ფასი: დაბალიდან მაღალზე",
