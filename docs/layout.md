@@ -27,8 +27,9 @@ All customer-facing copy is localized ("ARTIFACTS" brand, `en` and `ka`), and al
 
 - `routes/web.php` — redirects `/` → `/en`; `/{lang}`, `/{lang}/catalog`, `/{lang}/products/{product}`.
 - `app/Http/Controllers/HomeController.php` — database-backed home: new arrivals, trending (badged) products, women's/men's collections.
-- `app/Http/Controllers/CatalogController.php` — catalog with `q` search, `collection` slug, category/color/size/price filters, sort, pagination.
-- `resources/js/Layouts/Header/Header.tsx` — sticky header: search (catalog `q`), guest language switcher, sign-in / bag / profile controls.
+- `app/Http/Controllers/CatalogController.php` — catalog with `q` search, `collection` slug, category/color/size/price filters, sort, pagination. Frontend refactored to the feature pattern: `CatalogTypes.ts` (at feature root) + `hooks/useCatalog.ts` (filters/search state, auto-apply navigation, clear) + `Components/` (filters, product grid/card, pagination, collection header). Filters auto-apply on toggle — no Apply button. Frontend refactored to the feature-folder pattern (`CatalogTypes.ts` + `hooks/useCatalog` + `Components/`); filters auto-apply on toggle (no Apply button).
+- **Feature-folder pattern** (project-wide, see `.ai/rules/pages.md` & `hooks.md`): each storefront feature keeps `<Feature>Types.ts` at its root, custom hooks in `hooks/`, and presentational/modal children in `Components/`. Types shared app-wide go to `resources/js/types/` (e.g. `shared.ts`); reusable hooks go to `resources/js/hooks/` (`useLocale`, `useFormatCurrency`); otherwise they stay feature-local.
+- `resources/js/Layouts/Header/Header.tsx` — sticky header: search (catalog `q`), guest language switcher, sign-in / bag / profile controls. Refactored to the feature-folder pattern: `HeaderTypes.ts` + `hooks/` (useHeader, useSearchModal) + `Components/` (SearchModal, MobileHeader).
 - `resources/js/Layouts/{Root,Auth,Checkout,Profile}Layout.tsx` + `Footer/Footer.tsx` — shared surfaces using brand tokens.
 - `docs/` per-area docs and `.ai/rules/` project rules govern conventions (see AGENTS.md).
 
