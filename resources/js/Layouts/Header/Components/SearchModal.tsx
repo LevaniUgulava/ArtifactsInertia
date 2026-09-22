@@ -1,46 +1,13 @@
-import { router } from '@inertiajs/react';
 import { ArrowUpRightIcon, SearchIcon, XIcon } from 'lucide-react';
-import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { catalog } from '@/routes';
-
-type SearchModalProps = {
-    initialQuery: string;
-    lang: string;
-    onClose: () => void;
-};
+import type { SearchModalProps } from '../HeaderTypes';
+import { useSearchModal } from '../hooks/useSearchModal';
 
 const suggestionKeys = ['newArrivals', 'outerwear', 'essentials', 'gifts'] as const;
 
 export function SearchModal({ initialQuery, lang, onClose }: SearchModalProps) {
     const { t } = useTranslation('header');
-    const [query, setQuery] = useState(initialQuery);
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        inputRef.current?.focus();
-
-        const previousOverflow = document.body.style.overflow;
-        document.body.style.overflow = 'hidden';
-
-        return () => {
-            document.body.style.overflow = previousOverflow;
-        };
-    }, []);
-
-    const submitSearch = (e: FormEvent) => {
-        e.preventDefault();
-        const trimmedQuery = query.trim();
-
-        router.get(catalog.url({ lang }, { query: trimmedQuery ? { q: trimmedQuery } : {} }), {}, { preserveScroll: true });
-        onClose();
-    };
-
-    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Escape') {
-            onClose();
-        }
-    };
+    const { query, setQuery, inputRef, submitSearch, handleKeyDown } = useSearchModal(initialQuery, lang, onClose);
 
     return (
         <div aria-label={t('search')} aria-modal="true" className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-brand-charcoal/20 px-4 py-5 backdrop-blur-[2px] sm:px-6 sm:py-10" onMouseDown={(e) => e.target === e.currentTarget && onClose()} role="dialog">
