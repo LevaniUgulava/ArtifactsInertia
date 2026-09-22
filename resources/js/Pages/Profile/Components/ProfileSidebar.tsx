@@ -1,23 +1,27 @@
 import { Link, usePage } from '@inertiajs/react';
 import { HomeIcon, LogOutIcon, ShoppingBagIcon, UserRoundIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { cart, home, logout, profile } from '@/routes';
 import { LanguageSwitcher } from '@/Components/LanguageSwitcher';
+import { cart, home, logout, profile } from '@/routes';
+
+type ProfileSidebarPageProps = {
+    locale?: string;
+};
 
 export function ProfileSidebar() {
     const { t } = useTranslation('profile');
-    const { url, props } = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const { url, props } = usePage<ProfileSidebarPageProps>();
+    const lang = props.locale ?? 'en';
     const currentPath = url.split('?')[0];
 
     const navigationItems = [
-        { label: 'navHome', icon: HomeIcon, href: home.url({ lang }), paths: ['/en'] },
+        { label: 'navHome', icon: HomeIcon, href: home.url({ lang }), paths: [`/${lang}`] },
         { label: 'navCart', icon: ShoppingBagIcon, href: cart.url({ lang }), paths: ['/cart'] },
         { label: 'navProfile', icon: UserRoundIcon, href: profile.url({ lang }), paths: ['/profile', '/account'] },
     ];
 
     return (
-        <aside className="w-full shrink-0 border-b border-stone-200 bg-[#f8f5f0] md:w-56 md:border-b-0 md:border-r lg:w-64">
+        <aside className="hidden w-full shrink-0 border-b border-stone-200 bg-[#f8f5f0] md:block md:w-56 md:border-b-0 md:border-r lg:w-64">
             <nav aria-label={t('accountNav')} className="flex gap-1 overflow-x-auto px-4 py-3 md:block md:space-y-1 md:px-5 md:py-12 lg:px-7">
                 {navigationItems.map(({ href, icon: Icon, label, paths }) => {
                     const active = paths.some((path) => currentPath.endsWith(path));
