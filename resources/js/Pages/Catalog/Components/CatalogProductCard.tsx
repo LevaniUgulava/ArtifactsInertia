@@ -1,12 +1,12 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { useLocale } from '@/hooks/useLocale';
 import productRoutes from '@/routes/product';
-import type { CatalogProduct } from './CatalogTypes';
+import type { CatalogProduct } from '../CatalogTypes';
 
 export function CatalogProductCard({ product }: { product: CatalogProduct }) {
     const { t } = useTranslation('catalog');
-    const { props } = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const lang = useLocale();
 
     return (
         <article className="group min-w-0">

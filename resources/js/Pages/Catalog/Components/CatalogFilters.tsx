@@ -1,20 +1,19 @@
 import { useTranslation } from 'react-i18next';
-import type { ColorOption, FilterOption, FilterState } from './CatalogTypes';
+import type { ColorOption, FilterOption, FilterState } from '../CatalogTypes';
 
 type CatalogFiltersProps = {
     filters: {
         categories: FilterOption[];
         sizes: string[];
         colors: ColorOption[];
-        collections: string[];
+        collections: FilterOption[];
     };
     value: FilterState;
     onChange: (value: FilterState) => void;
-    onApply: () => void;
     onClear: () => void;
 };
 
-function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFiltersProps) {
+function FilterPanel({ filters, value, onChange, onClear }: CatalogFiltersProps) {
     const { t } = useTranslation('catalog');
 
     const toggleValue = (key: 'categories' | 'sizes' | 'colors' | 'collections', option: string) => {
@@ -95,29 +94,21 @@ function FilterPanel({ filters, value, onChange, onApply, onClear }: CatalogFilt
             <fieldset className="space-y-3 border-t border-stone-200 pt-6">
                 <legend className="font-semibold text-stone-950">{t('collection')}</legend>
                 <div className="space-y-2.5">
-                    {filters.collections.map((collection) => {
-                        const valueKey = collection.toLowerCase().replace("'", '').replace(' ', '-');
-                        const label = collection === "Women's" ? t('womenS') : collection === "Men's" ? t('menS') : t('all');
-
-                        return (
-                            <label className="flex items-center gap-2.5" key={collection}>
-                                <input
-                                    checked={value.collections.includes(valueKey)}
-                                    className="size-3.5 rounded-sm border-stone-300 text-amber-700 focus:ring-amber-700"
-                                    onChange={() => toggleValue('collections', valueKey)}
-                                    type="checkbox"
-                                />
-                                {label}
-                            </label>
-                        );
-                    })}
+                    {filters.collections.map((collection) => (
+                        <label className="flex items-center gap-2.5" key={collection.value}>
+                            <input
+                                checked={value.collections.includes(collection.value)}
+                                className="size-3.5 rounded-sm border-stone-300 text-amber-700 focus:ring-amber-700"
+                                onChange={() => toggleValue('collections', collection.value)}
+                                type="checkbox"
+                            />
+                            {t(`col_${collection.value}`, { defaultValue: collection.label })}
+                        </label>
+                    ))}
                 </div>
             </fieldset>
 
             <div className="space-y-3 border-t border-stone-200 pt-6">
-                <button className="w-full bg-[#b58a52] px-4 py-3 text-xs font-semibold text-white transition hover:bg-[#9d7442]" onClick={onApply} type="button">
-                    {t('applyFilters')}
-                </button>
                 <button className="w-full text-xs text-stone-500 transition hover:text-stone-950" onClick={onClear} type="button">
                     {t('clearAll')}
                 </button>

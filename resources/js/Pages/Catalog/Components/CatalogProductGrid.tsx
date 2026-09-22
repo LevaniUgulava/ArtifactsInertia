@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import type { CatalogProduct } from './CatalogTypes';
+import type { CatalogProduct } from '../CatalogTypes';
 import { CatalogProductCard } from './CatalogProductCard';
 
 export function CatalogProductGrid({ products }: { products: CatalogProduct[] }) {
