@@ -1,9 +1,10 @@
 import { Link, router, usePage } from '@inertiajs/react';
-import { ChevronDownIcon, SearchIcon, ShoppingBagIcon, XIcon } from 'lucide-react';
-import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type KeyboardEvent } from 'react';
+import { ChevronDownIcon, SearchIcon, ShoppingBagIcon } from 'lucide-react';
+import { useState, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { brand } from '@/Components/Brand/Brand';
-import { cart, catalog, home, login, profile } from '@/routes';
+import { cart, home, login, profile } from '@/routes';
+import { SearchModal } from './SearchModal';
 
 type SharedPageProps = {
     locale?: string;
@@ -29,11 +30,10 @@ export function Header() {
     const activeSearch = (props.catalog?.search as string) ?? '';
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState(activeSearch);
-    const searchInputRef = useRef<HTMLInputElement>(null);
 
-    const toggleSearch = () => {
+    const openSearch = () => {
         setSearchQuery(activeSearch);
-        setIsSearchOpen((open) => !open);
+        setIsSearchOpen(true);
     };
 
     const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -55,29 +55,9 @@ export function Header() {
         router.visit(`/${segments.join('/')}${query ? `?${query}` : ''}`, { preserveScroll: true });
     };
 
-    useEffect(() => {
-        if (isSearchOpen) {
-            searchInputRef.current?.focus();
-        }
-    }, [isSearchOpen]);
-
     const closeSearch = () => {
         setIsSearchOpen(false);
         setSearchQuery(activeSearch);
-    };
-
-    const handleSearchKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Escape') {
-            closeSearch();
-        }
-    };
-
-    const submitSearch = (e: FormEvent) => {
-        e.preventDefault();
-        const query = searchQuery.trim();
-
-        router.get(catalog.url({ lang }, { query: query ? { q: query } : {} }), {}, { preserveScroll: true });
-        setIsSearchOpen(false);
     };
 
     return (
@@ -89,46 +69,9 @@ export function Header() {
 
                 <div className="flex items-center gap-2 text-brand-charcoal sm:gap-3">
                     <div className="relative flex h-8 shrink-0 items-center">
-                        {isSearchOpen ? (
-                            <form className="flex w-56 shrink-0 items-center gap-1 rounded-full border border-brand-olive/45 bg-white px-2 py-1.5 shadow-sm ring-1 ring-brand-olive/10 focus-within:border-brand-charcoal focus-within:ring-brand-olive/20 sm:w-64 md:w-72" id="site-search" onSubmit={submitSearch} role="search">
-                                <button aria-label={t('search')} className="grid size-7 shrink-0 place-items-center rounded-full text-brand-olive/70 transition hover:bg-brand-stone hover:text-brand-charcoal" type="submit">
-                                    <SearchIcon aria-hidden="true" size={15} strokeWidth={1.8} />
-                                </button>
-                                <input
-                                    aria-label={t('search')}
-                                    className="min-w-0 flex-1 bg-transparent px-1 text-xs text-brand-charcoal outline-none placeholder:text-brand-olive/60"
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    onKeyDown={handleSearchKeyDown}
-                                    placeholder={t('searchPlaceholder')}
-                                    ref={searchInputRef}
-                                    type="search"
-                                    value={searchQuery}
-                                />
-                                {searchQuery ? (
-                                    <button
-                                        aria-label={t('clearSearch')}
-                                        className="grid size-7 shrink-0 place-items-center rounded-full text-brand-olive/70 transition hover:bg-brand-stone hover:text-brand-charcoal"
-                                        onClick={() => setSearchQuery('')}
-                                        type="button"
-                                    >
-                                        <XIcon aria-hidden="true" size={14} strokeWidth={1.8} />
-                                    </button>
-                                ) : null}
-                                <button aria-label={t('closeSearch')} className="grid size-7 shrink-0 place-items-center rounded-full text-brand-olive/70 transition hover:bg-brand-stone hover:text-brand-charcoal" onClick={closeSearch} type="button">
-                                    <XIcon aria-hidden="true" size={15} strokeWidth={1.8} />
-                                </button>
-                            </form>
-                        ) : (
-                            <button
-                                aria-expanded={false}
-                                aria-label={t('search')}
-                                className={`grid size-8 shrink-0 place-items-center rounded-full transition hover:bg-brand-olive/10 ${focusRing} focus-visible:outline-brand-charcoal`}
-                                onClick={toggleSearch}
-                                type="button"
-                            >
-                                <SearchIcon aria-hidden="true" size={17} strokeWidth={1.8} />
-                            </button>
-                        )}
+                        <button aria-expanded={isSearchOpen} aria-label={t('search')} className={`grid size-8 shrink-0 place-items-center rounded-full transition hover:bg-brand-olive/10 ${focusRing} focus-visible:outline-brand-charcoal`} onClick={openSearch} type="button">
+                            <SearchIcon aria-hidden="true" size={17} strokeWidth={1.8} />
+                        </button>
                     </div>
 
                     {user ? (
@@ -175,6 +118,7 @@ export function Header() {
                     )}
                 </div>
             </div>
+            {isSearchOpen ? <SearchModal initialQuery={searchQuery} lang={lang} onClose={closeSearch} /> : null}
         </header>
     );
 }

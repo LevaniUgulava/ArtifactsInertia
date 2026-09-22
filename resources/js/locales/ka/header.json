@@ -3,6 +3,15 @@
   "clearSearch": "ძიების გასუფთავება",
   "searchPlaceholder": "მოძებნე პროდუქტები…",
   "closeSearch": "დახურე ძებნა",
+  "suggestions": "სცადე მოძებნო",
+  "searchSubmitHint": "Enter — ძიება",
+  "searchCloseHint": "Esc — დახურვა",
+  "suggestionItems": {
+    "newArrivals": "ახალი შემოსული",
+    "outerwear": "ზედა ტანსაცმელი",
+    "essentials": "ყოველდღიური ნივთები",
+    "gifts": "საჩუქრები"
+  },
   "openBag": "ჩანთის გახსნა",
   "language": "ენა",
   "signIn": "შესვლა",

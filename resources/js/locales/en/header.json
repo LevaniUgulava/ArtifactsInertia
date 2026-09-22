@@ -3,6 +3,15 @@
   "clearSearch": "Clear search",
   "searchPlaceholder": "Search products…",
   "closeSearch": "Close search",
+  "suggestions": "Try searching for",
+  "searchSubmitHint": "Enter to search",
+  "searchCloseHint": "Esc to close",
+  "suggestionItems": {
+    "newArrivals": "New arrivals",
+    "outerwear": "Outerwear",
+    "essentials": "Everyday essentials",
+    "gifts": "Gifts"
+  },
   "openBag": "Open bag",
   "language": "Language",
   "signIn": "Sign in",
