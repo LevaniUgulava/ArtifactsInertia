@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Database\Seeders\CatalogSeeder;
 
 beforeEach(fn () => $this->seed(CatalogSeeder::class));
@@ -23,13 +24,32 @@ it('renders catalog filtered by collection slug', function () {
             ->has('catalog.products', 4));
 });
 
-it('preserves supported catalog query state', function () {
+it('filters and sorts products from supported catalog query state', function () {
     $this->get('/en/catalog?sort=price-high&page=2&category[]=outerwear&color[]=camel')
         ->assertInertia(fn ($page) => $page
             ->where('catalog.sort', 'price-high')
-            ->where('catalog.pagination.currentPage', 2)
+            ->where('catalog.pagination.total', 2)
             ->where('catalog.activeFilters.categories', ['outerwear'])
             ->where('catalog.activeFilters.colors', ['camel']));
+});
+
+it('filters products by size', function () {
+    $productsWithSize = Product::query()
+        ->whereHas('variants', fn ($query) => $query->where('size', 'XL'))
+        ->count();
+
+    $this->get('/en/catalog?size[]=XL')
+        ->assertInertia(fn ($page) => $page
+            ->where('catalog.activeFilters.sizes', ['XL'])
+            ->where('catalog.pagination.total', $productsWithSize));
+});
+
+it('filters products by collection from the sidebar', function () {
+    $this->get('/en/catalog?collection[]=mens')
+        ->assertInertia(fn ($page) => $page
+            ->where('catalog.collection.name', '')
+            ->where('catalog.activeFilters.collections', ['mens'])
+            ->where('catalog.pagination.total', 3));
 });
 
 it('falls back to safe catalog defaults for unsupported query state', function () {

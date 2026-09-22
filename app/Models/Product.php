@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -42,6 +43,52 @@ class Product extends Model
     public function collections(): BelongsToMany
     {
         return $this->belongsToMany(Collection::class);
+    }
+
+    /**
+     * Scope the query to products matching the active catalog state.
+     *
+     * @param  array{
+     *     categories: list<string>,
+     *     sizes: list<string>,
+     *     colors: list<string>,
+     *     collections: list<string>,
+     *     minPrice: int,
+     *     maxPrice: int,
+     * }  $filters
+     */
+    public function scopeForCatalog(Builder $query, ?Collection $collection, string $search, string $sort, array $filters): void
+    {
+        $categoryNames = Category::query()->get()
+            ->filter(fn (Category $category): bool => in_array(str($category->name)->slug()->toString(), $filters['categories'], true))
+            ->pluck('name');
+
+        $collectionSlugs = collect($filters['collections'])
+            ->when($collection !== null, fn ($slugs) => $slugs->push($collection->slug))
+            ->values()
+            ->all();
+
+        $query
+            ->with(['variants.media', 'categories', 'collections'])
+            ->withMin('variants', 'price')
+            ->when($collectionSlugs !== [], fn (Builder $query) => $query->whereHas('collections', fn (Builder $query) => $query->whereIn('slug', $collectionSlugs)))
+            ->when($filters['categories'] !== [], fn (Builder $query) => $query->whereHas('categories', fn (Builder $query) => $query->whereIn('name', $categoryNames)))
+            ->when($filters['sizes'] !== [], fn (Builder $query) => $query->whereHas('variants', fn (Builder $query) => $query->whereIn('size', $filters['sizes'])))
+            ->when($filters['colors'] !== [], fn (Builder $query) => $query->whereHas('variants', fn (Builder $query) => $query->whereIn('color', $filters['colors'])))
+            ->when(true, fn (Builder $query) => $query->whereHas('variants', fn (Builder $query) => $query->whereBetween('price', [$filters['minPrice'], $filters['maxPrice']])))
+            ->when($search !== '', function (Builder $query) use ($search): void {
+                $query->where(function (Builder $searchQuery) use ($search): void {
+                    $searchQuery->where('name', 'like', "%{$search}%")
+                        ->orWhere('eyebrow', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('spu', 'like', "%{$search}%")
+                        ->orWhereHas('categories', fn (Builder $categoryQuery) => $categoryQuery->where('name', 'like', "%{$search}%"))
+                        ->orWhereHas('collections', fn (Builder $collectionQuery) => $collectionQuery->where('name', 'like', "%{$search}%"));
+                });
+            })
+            ->when($sort === 'price-low', fn (Builder $query) => $query->orderBy('variants_min_price'))
+            ->when($sort === 'price-high', fn (Builder $query) => $query->orderByDesc('variants_min_price'))
+            ->when($sort === 'newest', fn (Builder $query) => $query->latest());
     }
 
     /**
