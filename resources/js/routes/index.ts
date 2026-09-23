@@ -1,8 +1,8 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults, validateParameters } from './../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
 * @see app/Http/Controllers/Auth/AuthController.php:21
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/login'
 */
 export const login = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -18,7 +18,7 @@ login.definition = {
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
 * @see app/Http/Controllers/Auth/AuthController.php:21
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/login'
 */
 login.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -39,7 +39,7 @@ login.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return login.definition.url
@@ -50,7 +50,7 @@ login.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
 * @see app/Http/Controllers/Auth/AuthController.php:21
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/login'
 */
 login.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -61,7 +61,7 @@ login.get = (args?: { lang?: string | number } | [lang: string | number ] | stri
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
 * @see app/Http/Controllers/Auth/AuthController.php:21
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/login'
 */
 login.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -70,49 +70,9 @@ login.head = (args?: { lang?: string | number } | [lang: string | number ] | str
 })
 
 /**
-* @see \App\Http\Controllers\Auth\AuthController::login
-* @see app/Http/Controllers/Auth/AuthController.php:21
-* @param lang - Default: 'en'
-* @route '/{lang?}/login'
-*/
-const loginForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: login.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::login
-* @see app/Http/Controllers/Auth/AuthController.php:21
-* @param lang - Default: 'en'
-* @route '/{lang?}/login'
-*/
-loginForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: login.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::login
-* @see app/Http/Controllers/Auth/AuthController.php:21
-* @param lang - Default: 'en'
-* @route '/{lang?}/login'
-*/
-loginForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: login.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-login.form = loginForm
-
-/**
 * @see \App\Http\Controllers\Auth\AuthController::register
 * @see app/Http/Controllers/Auth/AuthController.php:29
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/register'
 */
 export const register = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -128,7 +88,7 @@ register.definition = {
 /**
 * @see \App\Http\Controllers\Auth\AuthController::register
 * @see app/Http/Controllers/Auth/AuthController.php:29
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/register'
 */
 register.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -149,7 +109,7 @@ register.url = (args?: { lang?: string | number } | [lang: string | number ] | s
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return register.definition.url
@@ -160,7 +120,7 @@ register.url = (args?: { lang?: string | number } | [lang: string | number ] | s
 /**
 * @see \App\Http\Controllers\Auth\AuthController::register
 * @see app/Http/Controllers/Auth/AuthController.php:29
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/register'
 */
 register.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -171,7 +131,7 @@ register.get = (args?: { lang?: string | number } | [lang: string | number ] | s
 /**
 * @see \App\Http\Controllers\Auth\AuthController::register
 * @see app/Http/Controllers/Auth/AuthController.php:29
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/register'
 */
 register.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -180,49 +140,9 @@ register.head = (args?: { lang?: string | number } | [lang: string | number ] | 
 })
 
 /**
-* @see \App\Http\Controllers\Auth\AuthController::register
-* @see app/Http/Controllers/Auth/AuthController.php:29
-* @param lang - Default: 'en'
-* @route '/{lang?}/register'
-*/
-const registerForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: register.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::register
-* @see app/Http/Controllers/Auth/AuthController.php:29
-* @param lang - Default: 'en'
-* @route '/{lang?}/register'
-*/
-registerForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: register.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::register
-* @see app/Http/Controllers/Auth/AuthController.php:29
-* @param lang - Default: 'en'
-* @route '/{lang?}/register'
-*/
-registerForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: register.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-register.form = registerForm
-
-/**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CartController.php:23
+* @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 export const cart = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -237,8 +157,8 @@ cart.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CartController.php:23
+* @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 cart.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -259,7 +179,7 @@ cart.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return cart.definition.url
@@ -269,8 +189,8 @@ cart.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CartController.php:23
+* @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 cart.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -280,8 +200,8 @@ cart.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CartController.php:23
+* @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 cart.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -290,49 +210,9 @@ cart.head = (args?: { lang?: string | number } | [lang: string | number ] | stri
 })
 
 /**
-* @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/cart'
-*/
-const cartForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: cart.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/cart'
-*/
-cartForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: cart.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/cart'
-*/
-cartForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: cart.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-cart.form = cartForm
-
-/**
 * @see \App\Http\Controllers\ProfileController::profile
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/profile'
 */
 export const profile = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -348,7 +228,7 @@ profile.definition = {
 /**
 * @see \App\Http\Controllers\ProfileController::profile
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/profile'
 */
 profile.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -369,7 +249,7 @@ profile.url = (args?: { lang?: string | number } | [lang: string | number ] | st
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return profile.definition.url
@@ -380,7 +260,7 @@ profile.url = (args?: { lang?: string | number } | [lang: string | number ] | st
 /**
 * @see \App\Http\Controllers\ProfileController::profile
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/profile'
 */
 profile.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -391,7 +271,7 @@ profile.get = (args?: { lang?: string | number } | [lang: string | number ] | st
 /**
 * @see \App\Http\Controllers\ProfileController::profile
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/profile'
 */
 profile.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -400,49 +280,9 @@ profile.head = (args?: { lang?: string | number } | [lang: string | number ] | s
 })
 
 /**
-* @see \App\Http\Controllers\ProfileController::profile
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/profile'
-*/
-const profileForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: profile.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProfileController::profile
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/profile'
-*/
-profileForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: profile.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProfileController::profile
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/profile'
-*/
-profileForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: profile.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-profile.form = profileForm
-
-/**
 * @see \App\Http\Controllers\ProfileController::account
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/account'
 */
 export const account = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -458,7 +298,7 @@ account.definition = {
 /**
 * @see \App\Http\Controllers\ProfileController::account
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/account'
 */
 account.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -479,7 +319,7 @@ account.url = (args?: { lang?: string | number } | [lang: string | number ] | st
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return account.definition.url
@@ -490,7 +330,7 @@ account.url = (args?: { lang?: string | number } | [lang: string | number ] | st
 /**
 * @see \App\Http\Controllers\ProfileController::account
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/account'
 */
 account.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -501,7 +341,7 @@ account.get = (args?: { lang?: string | number } | [lang: string | number ] | st
 /**
 * @see \App\Http\Controllers\ProfileController::account
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/account'
 */
 account.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -510,49 +350,9 @@ account.head = (args?: { lang?: string | number } | [lang: string | number ] | s
 })
 
 /**
-* @see \App\Http\Controllers\ProfileController::account
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/account'
-*/
-const accountForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: account.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProfileController::account
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/account'
-*/
-accountForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: account.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProfileController::account
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/account'
-*/
-accountForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: account.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-account.form = accountForm
-
-/**
 * @see \App\Http\Controllers\CheckoutController::checkout
 * @see app/Http/Controllers/CheckoutController.php:17
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
 export const checkout = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -568,7 +368,7 @@ checkout.definition = {
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
 * @see app/Http/Controllers/CheckoutController.php:17
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
 checkout.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -589,7 +389,7 @@ checkout.url = (args?: { lang?: string | number } | [lang: string | number ] | s
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return checkout.definition.url
@@ -600,7 +400,7 @@ checkout.url = (args?: { lang?: string | number } | [lang: string | number ] | s
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
 * @see app/Http/Controllers/CheckoutController.php:17
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
 checkout.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -611,53 +411,13 @@ checkout.get = (args?: { lang?: string | number } | [lang: string | number ] | s
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
 * @see app/Http/Controllers/CheckoutController.php:17
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
 checkout.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: checkout.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:17
-* @param lang - Default: 'en'
-* @route '/{lang?}/checkout'
-*/
-const checkoutForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: checkout.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:17
-* @param lang - Default: 'en'
-* @route '/{lang?}/checkout'
-*/
-checkoutForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: checkout.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:17
-* @param lang - Default: 'en'
-* @route '/{lang?}/checkout'
-*/
-checkoutForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: checkout.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-checkout.form = checkoutForm
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::logout
@@ -694,31 +454,9 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Auth\AuthController::logout
-* @see app/Http/Controllers/Auth/AuthController.php:126
-* @route '/logout'
-*/
-const logoutForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: logout.url(options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::logout
-* @see app/Http/Controllers/Auth/AuthController.php:126
-* @route '/logout'
-*/
-logoutForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: logout.url(options),
-    method: 'post',
-})
-
-logout.form = logoutForm
-
-/**
 * @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CatalogController.php:20
+* @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
 export const catalog = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -733,8 +471,8 @@ catalog.definition = {
 
 /**
 * @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CatalogController.php:20
+* @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
 catalog.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -755,7 +493,7 @@ catalog.url = (args?: { lang?: string | number } | [lang: string | number ] | st
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return catalog.definition.url
@@ -765,8 +503,8 @@ catalog.url = (args?: { lang?: string | number } | [lang: string | number ] | st
 
 /**
 * @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CatalogController.php:20
+* @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
 catalog.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -776,8 +514,8 @@ catalog.get = (args?: { lang?: string | number } | [lang: string | number ] | st
 
 /**
 * @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CatalogController.php:20
+* @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
 catalog.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -786,48 +524,9 @@ catalog.head = (args?: { lang?: string | number } | [lang: string | number ] | s
 })
 
 /**
-* @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
-* @route '/{lang?}/catalog'
-*/
-const catalogForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: catalog.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
-* @route '/{lang?}/catalog'
-*/
-catalogForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: catalog.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
-* @route '/{lang?}/catalog'
-*/
-catalogForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: catalog.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-catalog.form = catalogForm
-
-/**
-* @see routes/web.php:15
-* @param lang - Default: 'en'
+* @see \App\Http\Controllers\HomeController::home
+* @see app/Http/Controllers/HomeController.php:17
+* @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
 export const home = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -841,8 +540,9 @@ home.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:15
-* @param lang - Default: 'en'
+* @see \App\Http\Controllers\HomeController::home
+* @see app/Http/Controllers/HomeController.php:17
+* @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
 home.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -863,7 +563,7 @@ home.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return home.definition.url
@@ -872,8 +572,9 @@ home.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 }
 
 /**
-* @see routes/web.php:15
-* @param lang - Default: 'en'
+* @see \App\Http\Controllers\HomeController::home
+* @see app/Http/Controllers/HomeController.php:17
+* @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
 home.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -882,8 +583,9 @@ home.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 })
 
 /**
-* @see routes/web.php:15
-* @param lang - Default: 'en'
+* @see \App\Http\Controllers\HomeController::home
+* @see app/Http/Controllers/HomeController.php:17
+* @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
 home.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -891,39 +593,3 @@ home.head = (args?: { lang?: string | number } | [lang: string | number ] | stri
     method: 'head',
 })
 
-/**
-* @see routes/web.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}'
-*/
-const homeForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: home.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see routes/web.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}'
-*/
-homeForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: home.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see routes/web.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}'
-*/
-homeForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: home.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-home.form = homeForm

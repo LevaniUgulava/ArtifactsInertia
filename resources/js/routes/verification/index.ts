@@ -1,8 +1,8 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\AuthController::notice
 * @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/verification'
 */
 export const notice = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -18,7 +18,7 @@ notice.definition = {
 /**
 * @see \App\Http\Controllers\Auth\AuthController::notice
 * @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/verification'
 */
 notice.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -39,7 +39,7 @@ notice.url = (args?: { lang?: string | number } | [lang: string | number ] | str
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return notice.definition.url
@@ -50,7 +50,7 @@ notice.url = (args?: { lang?: string | number } | [lang: string | number ] | str
 /**
 * @see \App\Http\Controllers\Auth\AuthController::notice
 * @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/verification'
 */
 notice.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -61,7 +61,7 @@ notice.get = (args?: { lang?: string | number } | [lang: string | number ] | str
 /**
 * @see \App\Http\Controllers\Auth\AuthController::notice
 * @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/verification'
 */
 notice.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -70,52 +70,12 @@ notice.head = (args?: { lang?: string | number } | [lang: string | number ] | st
 })
 
 /**
-* @see \App\Http\Controllers\Auth\AuthController::notice
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-const noticeForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: notice.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::notice
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-noticeForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: notice.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::notice
-* @see app/Http/Controllers/Auth/AuthController.php:37
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification'
-*/
-noticeForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: notice.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-notice.form = noticeForm
-
-/**
 * @see \App\Http\Controllers\Auth\AuthController::verify
 * @see app/Http/Controllers/Auth/AuthController.php:97
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-export const verify = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const verify = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: verify.url(args, options),
     method: 'get',
 })
@@ -128,10 +88,10 @@ verify.definition = {
 /**
 * @see \App\Http\Controllers\Auth\AuthController::verify
 * @see app/Http/Controllers/Auth/AuthController.php:97
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verify.url = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions) => {
+verify.url = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             lang: args[0],
@@ -147,7 +107,7 @@ verify.url = (args: { lang?: string | number, user: string | number | { id: stri
     ])
 
     const parsedArgs = {
-        lang: args.lang ?? 'en',
+        lang: args.lang ?? '$lang',
         user: typeof args.user === 'object'
         ? args.user.id
         : args.user,
@@ -164,10 +124,10 @@ verify.url = (args: { lang?: string | number, user: string | number | { id: stri
 /**
 * @see \App\Http\Controllers\Auth\AuthController::verify
 * @see app/Http/Controllers/Auth/AuthController.php:97
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verify.get = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+verify.get = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: verify.url(args, options),
     method: 'get',
 })
@@ -175,53 +135,13 @@ verify.get = (args: { lang?: string | number, user: string | number | { id: stri
 /**
 * @see \App\Http\Controllers\Auth\AuthController::verify
 * @see app/Http/Controllers/Auth/AuthController.php:97
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verify.head = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+verify.head = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: verify.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verify
-* @see app/Http/Controllers/Auth/AuthController.php:97
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification/verify/{user}/{hash}'
-*/
-const verifyForm = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: verify.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verify
-* @see app/Http/Controllers/Auth/AuthController.php:97
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification/verify/{user}/{hash}'
-*/
-verifyForm.get = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: verify.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::verify
-* @see app/Http/Controllers/Auth/AuthController.php:97
-* @param lang - Default: 'en'
-* @route '/{lang?}/verification/verify/{user}/{hash}'
-*/
-verifyForm.head = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: verify.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-verify.form = verifyForm
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::send
@@ -256,28 +176,6 @@ send.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: send.url(options),
     method: 'post',
 })
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::send
-* @see app/Http/Controllers/Auth/AuthController.php:116
-* @route '/verification-notification'
-*/
-const sendForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: send.url(options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::send
-* @see app/Http/Controllers/Auth/AuthController.php:116
-* @route '/verification-notification'
-*/
-sendForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: send.url(options),
-    method: 'post',
-})
-
-send.form = sendForm
 
 const verification = {
     notice: Object.assign(notice, notice),

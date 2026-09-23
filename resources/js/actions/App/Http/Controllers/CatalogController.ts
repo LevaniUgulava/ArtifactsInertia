@@ -1,8 +1,8 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CatalogController.php:20
+* @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
 export const index = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -17,8 +17,8 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CatalogController.php:20
+* @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
 index.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -39,7 +39,7 @@ index.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return index.definition.url
@@ -49,8 +49,8 @@ index.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CatalogController.php:20
+* @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
 index.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -60,54 +60,14 @@ index.get = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CatalogController.php:20
+* @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
 index.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
-* @route '/{lang?}/catalog'
-*/
-const indexForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
-* @route '/{lang?}/catalog'
-*/
-indexForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:14
-* @param lang - Default: 'en'
-* @route '/{lang?}/catalog'
-*/
-indexForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
 
 const CatalogController = { index }
 

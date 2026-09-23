@@ -1,8 +1,8 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\AuthController::update
 * @see app/Http/Controllers/Auth/AuthController.php:47
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/password/update'
 */
 export const update = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -18,7 +18,7 @@ update.definition = {
 /**
 * @see \App\Http\Controllers\Auth\AuthController::update
 * @see app/Http/Controllers/Auth/AuthController.php:47
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/password/update'
 */
 update.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -39,7 +39,7 @@ update.url = (args?: { lang?: string | number } | [lang: string | number ] | str
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return update.definition.url
@@ -50,7 +50,7 @@ update.url = (args?: { lang?: string | number } | [lang: string | number ] | str
 /**
 * @see \App\Http\Controllers\Auth\AuthController::update
 * @see app/Http/Controllers/Auth/AuthController.php:47
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/password/update'
 */
 update.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -61,53 +61,13 @@ update.get = (args?: { lang?: string | number } | [lang: string | number ] | str
 /**
 * @see \App\Http\Controllers\Auth\AuthController::update
 * @see app/Http/Controllers/Auth/AuthController.php:47
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/password/update'
 */
 update.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: update.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::update
-* @see app/Http/Controllers/Auth/AuthController.php:47
-* @param lang - Default: 'en'
-* @route '/{lang?}/password/update'
-*/
-const updateForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: update.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::update
-* @see app/Http/Controllers/Auth/AuthController.php:47
-* @param lang - Default: 'en'
-* @route '/{lang?}/password/update'
-*/
-updateForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: update.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\AuthController::update
-* @see app/Http/Controllers/Auth/AuthController.php:47
-* @param lang - Default: 'en'
-* @route '/{lang?}/password/update'
-*/
-updateForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-update.form = updateForm
 
 const password = {
     update: Object.assign(update, update),

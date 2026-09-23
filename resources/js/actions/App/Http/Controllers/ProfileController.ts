@@ -1,8 +1,8 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\ProfileController::show
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/profile'
 */
 const show0ff0d9b21497290db5b31098cf4c0c79 = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -18,7 +18,7 @@ show0ff0d9b21497290db5b31098cf4c0c79.definition = {
 /**
 * @see \App\Http\Controllers\ProfileController::show
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/profile'
 */
 show0ff0d9b21497290db5b31098cf4c0c79.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -39,7 +39,7 @@ show0ff0d9b21497290db5b31098cf4c0c79.url = (args?: { lang?: string | number } | 
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return show0ff0d9b21497290db5b31098cf4c0c79.definition.url
@@ -50,7 +50,7 @@ show0ff0d9b21497290db5b31098cf4c0c79.url = (args?: { lang?: string | number } | 
 /**
 * @see \App\Http\Controllers\ProfileController::show
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/profile'
 */
 show0ff0d9b21497290db5b31098cf4c0c79.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -61,7 +61,7 @@ show0ff0d9b21497290db5b31098cf4c0c79.get = (args?: { lang?: string | number } | 
 /**
 * @see \App\Http\Controllers\ProfileController::show
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/profile'
 */
 show0ff0d9b21497290db5b31098cf4c0c79.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -72,46 +72,7 @@ show0ff0d9b21497290db5b31098cf4c0c79.head = (args?: { lang?: string | number } |
 /**
 * @see \App\Http\Controllers\ProfileController::show
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/profile'
-*/
-const show0ff0d9b21497290db5b31098cf4c0c79Form = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show0ff0d9b21497290db5b31098cf4c0c79.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProfileController::show
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/profile'
-*/
-show0ff0d9b21497290db5b31098cf4c0c79Form.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show0ff0d9b21497290db5b31098cf4c0c79.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProfileController::show
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/profile'
-*/
-show0ff0d9b21497290db5b31098cf4c0c79Form.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show0ff0d9b21497290db5b31098cf4c0c79.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show0ff0d9b21497290db5b31098cf4c0c79.form = show0ff0d9b21497290db5b31098cf4c0c79Form
-/**
-* @see \App\Http\Controllers\ProfileController::show
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/account'
 */
 const show0522a72d3a9cbcbb706325c59f4e84dd = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -127,7 +88,7 @@ show0522a72d3a9cbcbb706325c59f4e84dd.definition = {
 /**
 * @see \App\Http\Controllers\ProfileController::show
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/account'
 */
 show0522a72d3a9cbcbb706325c59f4e84dd.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -148,7 +109,7 @@ show0522a72d3a9cbcbb706325c59f4e84dd.url = (args?: { lang?: string | number } | 
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return show0522a72d3a9cbcbb706325c59f4e84dd.definition.url
@@ -159,7 +120,7 @@ show0522a72d3a9cbcbb706325c59f4e84dd.url = (args?: { lang?: string | number } | 
 /**
 * @see \App\Http\Controllers\ProfileController::show
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/account'
 */
 show0522a72d3a9cbcbb706325c59f4e84dd.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -170,53 +131,13 @@ show0522a72d3a9cbcbb706325c59f4e84dd.get = (args?: { lang?: string | number } | 
 /**
 * @see \App\Http\Controllers\ProfileController::show
 * @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
+* @param lang - Default: '$lang'
 * @route '/{lang?}/account'
 */
 show0522a72d3a9cbcbb706325c59f4e84dd.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show0522a72d3a9cbcbb706325c59f4e84dd.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \App\Http\Controllers\ProfileController::show
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/account'
-*/
-const show0522a72d3a9cbcbb706325c59f4e84ddForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show0522a72d3a9cbcbb706325c59f4e84dd.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProfileController::show
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/account'
-*/
-show0522a72d3a9cbcbb706325c59f4e84ddForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show0522a72d3a9cbcbb706325c59f4e84dd.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProfileController::show
-* @see app/Http/Controllers/ProfileController.php:15
-* @param lang - Default: 'en'
-* @route '/{lang?}/account'
-*/
-show0522a72d3a9cbcbb706325c59f4e84ddForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show0522a72d3a9cbcbb706325c59f4e84dd.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show0522a72d3a9cbcbb706325c59f4e84dd.form = show0522a72d3a9cbcbb706325c59f4e84ddForm
 
 /**
 * Multiple routes resolve to \App\Http\Controllers\ProfileController::show, so this export is a

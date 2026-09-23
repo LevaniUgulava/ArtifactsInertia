@@ -1,8 +1,8 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/ProductController.php:16
+* @param lang - Default: '$lang'
 * @route '/{lang?}/products/{product}'
 */
 export const show = (args: { lang?: string | number, product: string | number } | [lang: string | number, product: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -17,8 +17,8 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/ProductController.php:16
+* @param lang - Default: '$lang'
 * @route '/{lang?}/products/{product}'
 */
 show.url = (args: { lang?: string | number, product: string | number } | [lang: string | number, product: string | number ], options?: RouteQueryOptions) => {
@@ -36,7 +36,7 @@ show.url = (args: { lang?: string | number, product: string | number } | [lang: 
     ])
 
     const parsedArgs = {
-        lang: args.lang ?? 'en',
+        lang: args.lang ?? '$lang',
         product: args.product,
     }
 
@@ -48,8 +48,8 @@ show.url = (args: { lang?: string | number, product: string | number } | [lang: 
 
 /**
 * @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/ProductController.php:16
+* @param lang - Default: '$lang'
 * @route '/{lang?}/products/{product}'
 */
 show.get = (args: { lang?: string | number, product: string | number } | [lang: string | number, product: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -59,54 +59,14 @@ show.get = (args: { lang?: string | number, product: string | number } | [lang: 
 
 /**
 * @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/ProductController.php:16
+* @param lang - Default: '$lang'
 * @route '/{lang?}/products/{product}'
 */
 show.head = (args: { lang?: string | number, product: string | number } | [lang: string | number, product: string | number ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/products/{product}'
-*/
-const showForm = (args: { lang?: string | number, product: string | number } | [lang: string | number, product: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/products/{product}'
-*/
-showForm.get = (args: { lang?: string | number, product: string | number } | [lang: string | number, product: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/products/{product}'
-*/
-showForm.head = (args: { lang?: string | number, product: string | number } | [lang: string | number, product: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
 
 const product = {
     show: Object.assign(show, show),

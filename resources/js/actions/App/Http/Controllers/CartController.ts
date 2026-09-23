@@ -1,8 +1,8 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CartController.php:23
+* @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 export const show = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -17,8 +17,8 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CartController.php:23
+* @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 show.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -39,7 +39,7 @@ show.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
     ])
 
     const parsedArgs = {
-        lang: args?.lang ?? 'en',
+        lang: args?.lang ?? '$lang',
     }
 
     return show.definition.url
@@ -49,8 +49,8 @@ show.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CartController.php:23
+* @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 show.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -60,8 +60,8 @@ show.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
+* @see app/Http/Controllers/CartController.php:23
+* @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 show.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -70,45 +70,184 @@ show.head = (args?: { lang?: string | number } | [lang: string | number ] | stri
 })
 
 /**
-* @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/cart'
+* @see \App\Http\Controllers\CartController::store
+* @see app/Http/Controllers/CartController.php:40
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items'
 */
-const showForm = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
+export const store = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(args, options),
+    method: 'post',
 })
 
-/**
-* @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/cart'
-*/
-showForm.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
+store.definition = {
+    methods: ["post"],
+    url: '/{lang?}/cart/items',
+} satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:13
-* @param lang - Default: 'en'
-* @route '/{lang?}/cart'
+* @see \App\Http\Controllers\CartController::store
+* @see app/Http/Controllers/CartController.php:40
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items'
 */
-showForm.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
+store.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { lang: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            lang: args[0],
         }
-    }),
-    method: 'get',
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "lang",
+    ])
+
+    const parsedArgs = {
+        lang: args?.lang ?? '$lang',
+    }
+
+    return store.definition.url
+            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CartController::store
+* @see app/Http/Controllers/CartController.php:40
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items'
+*/
+store.post = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(args, options),
+    method: 'post',
 })
 
-show.form = showForm
+/**
+* @see \App\Http\Controllers\CartController::updateQuantity
+* @see app/Http/Controllers/CartController.php:96
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}'
+*/
+export const updateQuantity = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: updateQuantity.url(args, options),
+    method: 'patch',
+})
 
-const CartController = { show }
+updateQuantity.definition = {
+    methods: ["patch"],
+    url: '/{lang?}/cart/items/{item}',
+} satisfies RouteDefinition<["patch"]>
+
+/**
+* @see \App\Http\Controllers\CartController::updateQuantity
+* @see app/Http/Controllers/CartController.php:96
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}'
+*/
+updateQuantity.url = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions) => {
+    if (Array.isArray(args)) {
+        args = {
+            lang: args[0],
+            item: args[1],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "lang",
+    ])
+
+    const parsedArgs = {
+        lang: args.lang ?? '$lang',
+        item: typeof args.item === 'object'
+        ? args.item.id
+        : args.item,
+    }
+
+    return updateQuantity.definition.url
+            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
+            .replace('{item}', parsedArgs.item.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CartController::updateQuantity
+* @see app/Http/Controllers/CartController.php:96
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}'
+*/
+updateQuantity.patch = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: updateQuantity.url(args, options),
+    method: 'patch',
+})
+
+/**
+* @see \App\Http\Controllers\CartController::remove
+* @see app/Http/Controllers/CartController.php:123
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}'
+*/
+export const remove = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: remove.url(args, options),
+    method: 'delete',
+})
+
+remove.definition = {
+    methods: ["delete"],
+    url: '/{lang?}/cart/items/{item}',
+} satisfies RouteDefinition<["delete"]>
+
+/**
+* @see \App\Http\Controllers\CartController::remove
+* @see app/Http/Controllers/CartController.php:123
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}'
+*/
+remove.url = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions) => {
+    if (Array.isArray(args)) {
+        args = {
+            lang: args[0],
+            item: args[1],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "lang",
+    ])
+
+    const parsedArgs = {
+        lang: args.lang ?? '$lang',
+        item: typeof args.item === 'object'
+        ? args.item.id
+        : args.item,
+    }
+
+    return remove.definition.url
+            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
+            .replace('{item}', parsedArgs.item.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CartController::remove
+* @see app/Http/Controllers/CartController.php:123
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}'
+*/
+remove.delete = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: remove.url(args, options),
+    method: 'delete',
+})
+
+const CartController = { show, store, updateQuantity, remove }
 
 export default CartController

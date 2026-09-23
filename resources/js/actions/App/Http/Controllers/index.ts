@@ -4,6 +4,7 @@ import ProfileController from './ProfileController'
 import CheckoutController from './CheckoutController'
 import CatalogController from './CatalogController'
 import ProductController from './ProductController'
+import HomeController from './HomeController'
 
 const Controllers = {
     Auth: Object.assign(Auth, Auth),
@@ -12,6 +13,7 @@ const Controllers = {
     CheckoutController: Object.assign(CheckoutController, CheckoutController),
     CatalogController: Object.assign(CatalogController, CatalogController),
     ProductController: Object.assign(ProductController, ProductController),
+    HomeController: Object.assign(HomeController, HomeController),
 }
 
 export default Controllers
