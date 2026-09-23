@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Catalog;
 
 use App\Models\Category;
 use App\Models\Collection as ProductCollection;

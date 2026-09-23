@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CatalogResource;
+use App\Http\Resources\Catalog\CatalogResource;
 use App\Models\Collection as ProductCollection;
 use App\Models\Product;
 use App\Services\CatalogFilterService;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Catalog;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CollectionResource extends JsonResource
+class ColorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,9 @@ class CollectionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->resource->name,
-            'count' => $this->resource->products_count,
-            'image' => $this->resource->image,
+            'value' => $this->resource->color,
+            'label' => $this->resource->color_label,
+            'hex' => $this->resource->color_hex,
         ];
     }
 }
