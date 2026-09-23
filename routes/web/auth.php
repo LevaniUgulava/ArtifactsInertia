@@ -11,6 +11,9 @@ Route::prefix('{lang}')->group(function () {
     Route::get('/verification', [AuthController::class, 'showVerification'])->name('verification.notice');
     Route::get('/password/update', [AuthController::class, 'showUpdatePassword'])->name('password.update');
     Route::get('/cart', [CartController::class, 'show'])->middleware('auth:sanctum')->name('cart');
+    Route::post('/cart/items', [CartController::class, 'store'])->middleware('auth:sanctum')->name('cart.items.store');
+    Route::patch('/cart/items/{item}', [CartController::class, 'updateQuantity'])->middleware('auth:sanctum')->name('cart.items.update');
+    Route::delete('/cart/items/{item}', [CartController::class, 'remove'])->middleware('auth:sanctum')->name('cart.items.destroy');
     Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth:sanctum')->name('profile');
     Route::get('/account', [ProfileController::class, 'show'])->middleware('auth:sanctum')->name('account');
 
