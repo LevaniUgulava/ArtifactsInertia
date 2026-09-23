@@ -7,11 +7,11 @@ export type ProductColor = {
     value: string;
     label: string;
     hex: string;
+    availableSizes: string[];
 };
 
 export type ProductSize = {
     value: string;
-    available: boolean;
 };
 
 export type ProductBenefit = {

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAddToCart } from '../hooks/useAddToCart';
+import { useProductVariantSelection } from '../hooks/useProductVariantSelection';
 import type { ProductData } from './ProductTypes';
 import { ProductActions } from './ProductActions';
 import { ProductBenefits } from './ProductBenefits';
@@ -7,11 +9,21 @@ import { ProductVariantSelector } from './ProductVariantSelector';
 
 export function ProductPurchasePanel({ product }: { product: ProductData }) {
     const { t } = useTranslation('product');
-    const [selectedColor, setSelectedColor] = useState(product.colors[0]?.value ?? '');
-    const [selectedSize, setSelectedSize] = useState('');
+    const { availableSizes, changeColor, changeSize, selectedColor, selectedSize } = useProductVariantSelection(product);
+    const { addToCart, errors, processing } = useAddToCart();
     const [addedToCart, setAddedToCart] = useState(false);
     const [wishlisted, setWishlisted] = useState(false);
     const [showSizeChart, setShowSizeChart] = useState(false);
+
+    function handleColorChange(value: string) {
+        changeColor(value);
+        setAddedToCart(false);
+    }
+
+    function handleSizeChange(value: string) {
+        changeSize(value);
+        setAddedToCart(false);
+    }
 
     return (
         <section className="space-y-5">
@@ -21,9 +33,17 @@ export function ProductPurchasePanel({ product }: { product: ProductData }) {
                 <p className="mt-1 text-base font-semibold text-stone-950">{product.price}</p>
             </div>
             <p className="max-w-xl text-xs leading-5 text-stone-600">{product.description}</p>
-            <ProductVariantSelector colors={product.colors} onColorChange={setSelectedColor} onSizeChange={setSelectedSize} onSizeChart={() => setShowSizeChart((visible) => !visible)} selectedColor={selectedColor} selectedSize={selectedSize} sizes={product.sizes} />
+            <ProductVariantSelector availableSizes={availableSizes} colors={product.colors} onColorChange={handleColorChange} onSizeChange={handleSizeChange} onSizeChart={() => setShowSizeChart((visible) => !visible)} selectedColor={selectedColor} selectedSize={selectedSize} sizes={product.sizes} />
             {showSizeChart ? <div className="border border-stone-200 bg-stone-50 p-4 text-[10px] leading-5 text-stone-600">{t('sizeChartText')}</div> : null}
-            <ProductActions addedToCart={addedToCart} canAddToCart={Boolean(selectedColor && selectedSize)} onAddToCart={() => setAddedToCart(true)} onWishlist={() => setWishlisted((active) => !active)} wishlisted={wishlisted} />
+            <ProductActions
+                addedToCart={addedToCart}
+                canAddToCart={Boolean(selectedColor && selectedSize)}
+                error={errors.size ?? ''}
+                onAddToCart={() => addToCart({ slug: product.slug, color: selectedColor, size: selectedSize }, () => setAddedToCart(true))}
+                onWishlist={() => setWishlisted((active) => !active)}
+                processing={processing}
+                wishlisted={wishlisted}
+            />
             <ProductBenefits benefits={product.benefits} />
         </section>
     );

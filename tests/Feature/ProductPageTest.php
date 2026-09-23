@@ -12,6 +12,7 @@ it('renders the public product detail page', function () {
             ->where('product.name', 'Cashmere Wrap Coat')
             ->has('product.images', 4)
             ->has('product.colors', 4)
+            ->has('product.colors.0.availableSizes')
             ->has('product.sizes', 5)
         );
 });

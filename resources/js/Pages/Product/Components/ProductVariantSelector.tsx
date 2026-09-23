@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import type { ProductColor, ProductSize } from './ProductTypes';
 
 type ProductVariantSelectorProps = {
+    availableSizes: string[];
     colors: ProductColor[];
     sizes: ProductSize[];
     selectedColor: string;
@@ -11,7 +12,7 @@ type ProductVariantSelectorProps = {
     onSizeChart: () => void;
 };
 
-export function ProductVariantSelector({ colors, sizes, selectedColor, selectedSize, onColorChange, onSizeChange, onSizeChart }: ProductVariantSelectorProps) {
+export function ProductVariantSelector({ availableSizes, colors, sizes, selectedColor, selectedSize, onColorChange, onSizeChange, onSizeChart }: ProductVariantSelectorProps) {
     const { t } = useTranslation(['product', 'catalog']);
 
     return (
@@ -23,7 +24,7 @@ export function ProductVariantSelector({ colors, sizes, selectedColor, selectedS
                         <button
                             aria-label={t('selectColor', { name: color.label })}
                             aria-pressed={selectedColor === color.value}
-                            className={`size-5 rounded-full border-2 p-0.5 transition ${selectedColor === color.value ? 'border-amber-700 ring-1 ring-amber-700 ring-offset-2' : 'border-transparent'}`}
+                            className={`size-5 rounded-full border-2 p-0.5 transition ${selectedColor === color.value ? ' ring-amber-700 ring-offset-2' : 'border-transparent'}`}
                             key={color.value}
                             onClick={() => onColorChange(color.value)}
                             type="button"
@@ -43,8 +44,8 @@ export function ProductVariantSelector({ colors, sizes, selectedColor, selectedS
                     {sizes.map((size) => (
                         <button
                             aria-pressed={selectedSize === size.value}
-                            className={`min-w-10 border px-3 py-2 text-[10px] transition ${selectedSize === size.value ? 'border-amber-700 bg-amber-700 text-white' : 'border-stone-200 text-stone-700 hover:border-stone-500'} ${!size.available ? 'cursor-not-allowed opacity-40 line-through' : ''}`}
-                            disabled={!size.available}
+                            className={`min-w-10 border px-3 py-2 text-[10px] transition ${selectedSize === size.value ? 'border-amber-700 bg-amber-700 text-white' : 'border-stone-200 text-stone-700 hover:border-stone-500'} ${!availableSizes.includes(size.value) ? 'cursor-not-allowed opacity-40 line-through' : ''}`}
+                            disabled={!availableSizes.includes(size.value)}
                             key={size.value}
                             onClick={() => onSizeChange(size.value)}
                             type="button"

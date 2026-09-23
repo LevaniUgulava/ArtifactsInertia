@@ -29,10 +29,10 @@ class ProductResource extends JsonResource
                 'value' => $variant->color,
                 'label' => $variant->color_label,
                 'hex' => $variant->color_hex,
+                'availableSizes' => $variants->where('color', $variant->color)->where('stock', '>', 0)->pluck('size')->unique()->values()->all(),
             ])->values()->all(),
             'sizes' => $variants->unique('size')->map(fn ($variant): array => [
                 'value' => $variant->size,
-                'available' => $variants->where('size', $variant->size)->where('stock', '>', 0)->isNotEmpty(),
             ])->values()->all(),
             'benefits' => $this->resource->benefits,
             'details' => $this->resource->details,
