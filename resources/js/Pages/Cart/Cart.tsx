@@ -19,13 +19,13 @@ function Cart({ cart }: CartPageProps) {
     const [promoApplied, setPromoApplied] = useState(false);
 
     const subtotal = useMemo(
-        () => items.reduce((total, item) => total + item.price * item.quantity, 0),
+        () => items.reduce((total, item) => total + (Number(item.price) || 0) * (Number(item.quantity) || 0), 0),
         [items],
     );
     const discount = promoApplied ? PROMO_DISCOUNT : 0;
-    const tax = Math.max(0, (subtotal - discount) * cart.taxRate);
-    const total = subtotal + cart.shipping + tax - discount;
-    const itemCount = items.reduce((count, item) => count + item.quantity, 0);
+    const shipping = Number(cart.shipping) || 0;
+    const total = Math.max(0, subtotal + shipping - discount);
+    const itemCount = items.reduce((count, item) => count + (Number(item.quantity) || 0), 0);
 
     function applyPromoCode() {
         setPromoApplied(promoCode.trim().toUpperCase() === PROMO_CODE);
@@ -69,11 +69,11 @@ function Cart({ cart }: CartPageProps) {
                                 discount={discount}
                                 onApplyPromo={applyPromoCode}
                                 onPromoCodeChange={setPromoCode}
+                                productCount={itemCount}
                                 promoApplied={promoApplied}
                                 promoCode={promoCode}
-                                shipping={cart.shipping}
+                                shipping={shipping}
                                 subtotal={subtotal}
-                                tax={tax}
                                 total={total}
                             />
                             <CartBenefits />

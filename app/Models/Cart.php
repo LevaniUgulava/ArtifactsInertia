@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['user_id', 'promo_code_id', 'shipping', 'tax_rate'])]
+#[Fillable(['user_id', 'promo_code_id', 'shipping'])]
 class Cart extends Model
 {
     /** @use HasFactory<CartFactory> */
@@ -19,7 +19,6 @@ class Cart extends Model
     {
         return [
             'shipping' => 'decimal:2',
-            'tax_rate' => 'decimal:4',
         ];
     }
 

@@ -12,7 +12,6 @@ export type CartItem = {
 export type CartPageProps = {
     cart: {
         shipping: number;
-        taxRate: number;
         items: CartItem[];
     };
 };
@@ -29,11 +28,11 @@ export type OrderSummaryProps = {
     discount: number;
     onApplyPromo: () => void;
     onPromoCodeChange: (value: string) => void;
+    productCount: number;
     promoApplied: boolean;
     promoCode: string;
     shipping: number;
     subtotal: number;
-    tax: number;
     total: number;
 };
 

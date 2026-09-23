@@ -16,7 +16,6 @@ class CartResource extends JsonResource
     {
         return [
             'shipping' => (float) ($this->shipping ?? 12),
-            'taxRate' => (float) ($this->tax_rate ?? 0.08),
             'items' => ItemsResource::collection($this?->items ?? collect())->resolve($request),
         ];
     }

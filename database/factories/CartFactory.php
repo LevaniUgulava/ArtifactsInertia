@@ -22,7 +22,6 @@ class CartFactory extends Factory
             'user_id' => User::factory(),
             'promo_code_id' => null,
             'shipping' => 12.00,
-            'tax_rate' => 0.08,
         ];
     }
 }

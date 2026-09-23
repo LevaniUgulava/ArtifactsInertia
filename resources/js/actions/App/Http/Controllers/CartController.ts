@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:23
+* @see app/Http/Controllers/CartController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -17,7 +17,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:23
+* @see app/Http/Controllers/CartController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -49,7 +49,7 @@ show.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:23
+* @see app/Http/Controllers/CartController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -60,7 +60,7 @@ show.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::show
-* @see app/Http/Controllers/CartController.php:23
+* @see app/Http/Controllers/CartController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -71,7 +71,7 @@ show.head = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\CartController::store
-* @see app/Http/Controllers/CartController.php:40
+* @see app/Http/Controllers/CartController.php:42
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items'
 */
@@ -87,7 +87,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::store
-* @see app/Http/Controllers/CartController.php:40
+* @see app/Http/Controllers/CartController.php:42
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items'
 */
@@ -119,7 +119,7 @@ store.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\CartController::store
-* @see app/Http/Controllers/CartController.php:40
+* @see app/Http/Controllers/CartController.php:42
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items'
 */
@@ -130,7 +130,7 @@ store.post = (args?: { lang?: string | number } | [lang: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\CartController::updateQuantity
-* @see app/Http/Controllers/CartController.php:96
+* @see app/Http/Controllers/CartController.php:93
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -146,7 +146,7 @@ updateQuantity.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::updateQuantity
-* @see app/Http/Controllers/CartController.php:96
+* @see app/Http/Controllers/CartController.php:93
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -179,7 +179,7 @@ updateQuantity.url = (args: { lang?: string | number, item: number | { id: numbe
 
 /**
 * @see \App\Http\Controllers\CartController::updateQuantity
-* @see app/Http/Controllers/CartController.php:96
+* @see app/Http/Controllers/CartController.php:93
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -190,7 +190,7 @@ updateQuantity.patch = (args: { lang?: string | number, item: number | { id: num
 
 /**
 * @see \App\Http\Controllers\CartController::remove
-* @see app/Http/Controllers/CartController.php:123
+* @see app/Http/Controllers/CartController.php:116
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -206,7 +206,7 @@ remove.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::remove
-* @see app/Http/Controllers/CartController.php:123
+* @see app/Http/Controllers/CartController.php:116
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -239,7 +239,7 @@ remove.url = (args: { lang?: string | number, item: number | { id: number } } | 
 
 /**
 * @see \App\Http\Controllers\CartController::remove
-* @see app/Http/Controllers/CartController.php:123
+* @see app/Http/Controllers/CartController.php:116
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -248,6 +248,66 @@ remove.delete = (args: { lang?: string | number, item: number | { id: number } }
     method: 'delete',
 })
 
-const CartController = { show, store, updateQuantity, remove }
+/**
+* @see \App\Http\Controllers\CartController::saveForLater
+* @see app/Http/Controllers/CartController.php:133
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}/save'
+*/
+export const saveForLater = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: saveForLater.url(args, options),
+    method: 'post',
+})
+
+saveForLater.definition = {
+    methods: ["post"],
+    url: '/{lang?}/cart/items/{item}/save',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\CartController::saveForLater
+* @see app/Http/Controllers/CartController.php:133
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}/save'
+*/
+saveForLater.url = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions) => {
+    if (Array.isArray(args)) {
+        args = {
+            lang: args[0],
+            item: args[1],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "lang",
+    ])
+
+    const parsedArgs = {
+        lang: args.lang ?? '$lang',
+        item: typeof args.item === 'object'
+        ? args.item.id
+        : args.item,
+    }
+
+    return saveForLater.definition.url
+            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
+            .replace('{item}', parsedArgs.item.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CartController::saveForLater
+* @see app/Http/Controllers/CartController.php:133
+* @param lang - Default: '$lang'
+* @route '/{lang?}/cart/items/{item}/save'
+*/
+saveForLater.post = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: saveForLater.url(args, options),
+    method: 'post',
+})
+
+const CartController = { show, store, updateQuantity, remove, saveForLater }
 
 export default CartController

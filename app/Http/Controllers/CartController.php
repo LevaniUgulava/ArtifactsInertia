@@ -126,4 +126,28 @@ class CartController extends Controller
 
         return response()->noContent();
     }
+
+    /**
+     * Move a cart item into the user's favorites (save for later).
+     */
+    public function saveForLater(Request $request, CartItem $item): JsonResponse
+    {
+        /** @var User $user */
+        $user = $request->user();
+
+        $cartItem = $user->cart?->items()->findOrFail($item->id);
+
+        abort_if($cartItem === null, 404);
+
+        $productId = $cartItem->variant?->product_id;
+
+        abort_if($productId === null, 422);
+
+        DB::transaction(function () use ($user, $cartItem, $productId): void {
+            $cartItem->delete();
+            $user->favorites()->syncWithoutDetaching([$productId]);
+        });
+
+        return response()->json(['saved' => true]);
+    }
 }
