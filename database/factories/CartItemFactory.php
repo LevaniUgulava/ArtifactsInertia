@@ -1,0 +1,39 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\Variant;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<CartItem>
+ */
+class CartItemFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'cart_id' => Cart::factory(),
+            'variant_id' => Variant::factory(),
+            'quantity' => fake()->numberBetween(1, 5),
+            'price' => fake()->randomFloat(2, 10, 500),
+        ];
+    }
+
+    /**
+     * Snapshot the unit price from the linked variant.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (CartItem $cartItem): void {
+            $cartItem->forceFill(['price' => $cartItem->variant->price])->save();
+        });
+    }
+}

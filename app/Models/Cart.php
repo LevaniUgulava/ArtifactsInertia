@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Models;
+
+use Database\Factories\CartFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+#[Fillable(['user_id', 'promo_code_id', 'shipping', 'tax_rate'])]
+class Cart extends Model
+{
+    /** @use HasFactory<CartFactory> */
+    use HasFactory;
+
+    protected function casts(): array
+    {
+        return [
+            'shipping' => 'decimal:2',
+            'tax_rate' => 'decimal:4',
+        ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function promoCode(): BelongsTo
+    {
+        return $this->belongsTo(PromoCode::class);
+    }
+}

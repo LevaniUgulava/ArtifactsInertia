@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Database\Factories\VariantFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Image\Enums\Fit;
@@ -9,19 +12,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+#[Fillable(['sku', 'color', 'color_label', 'color_hex', 'size', 'price', 'stock'])]
 class Variant extends Model implements HasMedia
 {
-    use InteractsWithMedia;
-
-    protected $fillable = [
-        'sku',
-        'color',
-        'color_label',
-        'color_hex',
-        'size',
-        'price',
-        'stock',
-    ];
+    /** @use HasFactory<VariantFactory> */
+    use HasFactory, InteractsWithMedia;
 
     protected function casts(): array
     {

@@ -2,24 +2,19 @@
 
 namespace App\Models;
 
+use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Fillable(['spu', 'slug', 'name', 'eyebrow', 'description', 'badge', 'sex', 'benefits', 'details'])]
 class Product extends Model
 {
-    protected $fillable = [
-        'spu',
-        'slug',
-        'name',
-        'eyebrow',
-        'description',
-        'badge',
-        'sex',
-        'benefits',
-        'details',
-    ];
+    /** @use HasFactory<ProductFactory> */
+    use HasFactory;
 
     protected function casts(): array
     {

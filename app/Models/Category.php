@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Fillable(['name'])]
 class Category extends Model
 {
-    protected $fillable = [
-        'name',
-    ];
-
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
