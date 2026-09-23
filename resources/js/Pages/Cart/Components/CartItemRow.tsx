@@ -4,7 +4,6 @@ import { QuantityControl } from '@/Pages/Cart/Components/QuantityControl';
 
 const currency = new Intl.NumberFormat('en-US', {
     currency: 'GEL',
-    currencyDisplay: 'narrowSymbol',
     style: 'currency',
 });
 
@@ -20,18 +19,19 @@ export type CartItem = {
 };
 
 type CartItemRowProps = {
+    error?: string;
     item: CartItem;
     onQuantityChange: (id: string, quantity: number) => void;
     onRemove: (id: string) => void;
     onSave: (id: string) => void;
 };
 
-export function CartItemRow({ item, onQuantityChange, onRemove, onSave }: CartItemRowProps) {
+export function CartItemRow({ error = '', item, onQuantityChange, onRemove, onSave }: CartItemRowProps) {
     const { t } = useTranslation('cart');
 
     return (
         <article className="grid gap-4 rounded-lg border border-stone-200 bg-white p-4 sm:grid-cols-[104px_minmax(0,1fr)_auto] sm:gap-5 sm:p-5">
-            <img alt={item.name} className="aspect-square w-24 rounded-md object-cover sm:w-[104px]" src={item.image} />
+            <img alt={item.name} className="aspect-square w-24 rounded-md object-cover sm:w-26" src={item.image} />
 
             <div className="flex min-w-0 flex-col justify-between gap-5">
                 <div className="space-y-2">
@@ -60,6 +60,7 @@ export function CartItemRow({ item, onQuantityChange, onRemove, onSave }: CartIt
                         {t('remove')}
                     </button>
                 </div>
+                {error && <p className="text-[10px] text-red-500">{error}</p>}
             </div>
 
             <p className="hidden text-sm font-semibold text-stone-950 sm:block">{currency.format(item.price)}</p>

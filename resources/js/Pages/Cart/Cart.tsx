@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { brandTitle } from '@/Components/Brand/Brand';
+import { useCartItems } from '@/Pages/Cart/hooks/useCartItems';
 import ProfileLayout from '@/Layouts/ProfileLayout';
 import { CartBenefits } from '@/Pages/Cart/Components/CartBenefits';
 import { CartItemRow, type CartItem } from '@/Pages/Cart/Components/CartItemRow';
@@ -17,15 +18,9 @@ type CartPageProps = {
     };
 };
 
-const currency = new Intl.NumberFormat('en-US', {
-    currency: 'GEL',
-    currencyDisplay: 'narrowSymbol',
-    style: 'currency',
-});
-
 function Cart({ cart }: CartPageProps) {
     const { t } = useTranslation('cart');
-    const [items, setItems] = useState(cart.items);
+    const { errors, items, removeItem, saveItem, setQuantity } = useCartItems(cart.items);
     const [promoCode, setPromoCode] = useState('');
     const [promoApplied, setPromoApplied] = useState(false);
 
@@ -38,18 +33,6 @@ function Cart({ cart }: CartPageProps) {
     const total = subtotal + cart.shipping + tax - discount;
     const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
-    function updateQuantity(id: string, quantity: number) {
-        setItems((currentItems) => currentItems.map((item) => item.id === id ? { ...item, quantity } : item));
-    }
-
-    function removeItem(id: string) {
-        setItems((currentItems) => currentItems.filter((item) => item.id !== id));
-    }
-
-    function saveItem(id: string) {
-        setItems((currentItems) => currentItems.filter((item) => item.id !== id));
-    }
-
     function applyPromoCode() {
         setPromoApplied(promoCode.trim().toUpperCase() === 'ATELIER25');
     }
@@ -58,7 +41,7 @@ function Cart({ cart }: CartPageProps) {
         <>
             <Head title={brandTitle(t('title'))} />
 
-            <div className="mx-auto w-full max-w-[1440px] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+            <div className="mx-auto w-full max-w-360 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
                 <div className="mb-7 flex items-end justify-between gap-5">
                     <div className="space-y-2">
                         <h1 className="text-2xl font-bold tracking-tight text-stone-950 sm:text-3xl">{t('title')}</h1>
@@ -74,9 +57,10 @@ function Cart({ cart }: CartPageProps) {
                         <section aria-label={t('cartItemsLabel')} className="space-y-4">
                             {items.map((item) => (
                                 <CartItemRow
+                                    error={errors[item.id]}
                                     item={item}
                                     key={item.id}
-                                    onQuantityChange={updateQuantity}
+                                    onQuantityChange={setQuantity}
                                     onRemove={removeItem}
                                     onSave={saveItem}
                                 />
