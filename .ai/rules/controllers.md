@@ -1,0 +1,16 @@
+---
+paths:
+  - app/Http/Controllers/CartController.php
+  - 'app/Http/Controllers/**'
+---
+
+# Controllers
+
+## Eager load cart item relations in CartController::show
+Always load $user->cart()->with(['items.variant.product', 'items.variant.media', 'promoCode']) to avoid N+1 on items.variant.product->name and image. Serialize with ItemsResource::collection(...)->resolve($request) so cart.items stays a plain array.
+
+## Add-to-cart resolves variant by slug → color+size
+Add-to-cart: frontend posts slug+color+size; server finds the Product by slug, then the Variant by (color,size) — variants are unique per product by that pair. Increment existing cart item instead of duplicating (unique cart_id+variant_id). Enforce stock, snapshot variant price on first add, keep it for later increments. Return JSON (not Inertia) — frontend uses useHttp.
+
+## Use Form Requests, never inline validation in controllers
+Never call `$request->validate()` or throw ValidationException inline in a controller action. Put field validation in a Form Request, one per action, in a per-feature folder: `app/Http/Requests/<Feature>/<Feature><Action>Request.php` (e.g. `Cart/CartStoreRequest`, `Cart/CartUpdateQuantityRequest`), then type-hint it on the action. Keep business/stock checks (non-field logic) in the controller or a service. Resources follow the same per-feature layout in `app/Http/Resources/<Feature>/` (e.g. `Cart/CartResource`, `Cart/ItemsResource`).
