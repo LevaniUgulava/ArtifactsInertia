@@ -1,4 +1,6 @@
-export function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
+import type { SectionTitleProps } from '../types/HomeTypes';
+
+export function SectionTitle({ eyebrow, title }: SectionTitleProps) {
     return (
         <div className="space-y-1">
             <h2 className="text-2xl font-semibold tracking-tight text-stone-950 sm:text-3xl 2xl:text-4xl">{title}</h2>

@@ -1,17 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import type { ColorOption, FilterOption, FilterState } from '../CatalogTypes';
-
-type CatalogFiltersProps = {
-    filters: {
-        categories: FilterOption[];
-        sizes: string[];
-        colors: ColorOption[];
-        collections: FilterOption[];
-    };
-    value: FilterState;
-    onChange: (value: FilterState) => void;
-    onClear: () => void;
-};
+import { MAX_PRICE, MIN_PRICE } from '../constants/filters';
+import type { CatalogFiltersProps, ColorOption, FilterOption, FilterState } from '../types/CatalogTypes';
 
 function FilterPanel({ filters, value, onChange, onClear }: CatalogFiltersProps) {
     const { t } = useTranslation('catalog');
@@ -80,8 +69,8 @@ function FilterPanel({ filters, value, onChange, onClear }: CatalogFiltersProps)
             <fieldset className="space-y-3 border-t border-stone-200 pt-6">
                 <legend className="font-semibold text-stone-950">{t('priceRange')}</legend>
                 <div className="flex items-center justify-between text-[10px] text-stone-500">
-                    <span>₾50</span>
-                    <span>₾2,500</span>
+                    <span>₾{MIN_PRICE}</span>
+                    <span>₾{MAX_PRICE.toLocaleString()}</span>
                 </div>
                 <div className="relative h-1 rounded-full bg-stone-200">
                     <span className="absolute inset-x-0 h-1 rounded-full bg-stone-400" />

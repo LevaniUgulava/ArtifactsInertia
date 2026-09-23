@@ -1,19 +1,5 @@
-export const brand = {
-    name: 'ARTIFACTS',
-    tagline: 'WEAR A BETTER STORY',
-    markSrc: '/branding/artifacts-mark.png',
-    wordmarkSrc: '/branding/artifacts-wordmark.svg',
-} as const;
-
-export function brandTitle(title?: string): string {
-    return title ? `${title} | ${brand.name}` : brand.name;
-}
-
-type BrandLockupProps = {
-    className?: string;
-    tone?: 'dark' | 'light';
-    showTagline?: boolean;
-};
+import type { BrandLockupProps } from '@/types/components';
+import { brand } from '@/constants/brand';
 
 export function BrandLockup({ className = '', tone = 'dark', showTagline = false }: BrandLockupProps) {
     const toneClass = tone === 'light' ? 'brightness-0 invert' : 'brightness-0';

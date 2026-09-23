@@ -1,16 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import type { ProductColor, ProductSize } from './ProductTypes';
-
-type ProductVariantSelectorProps = {
-    availableSizes: string[];
-    colors: ProductColor[];
-    sizes: ProductSize[];
-    selectedColor: string;
-    selectedSize: string;
-    onColorChange: (value: string) => void;
-    onSizeChange: (value: string) => void;
-    onSizeChart: () => void;
-};
+import type { ProductVariantSelectorProps } from '../types/ProductTypes';
 
 export function ProductVariantSelector({ availableSizes, colors, sizes, selectedColor, selectedSize, onColorChange, onSizeChange, onSizeChart }: ProductVariantSelectorProps) {
     const { t } = useTranslation(['product', 'catalog']);

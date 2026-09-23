@@ -1,14 +1,9 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { catalog } from '@/routes';
+import type { CollectionBannersProps } from '../types/HomeTypes';
 
-type CollectionBanner = {
-    name: string;
-    slug: string;
-    image: string;
-};
-
-export function CollectionBanners({ collections }: { collections: CollectionBanner[] }) {
+export function CollectionBanners({ collections }: CollectionBannersProps) {
     const { t } = useTranslation('home');
     const { props } = usePage();
     const lang = (props.locale as string) ?? 'en';

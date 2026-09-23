@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAddToCart } from '../hooks/useAddToCart';
 import { useProductVariantSelection } from '../hooks/useProductVariantSelection';
-import type { ProductData } from './ProductTypes';
+import type { ProductPurchasePanelProps } from '../types/ProductTypes';
 import { ProductActions } from './ProductActions';
 import { ProductBenefits } from './ProductBenefits';
 import { ProductVariantSelector } from './ProductVariantSelector';
 
-export function ProductPurchasePanel({ product }: { product: ProductData }) {
+export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
     const { t } = useTranslation('product');
     const { availableSizes, changeColor, changeSize, selectedColor, selectedSize } = useProductVariantSelection(product);
     const { addToCart, errors, processing } = useAddToCart();

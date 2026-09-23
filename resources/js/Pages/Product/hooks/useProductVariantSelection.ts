@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { ProductData } from '../Components/ProductTypes';
+import type { ProductData } from '../types/ProductTypes';
 
 export function useProductVariantSelection(product: ProductData) {
     const [selectedColor, setSelectedColor] = useState(product.colors[0]?.value ?? '');

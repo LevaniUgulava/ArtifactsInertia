@@ -1,11 +1,11 @@
 import { Head } from '@inertiajs/react';
-import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { brandTitle } from '@/Components/Brand/Brand';
+import { brandTitle } from '@/constants/brand';
 import { Header } from '@/Layouts/Header/Header';
 import { ProfileSidebar } from '@/Pages/Profile/Components/ProfileSidebar';
+import type { ProfileLayoutProps } from '@/types/layouts';
 
-export default function ProfileLayout({ children }: { children: ReactNode }) {
+export default function ProfileLayout({ children }: ProfileLayoutProps) {
     const { t } = useTranslation('profile');
 
     return (

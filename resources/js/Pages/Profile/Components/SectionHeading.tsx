@@ -1,9 +1,4 @@
-import type { ReactNode } from 'react';
-
-type SectionHeadingProps = {
-    action?: ReactNode;
-    title: string;
-};
+import type { SectionHeadingProps } from '../types/ProfileTypes';
 
 export function SectionHeading({ action, title }: SectionHeadingProps) {
     return (

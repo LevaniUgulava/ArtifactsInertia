@@ -1,12 +1,6 @@
 import { ArrowDownUpIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-
-type CollectionHeaderProps = {
-    name: string;
-    count: number;
-    sort: string;
-    onSortChange: (sort: string) => void;
-};
+import type { CollectionHeaderProps } from '../types/CatalogTypes';
 
 export function CollectionHeader({ name, count, sort, onSortChange }: CollectionHeaderProps) {
     const { t } = useTranslation('catalog');

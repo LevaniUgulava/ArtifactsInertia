@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import type { CatalogProduct } from '../CatalogTypes';
+import type { CatalogProductGridProps } from '../types/CatalogTypes';
 import { CatalogProductCard } from './CatalogProductCard';
 
-export function CatalogProductGrid({ products }: { products: CatalogProduct[] }) {
+export function CatalogProductGrid({ products }: CatalogProductGridProps) {
     const { t } = useTranslation('common');
 
     if (products.length === 0) {

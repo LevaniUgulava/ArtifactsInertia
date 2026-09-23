@@ -1,27 +1,6 @@
-import { BellIcon, CreditCardIcon, MapPinIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { settings } from '../constants/settings';
 import { SectionHeading } from '@/Pages/Profile/Components/SectionHeading';
-
-const settings = [
-    {
-        title: 'addressBook',
-        icon: MapPinIcon,
-        lines: ['addressLine1', 'addressLine2', 'addressLine3'],
-        action: 'editAddresses',
-    },
-    {
-        title: 'paymentMethods',
-        icon: CreditCardIcon,
-        lines: ['paymentLine1', 'paymentLine2', 'paymentLine3'],
-        action: 'managePayments',
-    },
-    {
-        title: 'preferences',
-        icon: BellIcon,
-        lines: ['preferenceLine1', 'preferenceLine2', 'preferenceLine3'],
-        action: 'editSettings',
-    },
-];
 
 export function AccountSettings() {
     const { t } = useTranslation('profile');

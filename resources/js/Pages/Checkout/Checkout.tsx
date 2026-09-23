@@ -1,37 +1,18 @@
 import { Head, useForm } from '@inertiajs/react';
 import { useMemo, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { brandTitle } from '@/Components/Brand/Brand';
+import { brandTitle } from '@/constants/brand';
+import { gelFormatter } from '@/constants/format';
+import { PROMO_CODE, PROMO_DISCOUNT } from '@/constants/promo';
 import CheckoutLayout from '@/Layouts/CheckoutLayout';
 import { CheckoutBenefits } from '@/Pages/Checkout/Components/CheckoutBenefits';
 import { CheckoutBreadcrumb } from '@/Pages/Checkout/Components/CheckoutBreadcrumb';
 import { CheckoutOrderSummary } from '@/Pages/Checkout/Components/CheckoutOrderSummary';
-import { DeliveryMethods, type DeliveryMethod } from '@/Pages/Checkout/Components/DeliveryMethods';
-import { PaymentDetails, type PaymentMethod } from '@/Pages/Checkout/Components/PaymentDetails';
-import { ShippingInformation, type ShippingFields } from '@/Pages/Checkout/Components/ShippingInformation';
+import { DeliveryMethods } from '@/Pages/Checkout/Components/DeliveryMethods';
+import { PaymentDetails } from '@/Pages/Checkout/Components/PaymentDetails';
+import { ShippingInformation } from '@/Pages/Checkout/Components/ShippingInformation';
 import checkout from '@/routes/checkout';
-
-export type CheckoutItem = {
-    id: string;
-    name: string;
-    variant: string;
-    quantity: number;
-    price: number;
-    image: string;
-};
-
-type CheckoutPageProps = {
-    status?: string;
-    checkout: {
-        customer: ShippingFields & { email: string };
-        items: CheckoutItem[];
-        deliveryMethods: DeliveryMethod[];
-        paymentMethods: PaymentMethod[];
-        taxRate: number;
-    };
-};
-
-const currency = new Intl.NumberFormat('en-US', { currency: 'GEL', currencyDisplay: 'narrowSymbol', style: 'currency' });
+import type { CheckoutPageProps, ShippingFields } from '@/Pages/Checkout/types/CheckoutTypes';
 
 function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
     const { t } = useTranslation('checkout');
@@ -53,7 +34,7 @@ function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
     const subtotal = useMemo(() => checkoutData.items.reduce((total, item) => total + item.price * item.quantity, 0), [checkoutData.items]);
     const selectedDelivery = checkoutData.deliveryMethods.find((method) => method.id === form.data.delivery_method);
     const shipping = selectedDelivery?.price ?? 0;
-    const discount = promoApplied ? 25 : 0;
+    const discount = promoApplied ? PROMO_DISCOUNT : 0;
     const tax = Math.max(0, (subtotal - discount) * checkoutData.taxRate);
     const total = subtotal + shipping + tax - discount;
 
@@ -67,7 +48,7 @@ function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
     }
 
     function applyPromoCode() {
-        setPromoApplied(promoCode.trim().toUpperCase() === 'ATELIER25');
+        setPromoApplied(promoCode.trim().toUpperCase() === PROMO_CODE);
     }
 
     return (
@@ -113,5 +94,3 @@ function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
 Checkout.layout = CheckoutLayout;
 
 export default Checkout;
-
-export { currency };

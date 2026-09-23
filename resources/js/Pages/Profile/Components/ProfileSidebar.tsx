@@ -3,10 +3,7 @@ import { HomeIcon, LogOutIcon, ShoppingBagIcon, UserRoundIcon } from 'lucide-rea
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '@/Components/LanguageSwitcher';
 import { cart, home, logout, profile } from '@/routes';
-
-type ProfileSidebarPageProps = {
-    locale?: string;
-};
+import type { ProfileSidebarPageProps } from '../types/ProfileTypes';
 
 export function ProfileSidebar() {
     const { t } = useTranslation('profile');

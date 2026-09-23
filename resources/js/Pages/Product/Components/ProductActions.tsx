@@ -1,15 +1,6 @@
 import { HeartIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-
-type ProductActionsProps = {
-    canAddToCart: boolean;
-    addedToCart: boolean;
-    wishlisted: boolean;
-    processing: boolean;
-    error?: string;
-    onAddToCart: () => void;
-    onWishlist: () => void;
-};
+import type { ProductActionsProps } from '../types/ProductTypes';
 
 export function ProductActions({ canAddToCart, addedToCart, wishlisted, processing, error = '', onAddToCart, onWishlist }: ProductActionsProps) {
     const { t } = useTranslation('product');

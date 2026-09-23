@@ -2,7 +2,8 @@ import { HomeIcon, LogOutIcon, ShoppingBagIcon, UserRoundIcon, XIcon } from 'luc
 import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { cart, home, login, logout, profile } from '@/routes';
-import type { MobileHeaderProps } from '../HeaderTypes';
+import { USER_AVATAR_IMAGE } from '@/constants/images';
+import type { MobileHeaderProps } from '../types/HeaderTypes';
 
 export function MobileHeader({ user, lang, onClose }: MobileHeaderProps) {
     const { t } = useTranslation('header');
@@ -20,7 +21,7 @@ export function MobileHeader({ user, lang, onClose }: MobileHeaderProps) {
                 <div className="border-b border-brand-olive/15 px-5 py-5">
                     <div className="flex items-center gap-3">
                         <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-full bg-brand-taupe/30">
-                            <img alt="" className="size-full object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=85" />
+                            <img alt="" className="size-full object-cover" src={USER_AVATAR_IMAGE} />
                         </span>
                         <span className="min-w-0">
                             <span className="block truncate text-sm font-semibold">{user?.name ?? t('guest')}</span>

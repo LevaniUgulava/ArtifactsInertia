@@ -1,17 +1,11 @@
 import { Head } from '@inertiajs/react';
-import { brandTitle } from '@/Components/Brand/Brand';
+import { brandTitle } from '@/constants/brand';
 import RootLayout from '@/Layouts/RootLayout';
 import { CollectionBanners } from '@/Pages/Home/Components/CollectionBanners';
 import { Hero } from '@/Pages/Home/Components/Hero';
 import { NewArrivals } from '@/Pages/Home/Components/NewArrivals';
-import type { Product } from '@/Pages/Home/Components/ProductGrid';
 import { TrendingNow } from '@/Pages/Home/Components/TrendingNow';
-
-type HomePageProps = {
-    newArrivals: Product[];
-    trendingProducts: Product[];
-    collections: { name: string; slug: string; image: string }[];
-};
+import type { HomePageProps } from '@/Pages/Home/types/HomeTypes';
 
 function Home({ newArrivals, trendingProducts, collections }: HomePageProps) {
     return (

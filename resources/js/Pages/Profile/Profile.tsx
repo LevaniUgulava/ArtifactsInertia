@@ -1,20 +1,9 @@
 import ProfileLayout from '@/Layouts/ProfileLayout';
 import { AccountSettings } from '@/Pages/Profile/Components/AccountSettings';
-import { OrderHistory, type Order } from '@/Pages/Profile/Components/OrderHistory';
-import { ProfileOverview, type ProfileSummary } from '@/Pages/Profile/Components/ProfileOverview';
-import { SavedItems, type SavedItem } from '@/Pages/Profile/Components/SavedItems';
-
-type ProfilePageProps = {
-    profile: {
-        name: string;
-        email: string;
-        memberSince: string | null;
-        avatarUrl: string;
-        stats: ProfileSummary['stats'];
-        orders: Order[];
-        savedItems: SavedItem[];
-    };
-};
+import { OrderHistory } from '@/Pages/Profile/Components/OrderHistory';
+import { ProfileOverview } from '@/Pages/Profile/Components/ProfileOverview';
+import { SavedItems } from '@/Pages/Profile/Components/SavedItems';
+import type { ProfilePageProps } from '@/Pages/Profile/types/ProfileTypes';
 
 function Profile({ profile }: ProfilePageProps) {
     return (

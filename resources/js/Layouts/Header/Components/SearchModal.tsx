@@ -1,9 +1,8 @@
 import { ArrowUpRightIcon, SearchIcon, XIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { SearchModalProps } from '../HeaderTypes';
+import { suggestionKeys } from '../constants/searchSuggestions';
+import type { SearchModalProps } from '../types/HeaderTypes';
 import { useSearchModal } from '../hooks/useSearchModal';
-
-const suggestionKeys = ['newArrivals', 'outerwear', 'essentials', 'gifts'] as const;
 
 export function SearchModal({ initialQuery, lang, onClose }: SearchModalProps) {
     const { t } = useTranslation('header');

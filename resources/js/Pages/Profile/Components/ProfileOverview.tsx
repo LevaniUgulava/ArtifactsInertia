@@ -1,23 +1,7 @@
 import { UserRoundIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-
-export type ProfileSummary = {
-    stats: { label: string; value: number }[];
-};
-
-type ProfileOverviewProps = {
-    avatarUrl: string;
-    email: string;
-    memberSince: string | null;
-    name: string;
-    stats: ProfileSummary['stats'];
-};
-
-const statKeys: Record<string, string> = {
-    Orders: 'orders',
-    Saved: 'saved',
-    Reviews: 'reviews',
-};
+import { statKeys } from '../constants/statKeys';
+import type { ProfileOverviewProps } from '../types/ProfileTypes';
 
 export function ProfileOverview({ avatarUrl, email, memberSince, name, stats }: ProfileOverviewProps) {
     const { t } = useTranslation('profile');

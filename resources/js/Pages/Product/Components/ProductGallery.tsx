@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { ProductImage } from './ProductTypes';
+import type { ProductGalleryProps } from '../types/ProductTypes';
 
-export function ProductGallery({ images }: { images: ProductImage[] }) {
+export function ProductGallery({ images }: ProductGalleryProps) {
     const { t } = useTranslation('product');
     const [selectedIndex, setSelectedIndex] = useState(0);
     const selectedImage = images[selectedIndex] ?? images[0];

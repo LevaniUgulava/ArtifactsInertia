@@ -1,25 +1,9 @@
 import { Link } from '@inertiajs/react';
 import { LockKeyholeIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { gelFormatter } from '@/constants/format';
 import { checkout } from '@/routes';
-
-const currency = new Intl.NumberFormat('en-US', {
-    currency: 'GEL',
-    currencyDisplay: 'narrowSymbol',
-    style: 'currency',
-});
-
-type OrderSummaryProps = {
-    discount: number;
-    onApplyPromo: () => void;
-    onPromoCodeChange: (value: string) => void;
-    promoApplied: boolean;
-    promoCode: string;
-    shipping: number;
-    subtotal: number;
-    tax: number;
-    total: number;
-};
+import type { OrderSummaryProps } from '../types/CartTypes';
 
 export function OrderSummary({ discount, onApplyPromo, onPromoCodeChange, promoApplied, promoCode, shipping, subtotal, tax, total }: OrderSummaryProps) {
     const { t } = useTranslation('cart');
@@ -31,20 +15,20 @@ export function OrderSummary({ discount, onApplyPromo, onPromoCodeChange, promoA
             <dl className="mt-6 space-y-4 text-xs">
                 <div className="flex items-center justify-between gap-4 text-stone-500">
                     <dt>{t('subtotal')}</dt>
-                    <dd className="font-semibold text-stone-700">{currency.format(subtotal)}</dd>
+                    <dd className="font-semibold text-stone-700">{gelFormatter.format(subtotal)}</dd>
                 </div>
                 <div className="flex items-center justify-between gap-4 text-stone-500">
                     <dt>{t('estimatedShipping')}</dt>
-                    <dd className="font-semibold text-stone-700">{currency.format(shipping)}</dd>
+                    <dd className="font-semibold text-stone-700">{gelFormatter.format(shipping)}</dd>
                 </div>
                 <div className="flex items-center justify-between gap-4 text-stone-500">
                     <dt>{t('tax')}</dt>
-                    <dd className="font-semibold text-stone-700">{currency.format(tax)}</dd>
+                    <dd className="font-semibold text-stone-700">{gelFormatter.format(tax)}</dd>
                 </div>
                 {discount > 0 && (
                     <div className="flex items-center justify-between gap-4 text-emerald-600">
                         <dt>{t('discountLabel')}</dt>
-                        <dd className="font-semibold">-{currency.format(discount)}</dd>
+                        <dd className="font-semibold">-{gelFormatter.format(discount)}</dd>
                     </div>
                 )}
             </dl>
@@ -68,7 +52,7 @@ export function OrderSummary({ discount, onApplyPromo, onPromoCodeChange, promoA
 
             <div className="mt-6 flex items-center justify-between gap-4 border-t border-stone-200 pt-5">
                 <span className="text-sm font-bold text-stone-950">{t('total')}</span>
-                <span className="text-lg font-bold text-stone-950">{currency.format(total)}</span>
+                <span className="text-lg font-bold text-stone-950">{gelFormatter.format(total)}</span>
             </div>
 
             <Link className="mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-stone-900 px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-stone-700" href={checkout.url()}>

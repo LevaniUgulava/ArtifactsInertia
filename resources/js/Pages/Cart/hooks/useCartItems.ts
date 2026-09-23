@@ -1,7 +1,7 @@
 import { useHttp } from '@inertiajs/react';
 import { useState } from 'react';
 import { useLocale } from '@/hooks/useLocale';
-import type { CartItem } from '@/Pages/Cart/Components/CartItemRow';
+import type { CartItem } from '../types/CartTypes';
 import { destroy as cartItemDestroy, update as cartItemUpdate } from '@/routes/cart/items';
 
 function withoutError(errors: Record<string, string>, id: string): Record<string, string> {

@@ -1,20 +1,7 @@
 import { CheckIcon, TruckIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-
-export type DeliveryMethod = {
-    id: string;
-    label: string;
-    description: string;
-    price: number;
-};
-
-type DeliveryMethodsProps = {
-    methods: DeliveryMethod[];
-    selected: string;
-    onChange: (id: string) => void;
-};
-
-const currency = new Intl.NumberFormat('en-US', { currency: 'GEL', currencyDisplay: 'narrowSymbol', style: 'currency' });
+import { gelFormatter } from '@/constants/format';
+import type { DeliveryMethod, DeliveryMethodsProps } from '../types/CheckoutTypes';
 
 export function DeliveryMethods({ methods, onChange, selected }: DeliveryMethodsProps) {
     const { t } = useTranslation('checkout');
@@ -38,7 +25,7 @@ export function DeliveryMethods({ methods, onChange, selected }: DeliveryMethods
                                 <span className="block text-xs font-semibold text-stone-800">{label}</span>
                                 <span className="mt-1 block text-[10px] font-normal text-stone-400">{description}</span>
                             </span>
-                            <span className="text-xs font-semibold text-stone-700">{method.price > 0 ? currency.format(method.price) : t('free')}</span>
+                            <span className="text-xs font-semibold text-stone-700">{method.price > 0 ? gelFormatter.format(method.price) : t('free')}</span>
                         </button>
                     );
                 })}

@@ -1,14 +1,8 @@
 import { Link, usePage } from '@inertiajs/react';
 import productRoutes from '@/routes/product';
+import type { ProductGridProps } from '../types/HomeTypes';
 
-export type Product = {
-    id: string;
-    image: string;
-    name: string;
-    price: string;
-};
-
-export function ProductGrid({ products }: { products: Product[] }) {
+export function ProductGrid({ products }: ProductGridProps) {
     const { props } = usePage();
     const lang = (props.locale as string) ?? 'en';
 

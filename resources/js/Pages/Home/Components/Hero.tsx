@@ -1,5 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { HERO_IMAGE } from '@/constants/images';
 import { catalog } from '@/routes';
 
 export function Hero() {
@@ -12,7 +13,7 @@ export function Hero() {
             <img
                 alt={t('hero.title')}
                 className="absolute inset-0 size-full object-cover opacity-70"
-                src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=85"
+                src={HERO_IMAGE}
             />
             <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/25 to-transparent" />
             <div className="relative mx-auto flex min-h-124 max-w-[1920px] items-end px-5 py-12 sm:min-h-160 sm:px-8 sm:py-20 lg:px-12 2xl:min-h-216 2xl:px-16 2xl:py-28">

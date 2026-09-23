@@ -1,0 +1,1 @@
+export const suggestionKeys = ['newArrivals', 'outerwear', 'essentials', 'gifts'] as const;

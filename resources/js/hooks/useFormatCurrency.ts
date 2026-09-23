@@ -1,9 +1,5 @@
-const formatter = new Intl.NumberFormat('en-US', {
-    currency: 'GEL',
-    currencyDisplay: 'narrowSymbol',
-    style: 'currency',
-});
+import { gelFormatter } from '@/constants/format';
 
 export function useFormatCurrency(): Intl.NumberFormat {
-    return formatter;
+    return gelFormatter;
 }

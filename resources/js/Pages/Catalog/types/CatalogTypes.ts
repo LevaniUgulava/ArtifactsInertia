@@ -59,3 +59,36 @@ export type CatalogPageProps = {
         };
     };
 };
+
+export type CatalogFiltersProps = {
+    filters: {
+        categories: FilterOption[];
+        sizes: string[];
+        colors: ColorOption[];
+        collections: FilterOption[];
+    };
+    value: FilterState;
+    onChange: (value: FilterState) => void;
+    onClear: () => void;
+};
+
+export type CollectionHeaderProps = {
+    name: string;
+    count: number;
+    sort: string;
+    onSortChange: (sort: string) => void;
+};
+
+export type CatalogPaginationProps = {
+    currentPage: number;
+    lastPage: number;
+    onNavigate: (page: number) => void;
+};
+
+export type CatalogProductCardProps = {
+    product: CatalogProduct;
+};
+
+export type CatalogProductGridProps = {
+    products: CatalogProduct[];
+};

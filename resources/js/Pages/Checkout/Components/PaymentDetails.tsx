@@ -1,23 +1,6 @@
-import { AppleIcon, CreditCardIcon, LandmarkIcon, WalletCardsIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-
-export type PaymentMethod = {
-    id: string;
-    label: string;
-};
-
-type PaymentDetailsProps = {
-    methods: PaymentMethod[];
-    selected: string;
-    onChange: (id: string) => void;
-};
-
-const icons = {
-    apple_pay: AppleIcon,
-    card: CreditCardIcon,
-    google_pay: LandmarkIcon,
-    paypal: WalletCardsIcon,
-};
+import { paymentIcons } from '../constants/paymentIcons';
+import type { PaymentDetailsProps } from '../types/CheckoutTypes';
 
 export function PaymentDetails({ methods, onChange, selected }: PaymentDetailsProps) {
     const { t } = useTranslation('checkout');
@@ -31,7 +14,7 @@ export function PaymentDetails({ methods, onChange, selected }: PaymentDetailsPr
 
             <div aria-label={t('paymentDetails')} className="mt-5 flex flex-wrap gap-2" role="radiogroup">
                 {methods.map((method) => {
-                    const Icon = icons[method.id as keyof typeof icons];
+                    const Icon = paymentIcons[method.id as keyof typeof paymentIcons];
                     const isSelected = selected === method.id;
 
                     return (

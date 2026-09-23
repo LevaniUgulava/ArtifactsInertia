@@ -7,13 +7,13 @@ import {
     UserRoundIcon,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { brand } from '@/Components/Brand/Brand';
+import { brand } from '@/constants/brand';
+import { USER_AVATAR_IMAGE } from '@/constants/images';
 import { cart, home, login, profile } from '@/routes';
+import { focusRing } from './constants/focusRing';
 import { MobileHeader } from './Components/MobileHeader';
 import { SearchModal } from './Components/SearchModal';
 import { useHeader } from './hooks/useHeader';
-
-const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-2';
 
 export function Header() {
     const { t } = useTranslation('header');
@@ -66,7 +66,7 @@ export function Header() {
                                 <span
                                     className="grid size-8 place-items-center overflow-hidden rounded-full bg-brand-taupe/30">
                                     <img alt="" className="size-full object-cover"
-                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=85"/>
+                                         src={USER_AVATAR_IMAGE}/>
                                 </span>
                                 <span className="max-w-32 truncate">{user.name}</span>
                             </Link>

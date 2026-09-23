@@ -1,6 +1,6 @@
 import { router, usePage } from '@inertiajs/react';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import type { HeaderPageProps } from '../HeaderTypes';
+import type { HeaderPageProps } from '../types/HeaderTypes';
 
 export function useHeader() {
     const { props, url } = usePage<HeaderPageProps>();

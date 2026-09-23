@@ -1,14 +1,9 @@
 import { ArrowRightIcon, ShoppingBagIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeading } from '@/Pages/Profile/Components/SectionHeading';
+import type { SavedItemsProps } from '../types/ProfileTypes';
 
-export type SavedItem = {
-    name: string;
-    price: string;
-    image: string;
-};
-
-export function SavedItems({ items }: { items: SavedItem[] }) {
+export function SavedItems({ items }: SavedItemsProps) {
     const { t } = useTranslation('profile');
 
     return (

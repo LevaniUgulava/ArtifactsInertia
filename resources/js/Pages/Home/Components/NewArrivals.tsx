@@ -1,10 +1,11 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { catalog } from '@/routes';
-import { ProductGrid, type Product } from '@/Pages/Home/Components/ProductGrid';
+import { ProductGrid } from '@/Pages/Home/Components/ProductGrid';
 import { SectionTitle } from '@/Pages/Home/Components/SectionTitle';
+import type { NewArrivalsProps } from '../types/HomeTypes';
 
-export function NewArrivals({ products }: { products: Product[] }) {
+export function NewArrivals({ products }: NewArrivalsProps) {
     const { t } = useTranslation('home');
     const { props } = usePage();
     const lang = (props.locale as string) ?? 'en';

@@ -1,13 +1,13 @@
 import { Head } from '@inertiajs/react';
-import { brandTitle } from '@/Components/Brand/Brand';
+import { brandTitle } from '@/constants/brand';
 import RootLayout from '@/Layouts/RootLayout';
 import { ProductBreadcrumb } from './Components/ProductBreadcrumb';
 import { ProductDetails } from './Components/ProductDetails';
 import { ProductGallery } from './Components/ProductGallery';
 import { ProductPurchasePanel } from './Components/ProductPurchasePanel';
-import type { ProductData } from './Components/ProductTypes';
+import type { ProductPageProps } from './types/ProductTypes';
 
-function Product({ product }: { product: ProductData }) {
+function Product({ product }: ProductPageProps) {
     return (
         <>
             <Head title={brandTitle(product.name)} />

@@ -1,22 +1,16 @@
 import { Head, Link } from '@inertiajs/react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { brandTitle } from '@/Components/Brand/Brand';
-import { useCartItems } from '@/Pages/Cart/hooks/useCartItems';
+import { brandTitle } from '@/constants/brand';
+import { PROMO_CODE, PROMO_DISCOUNT } from '@/constants/promo';
 import ProfileLayout from '@/Layouts/ProfileLayout';
+import { useCartItems } from '@/Pages/Cart/hooks/useCartItems';
 import { CartBenefits } from '@/Pages/Cart/Components/CartBenefits';
-import { CartItemRow, type CartItem } from '@/Pages/Cart/Components/CartItemRow';
+import { CartItemRow } from '@/Pages/Cart/Components/CartItemRow';
 import { EmptyCart } from '@/Pages/Cart/Components/EmptyCart';
 import { OrderSummary } from '@/Pages/Cart/Components/OrderSummary';
 import { home } from '@/routes';
-
-type CartPageProps = {
-    cart: {
-        shipping: number;
-        taxRate: number;
-        items: CartItem[];
-    };
-};
+import type { CartPageProps } from '@/Pages/Cart/types/CartTypes';
 
 function Cart({ cart }: CartPageProps) {
     const { t } = useTranslation('cart');
@@ -28,13 +22,13 @@ function Cart({ cart }: CartPageProps) {
         () => items.reduce((total, item) => total + item.price * item.quantity, 0),
         [items],
     );
-    const discount = promoApplied ? 25 : 0;
+    const discount = promoApplied ? PROMO_DISCOUNT : 0;
     const tax = Math.max(0, (subtotal - discount) * cart.taxRate);
     const total = subtotal + cart.shipping + tax - discount;
     const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
     function applyPromoCode() {
-        setPromoApplied(promoCode.trim().toUpperCase() === 'ATELIER25');
+        setPromoApplied(promoCode.trim().toUpperCase() === PROMO_CODE);
     }
 
     return (

@@ -11,3 +11,6 @@ Inertia v3 @inertiajs/react: when you pass a manual `setup` to createInertiaApp,
 
 ## Prices are Georgian Lari (₾) everywhere — use narrowSymbol
 Currency is Georgian Lari only. frontend Intl money formatters must use { style: 'currency', currency: 'GEL', currencyDisplay: 'narrowSymbol' } — without narrowSymbol, en-US renders 'GEL 485.00' instead of '₾485.00'. Never hardcode $, EUR, or €. Backend resources/API-derived price strings prefix the amount with '₾'.
+
+## Global types/constants folders and gelFormatter idiom
+Global types live in resources/js/types/ (shared.ts, components.ts for Components/*Props, layouts.ts, app.ts); global constants live in resources/js/constants/ files (brand.ts, format.ts, promo.ts, images.ts) — never inline brand strings, currency formatters, promo codes, or unsplash URLs in components. Use `gelFormatter` from @/constants/format for ₾ money formatting (GEL + narrowSymbol; narrowSymbol is cast for older TS lib). useFormatCurrency still wraps gelFormatter. This supersedes the hooks.md "useFormatCurrency idiom" for new code.

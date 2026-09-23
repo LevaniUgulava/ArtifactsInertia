@@ -1,24 +1,7 @@
 import { LockKeyholeIcon, TagIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { CheckoutItem } from '@/Pages/Checkout/Checkout';
-
-type CheckoutOrderSummaryProps = {
-    discount: number;
-    items: CheckoutItem[];
-    onApplyPromo: () => void;
-    onPromoCodeChange: (value: string) => void;
-    promoApplied: boolean;
-    promoCode: string;
-    shipping: number;
-    subtotal: number;
-    tax: number;
-    total: number;
-    terms: boolean;
-    onTermsChange: (value: boolean) => void;
-    processing: boolean;
-};
-
-const currency = new Intl.NumberFormat('en-US', { currency: 'GEL', currencyDisplay: 'narrowSymbol', style: 'currency' });
+import { gelFormatter } from '@/constants/format';
+import type { CheckoutOrderSummaryProps } from '../types/CheckoutTypes';
 
 export function CheckoutOrderSummary({ discount, items, onApplyPromo, onPromoCodeChange, onTermsChange, promoApplied, promoCode, processing, shipping, subtotal, tax, terms, total }: CheckoutOrderSummaryProps) {
     const { t } = useTranslation('checkout');
@@ -36,21 +19,21 @@ export function CheckoutOrderSummary({ discount, items, onApplyPromo, onPromoCod
                             <p className="mt-1 text-[10px] text-stone-400">{item.variant}</p>
                             <p className="mt-1 text-[10px] text-stone-500">{t('qtyLabel', { count: item.quantity })}</p>
                         </div>
-                        <p className="text-[11px] font-semibold text-stone-700">{currency.format(item.price * item.quantity)}</p>
+                        <p className="text-[11px] font-semibold text-stone-700">{gelFormatter.format(item.price * item.quantity)}</p>
                     </div>
                 ))}
             </div>
 
             <dl className="mt-5 space-y-3 border-t border-stone-100 pt-5 text-xs">
-                <div className="flex justify-between gap-4 text-stone-500"><dt>{t('subtotal')}</dt><dd className="font-semibold text-stone-700">{currency.format(subtotal)}</dd></div>
-                <div className="flex justify-between gap-4 text-stone-500"><dt>{t('expressDelivery')}</dt><dd className="font-semibold text-stone-700">{shipping > 0 ? currency.format(shipping) : t('free')}</dd></div>
-                <div className="flex justify-between gap-4 text-stone-500"><dt>{t('taxLine')}</dt><dd className="font-semibold text-stone-700">{currency.format(tax)}</dd></div>
-                {discount > 0 && <div className="flex justify-between gap-4 text-emerald-600"><dt>{t('promoDiscount')}</dt><dd className="font-semibold">-{currency.format(discount)}</dd></div>}
+                <div className="flex justify-between gap-4 text-stone-500"><dt>{t('subtotal')}</dt><dd className="font-semibold text-stone-700">{gelFormatter.format(subtotal)}</dd></div>
+                <div className="flex justify-between gap-4 text-stone-500"><dt>{t('expressDelivery')}</dt><dd className="font-semibold text-stone-700">{shipping > 0 ? gelFormatter.format(shipping) : t('free')}</dd></div>
+                <div className="flex justify-between gap-4 text-stone-500"><dt>{t('taxLine')}</dt><dd className="font-semibold text-stone-700">{gelFormatter.format(tax)}</dd></div>
+                {discount > 0 && <div className="flex justify-between gap-4 text-emerald-600"><dt>{t('promoDiscount')}</dt><dd className="font-semibold">-{gelFormatter.format(discount)}</dd></div>}
             </dl>
 
             <div className="mt-5 flex items-center justify-between gap-4 border-t border-stone-100 pt-5">
                 <span className="text-sm font-bold text-stone-950">{t('total')}</span>
-                <span className="text-base font-bold text-stone-950">{currency.format(total)}</span>
+                <span className="text-base font-bold text-stone-950">{gelFormatter.format(total)}</span>
             </div>
 
             <div className="mt-5 flex gap-2">

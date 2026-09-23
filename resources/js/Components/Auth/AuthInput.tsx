@@ -1,11 +1,5 @@
 import { CheckCircle2, AlertCircle } from 'lucide-react';
-import type { InputHTMLAttributes } from 'react';
-
-type AuthInputProps = InputHTMLAttributes<HTMLInputElement> & {
-    error?: string;
-    label: string;
-    valid?: boolean;
-};
+import type { AuthInputProps } from '@/types/components';
 
 export function AuthInput({ error, id, label, name, valid = false, ...inputProps }: AuthInputProps) {
     const inputId = id ?? name;

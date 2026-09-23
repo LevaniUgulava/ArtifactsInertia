@@ -1,14 +1,7 @@
 import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-
-type LanguageSwitcherProps = {
-    className?: string;
-};
-
-type SharedPageProps = {
-    locale?: string;
-    availableLocales?: string[];
-};
+import type { LanguageSwitcherProps } from '@/types/components';
+import type { SharedPageProps } from '@/types/shared';
 
 export function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
     const { t } = useTranslation('profile');

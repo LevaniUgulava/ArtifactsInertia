@@ -2,9 +2,9 @@ import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { useLocale } from '@/hooks/useLocale';
 import productRoutes from '@/routes/product';
-import type { CatalogProduct } from '../CatalogTypes';
+import type { CatalogProductCardProps } from '../types/CatalogTypes';
 
-export function CatalogProductCard({ product }: { product: CatalogProduct }) {
+export function CatalogProductCard({ product }: CatalogProductCardProps) {
     const { t } = useTranslation('catalog');
     const lang = useLocale();
 

@@ -1,12 +1,7 @@
 import { useHttp } from '@inertiajs/react';
 import { useLocale } from '@/hooks/useLocale';
 import { store as cartItemStore } from '@/routes/cart/items';
-
-type AddToCartInput = {
-    slug: string;
-    color: string;
-    size: string;
-};
+import type { AddToCartInput } from '../types/ProductTypes';
 
 export function useAddToCart() {
     const locale = useLocale();

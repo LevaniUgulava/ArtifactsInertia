@@ -1,20 +1,5 @@
 import { useTranslation } from 'react-i18next';
-
-type ShippingFields = {
-    first_name: string;
-    last_name: string;
-    address: string;
-    city: string;
-    postal_code: string;
-    country: string;
-    phone: string;
-};
-
-type ShippingInformationProps = {
-    data: ShippingFields;
-    errors: Record<string, string | undefined>;
-    onChange: (field: keyof ShippingFields, value: string) => void;
-};
+import type { ShippingFields, ShippingInformationProps } from '../types/CheckoutTypes';
 
 function Field({ error, label, name, onChange, value }: { error?: string; label: string; name: keyof ShippingFields; onChange: ShippingInformationProps['onChange']; value: string }) {
     return (
@@ -70,5 +55,3 @@ export function ShippingInformation({ data, errors, onChange }: ShippingInformat
         </section>
     );
 }
-
-export type { ShippingFields };

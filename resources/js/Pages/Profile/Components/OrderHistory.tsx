@@ -1,21 +1,8 @@
 import { ArrowRightIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { statusKeys } from '../constants/statusKeys';
 import { SectionHeading } from '@/Pages/Profile/Components/SectionHeading';
-
-export type Order = {
-    id: string;
-    date: string;
-    itemCount: string;
-    status: string;
-    statusTone: 'success' | 'info';
-    total: string;
-    image: string;
-};
-
-const statusKeys: Record<string, string> = {
-    Delivered: 'orderStatus.delivered',
-    'In Transit': 'orderStatus.inTransit',
-};
+import type { Order, OrderHistoryProps } from '../types/ProfileTypes';
 
 function localizeItemCount(t: (key: string, opts?: Record<string, unknown>) => string, itemCount: string): string {
     const match = itemCount.match(/(\d+)/);
@@ -24,7 +11,7 @@ function localizeItemCount(t: (key: string, opts?: Record<string, unknown>) => s
     return t(Number(match[1]) === 1 ? 'itemCount' : 'itemsCount', { count: match[1] });
 }
 
-export function OrderHistory({ orders }: { orders: Order[] }) {
+export function OrderHistory({ orders }: OrderHistoryProps) {
     const { t } = useTranslation('profile');
 
     return (

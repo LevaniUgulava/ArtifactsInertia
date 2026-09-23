@@ -4,13 +4,7 @@ import { useTranslation } from 'react-i18next';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { login } from '@/routes';
 import verification from '@/routes/verification';
-
-type VerificationPageProps = {
-    auth: {
-        user: { name: string; email_verified_at: string | null } | null;
-    };
-    status?: string;
-};
+import type { VerificationPageProps } from './types/AuthTypes';
 
 export default function Verification() {
     const { t } = useTranslation('auth');

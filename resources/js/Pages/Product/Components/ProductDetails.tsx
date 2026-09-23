@@ -1,6 +1,6 @@
-import type { ProductDetail } from './ProductTypes';
+import type { ProductDetailsProps } from '../types/ProductTypes';
 
-export function ProductDetails({ details }: { details: ProductDetail[] }) {
+export function ProductDetails({ details }: ProductDetailsProps) {
     return (
         <section className="grid gap-8 border-t border-stone-200 pt-8 md:grid-cols-3 md:gap-10">
             {details.map((detail) => (

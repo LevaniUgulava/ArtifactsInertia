@@ -1,30 +1,8 @@
 import { HeartIcon, Trash2Icon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { gelFormatter } from '@/constants/format';
 import { QuantityControl } from '@/Pages/Cart/Components/QuantityControl';
-
-const currency = new Intl.NumberFormat('en-US', {
-    currency: 'GEL',
-    style: 'currency',
-});
-
-export type CartItem = {
-    id: string;
-    name: string;
-    price: number;
-    size: string;
-    color: string;
-    colorHex: string;
-    quantity: number;
-    image: string;
-};
-
-type CartItemRowProps = {
-    error?: string;
-    item: CartItem;
-    onQuantityChange: (id: string, quantity: number) => void;
-    onRemove: (id: string) => void;
-    onSave: (id: string) => void;
-};
+import type { CartItem, CartItemRowProps } from '../types/CartTypes';
 
 export function CartItemRow({ error = '', item, onQuantityChange, onRemove, onSave }: CartItemRowProps) {
     const { t } = useTranslation('cart');
@@ -37,7 +15,7 @@ export function CartItemRow({ error = '', item, onQuantityChange, onRemove, onSa
                 <div className="space-y-2">
                     <div className="flex items-start justify-between gap-4 sm:block">
                         <h2 className="text-sm font-semibold text-stone-950">{item.name}</h2>
-                        <p className="text-sm font-semibold text-stone-950 sm:hidden">{currency.format(item.price)}</p>
+                        <p className="text-sm font-semibold text-stone-950 sm:hidden">{gelFormatter.format(item.price)}</p>
                     </div>
                     <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-stone-500">
                         <span>{t('sizeLabel', { size: item.size })}</span>
@@ -63,7 +41,7 @@ export function CartItemRow({ error = '', item, onQuantityChange, onRemove, onSa
                 {error && <p className="text-[10px] text-red-500">{error}</p>}
             </div>
 
-            <p className="hidden text-sm font-semibold text-stone-950 sm:block">{currency.format(item.price)}</p>
+            <p className="hidden text-sm font-semibold text-stone-950 sm:block">{gelFormatter.format(item.price)}</p>
         </article>
     );
 }

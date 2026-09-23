@@ -1,8 +1,9 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { catalog, home } from '@/routes';
+import type { ProductBreadcrumbProps } from '../types/ProductTypes';
 
-export function ProductBreadcrumb({ category, name }: { category: string; name: string }) {
+export function ProductBreadcrumb({ category, name }: ProductBreadcrumbProps) {
     const { t } = useTranslation('common');
     const { props } = usePage();
     const lang = (props.locale as string) ?? 'en';
