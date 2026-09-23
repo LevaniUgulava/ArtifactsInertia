@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { CatalogProduct } from '@/Pages/Catalog/types/CatalogTypes';
 
 export type Order = {
     id: string;
@@ -26,16 +27,6 @@ export type ProfileOverviewProps = {
     stats: ProfileSummary['stats'];
 };
 
-export type SavedItem = {
-    name: string;
-    price: string;
-    image: string;
-};
-
-export type SavedItemsProps = {
-    items: SavedItem[];
-};
-
 export type SectionHeadingProps = {
     action?: ReactNode;
     title: string;
@@ -49,10 +40,13 @@ export type ProfilePageProps = {
         avatarUrl: string;
         stats: ProfileSummary['stats'];
         orders: Order[];
-        savedItems: SavedItem[];
     };
 };
 
 export type ProfileSidebarPageProps = {
     locale?: string;
+};
+
+export type FavoritesPageProps = {
+    favorites: CatalogProduct[];
 };

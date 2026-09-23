@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ProfileController;
 
 Route::prefix('{lang}')->group(function () {
@@ -14,6 +15,10 @@ Route::prefix('{lang}')->group(function () {
     Route::post('/cart/items', [CartController::class, 'store'])->middleware('auth:sanctum')->name('cart.items.store');
     Route::patch('/cart/items/{item}', [CartController::class, 'updateQuantity'])->middleware('auth:sanctum')->name('cart.items.update');
     Route::delete('/cart/items/{item}', [CartController::class, 'remove'])->middleware('auth:sanctum')->name('cart.items.destroy');
+    Route::post('/cart/items/{item}/save', [CartController::class, 'saveForLater'])->middleware('auth:sanctum')->name('cart.items.save');
+    Route::get('/favorites', [FavoritesController::class, 'index'])->middleware('auth:sanctum')->name('favorites');
+    Route::post('/favorites/{product}', [FavoritesController::class, 'store'])->middleware('auth:sanctum')->name('favorites.store');
+    Route::delete('/favorites/{product}', [FavoritesController::class, 'destroy'])->middleware('auth:sanctum')->name('favorites.destroy');
     Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth:sanctum')->name('profile');
     Route::get('/account', [ProfileController::class, 'show'])->middleware('auth:sanctum')->name('account');
 

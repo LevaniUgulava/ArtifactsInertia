@@ -48,6 +48,7 @@ export type AddToCartInput = {
 
 export type ProductPageProps = {
     product: ProductData;
+    favorited: boolean;
 };
 
 export type ProductBreadcrumbProps = {
@@ -61,6 +62,7 @@ export type ProductGalleryProps = {
 
 export type ProductPurchasePanelProps = {
     product: ProductData;
+    favorited: boolean;
 };
 
 export type ProductActionsProps = {

@@ -27,30 +27,7 @@ export function PaymentDetails({ methods, onChange, selected }: PaymentDetailsPr
             </div>
 
             {selected === 'card' && (
-                <div className="mt-5 flex flex-col gap-4">
-                    <label className="flex flex-col gap-2 text-[10px] font-medium text-stone-500" htmlFor="card-number">
-                        {t('card_number')}
-                        <span className="flex min-h-11 items-center justify-between rounded-md border border-stone-200 bg-stone-50 px-3 text-xs font-normal text-stone-600">
-                            <input aria-label={t('card_number')} className="min-w-0 flex-1 bg-transparent outline-none" id="card-number" readOnly value="4242 •••• •••• 8901" />
-                            <span className="text-[9px] font-bold text-blue-600">VISA</span>
-                        </span>
-                    </label>
-                    <div className="flex flex-col gap-4 sm:flex-row">
-                        <label className="flex min-w-0 flex-1 flex-col gap-2 text-[10px] font-medium text-stone-500" htmlFor="expiry-date">
-                            {t('expiry_date')}
-                            <input className="min-h-11 rounded-md border border-stone-200 bg-stone-50 px-3 text-xs text-stone-600 outline-none" id="expiry-date" readOnly value="09/27" />
-                        </label>
-                        <label className="flex min-w-0 flex-1 flex-col gap-2 text-[10px] font-medium text-stone-500" htmlFor="cvv">
-                            {t('cvv')}
-                            <input className="min-h-11 rounded-md border border-stone-200 bg-stone-50 px-3 text-xs text-stone-600 outline-none" id="cvv" readOnly value="•••" />
-                        </label>
-                    </div>
-                    <label className="flex flex-col gap-2 text-[10px] font-medium text-stone-500" htmlFor="name-on-card">
-                        {t('name_on_card')}
-                        <input className="min-h-11 rounded-md border border-stone-200 bg-stone-50 px-3 text-xs text-stone-600 outline-none" id="name-on-card" readOnly value="Camille Rousseau" />
-                    </label>
-                    <p className="text-[10px] leading-4 text-stone-400">{t('maskedNotice')}</p>
-                </div>
+                <p className="mt-4 rounded-md bg-[#f8f5f0] px-3 py-2.5 text-[10px] leading-4 text-stone-500">{t('cardRedirectNotice')}</p>
             )}
         </section>
     );

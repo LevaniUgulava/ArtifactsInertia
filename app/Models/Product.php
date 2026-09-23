@@ -41,6 +41,15 @@ class Product extends Model
     }
 
     /**
+     * @return BelongsToMany<User, $this>
+     */
+    public function favoritedBy(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favorites')
+            ->withTimestamps();
+    }
+
+    /**
      * Scope the query to products matching the active catalog state.
      *
      * @param  array{

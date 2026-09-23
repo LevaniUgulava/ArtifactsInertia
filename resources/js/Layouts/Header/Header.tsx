@@ -11,6 +11,7 @@ import { brand } from '@/constants/brand';
 import { USER_AVATAR_IMAGE } from '@/constants/images';
 import { cart, home, login, profile } from '@/routes';
 import { focusRing } from './constants/focusRing';
+import { CartBadge } from './Components/CartBadge';
 import { MobileHeader } from './Components/MobileHeader';
 import { SearchModal } from './Components/SearchModal';
 import { useHeader } from './hooks/useHeader';
@@ -55,11 +56,14 @@ export function Header() {
 
                     {user ? (
                         <>
+<div className="relative hidden md:block">
                             <Link aria-label={t('openBag')}
-                                  className={`hidden size-8 place-items-center rounded-full transition hover:bg-brand-olive/10 md:grid ${focusRing} focus-visible:outline-brand-charcoal`}
+                                  className={`grid size-8 place-items-center rounded-full transition hover:bg-brand-olive/10 ${focusRing} focus-visible:outline-brand-charcoal`}
                                   href={cart.url({ lang })}>
                                 <ShoppingBagIcon aria-hidden="true" size={17} strokeWidth={1.8}/>
                             </Link>
+                            <CartBadge />
+                        </div>
                             <Link
                                 className="hidden items-center gap-2 border-l border-brand-olive/20 pl-3 text-xs font-semibold text-brand-olive transition hover:text-brand-charcoal sm:flex sm:pl-4"
                                 href={profile.url({ lang })}>

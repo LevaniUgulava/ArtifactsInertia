@@ -1,8 +1,8 @@
 import { Link, usePage } from '@inertiajs/react';
-import { HomeIcon, LogOutIcon, ShoppingBagIcon, UserRoundIcon } from 'lucide-react';
+import { HeartIcon, HomeIcon, LogOutIcon, ShoppingBagIcon, UserRoundIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '@/Components/LanguageSwitcher';
-import { cart, home, logout, profile } from '@/routes';
+import { cart, favorites, home, logout, profile } from '@/routes';
 import type { ProfileSidebarPageProps } from '../types/ProfileTypes';
 
 export function ProfileSidebar() {
@@ -14,6 +14,7 @@ export function ProfileSidebar() {
     const navigationItems = [
         { label: 'navHome', icon: HomeIcon, href: home.url({ lang }), paths: [`/${lang}`] },
         { label: 'navCart', icon: ShoppingBagIcon, href: cart.url({ lang }), paths: ['/cart'] },
+        { label: 'navFavorites', icon: HeartIcon, href: favorites.url({ lang }), paths: ['/favorites'] },
         { label: 'navProfile', icon: UserRoundIcon, href: profile.url({ lang }), paths: ['/profile', '/account'] },
     ];
 

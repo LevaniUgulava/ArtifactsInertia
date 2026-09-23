@@ -7,7 +7,7 @@ import { ProductGallery } from './Components/ProductGallery';
 import { ProductPurchasePanel } from './Components/ProductPurchasePanel';
 import type { ProductPageProps } from './types/ProductTypes';
 
-function Product({ product }: ProductPageProps) {
+function Product({ product, favorited }: ProductPageProps) {
     return (
         <>
             <Head title={brandTitle(product.name)} />
@@ -15,7 +15,7 @@ function Product({ product }: ProductPageProps) {
                 <ProductBreadcrumb category={product.category} name={product.name} />
                 <div className="mt-5 grid gap-8 lg:grid-cols-2 lg:gap-12 2xl:gap-20">
                     <ProductGallery images={product.images} />
-                    <ProductPurchasePanel product={product} />
+                    <ProductPurchasePanel favorited={favorited} product={product} />
                 </div>
                 <div className="mt-12 space-y-10">
                     <ProductDetails details={product.details} />

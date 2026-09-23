@@ -141,7 +141,7 @@ register.head = (args?: { lang?: string | number } | [lang: string | number ] | 
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:23
+* @see app/Http/Controllers/CartController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -157,7 +157,7 @@ cart.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:23
+* @see app/Http/Controllers/CartController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -189,7 +189,7 @@ cart.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:23
+* @see app/Http/Controllers/CartController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -200,12 +200,82 @@ cart.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:23
+* @see app/Http/Controllers/CartController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
 cart.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: cart.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\FavoritesController::favorites
+* @see app/Http/Controllers/FavoritesController.php:18
+* @param lang - Default: '$lang'
+* @route '/{lang?}/favorites'
+*/
+export const favorites = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: favorites.url(args, options),
+    method: 'get',
+})
+
+favorites.definition = {
+    methods: ["get","head"],
+    url: '/{lang?}/favorites',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\FavoritesController::favorites
+* @see app/Http/Controllers/FavoritesController.php:18
+* @param lang - Default: '$lang'
+* @route '/{lang?}/favorites'
+*/
+favorites.url = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { lang: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            lang: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "lang",
+    ])
+
+    const parsedArgs = {
+        lang: args?.lang ?? '$lang',
+    }
+
+    return favorites.definition.url
+            .replace('{lang?}', parsedArgs.lang?.toString() ?? '')
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\FavoritesController::favorites
+* @see app/Http/Controllers/FavoritesController.php:18
+* @param lang - Default: '$lang'
+* @route '/{lang?}/favorites'
+*/
+favorites.get = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: favorites.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\FavoritesController::favorites
+* @see app/Http/Controllers/FavoritesController.php:18
+* @param lang - Default: '$lang'
+* @route '/{lang?}/favorites'
+*/
+favorites.head = (args?: { lang?: string | number } | [lang: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: favorites.url(args, options),
     method: 'head',
 })
 
@@ -351,7 +421,7 @@ account.head = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:17
+* @see app/Http/Controllers/CheckoutController.php:26
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -367,7 +437,7 @@ checkout.definition = {
 
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:17
+* @see app/Http/Controllers/CheckoutController.php:26
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -399,7 +469,7 @@ checkout.url = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:17
+* @see app/Http/Controllers/CheckoutController.php:26
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -410,7 +480,7 @@ checkout.get = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:17
+* @see app/Http/Controllers/CheckoutController.php:26
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */

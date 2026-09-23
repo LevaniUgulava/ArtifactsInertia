@@ -1,6 +1,7 @@
-import { CheckIcon, TruckIcon } from 'lucide-react';
+import { CheckIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { gelFormatter } from '@/constants/format';
+import { deliveryIcons } from '../constants/deliveryIcons';
 import type { DeliveryMethod, DeliveryMethodsProps } from '../types/CheckoutTypes';
 
 export function DeliveryMethods({ methods, onChange, selected }: DeliveryMethodsProps) {
@@ -14,13 +15,14 @@ export function DeliveryMethods({ methods, onChange, selected }: DeliveryMethods
                     const isSelected = selected === method.id;
                     const label = t(method.id, { defaultValue: method.label });
                     const description = t(`${method.id}Description`, { defaultValue: method.description });
+                    const Icon = deliveryIcons[method.icon as keyof typeof deliveryIcons] ?? deliveryIcons.truck;
 
                     return (
                         <button aria-checked={isSelected} className={`flex items-center gap-3 rounded-md border px-4 py-3 text-left transition ${isSelected ? 'border-[#d7b37d] bg-[#fffcf7]' : 'border-stone-200 hover:border-stone-300'}`} key={method.id} role="radio" type="button" onClick={() => onChange(method.id)}>
                             <span className={`grid size-4 shrink-0 place-items-center rounded-full border ${isSelected ? 'border-[#b38145] bg-[#b38145] text-white' : 'border-stone-300 text-transparent'}`}>
                                 <CheckIcon aria-hidden="true" size={10} strokeWidth={3} />
                             </span>
-                            <TruckIcon aria-hidden="true" className={isSelected ? 'text-[#b38145]' : 'text-stone-400'} size={16} strokeWidth={1.7} />
+                            <Icon aria-hidden="true" className={isSelected ? 'text-[#b38145]' : 'text-stone-400'} size={16} strokeWidth={1.7} />
                             <span className="min-w-0 flex-1">
                                 <span className="block text-xs font-semibold text-stone-800">{label}</span>
                                 <span className="mt-1 block text-[10px] font-normal text-stone-400">{description}</span>

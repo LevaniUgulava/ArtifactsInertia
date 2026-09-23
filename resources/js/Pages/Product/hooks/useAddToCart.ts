@@ -1,4 +1,4 @@
-import { useHttp } from '@inertiajs/react';
+import { router, useHttp } from '@inertiajs/react';
 import { useLocale } from '@/hooks/useLocale';
 import { store as cartItemStore } from '@/routes/cart/items';
 import type { AddToCartInput } from '../types/ProductTypes';
@@ -15,6 +15,7 @@ export function useAddToCart() {
         transform(() => input);
         post(cartItemStore.url({ lang: locale }), {
             onSuccess: () => {
+                router.reload({ only: ['cartCount'] });
                 reset();
                 onSuccess?.();
             },

@@ -5,7 +5,7 @@ import { gelFormatter } from '@/constants/format';
 import { checkout } from '@/routes';
 import type { OrderSummaryProps } from '../types/CartTypes';
 
-export function OrderSummary({ discount, onApplyPromo, onPromoCodeChange, promoApplied, promoCode, shipping, subtotal, tax, total }: OrderSummaryProps) {
+export function OrderSummary({ discount, onApplyPromo, onPromoCodeChange, productCount, promoApplied, promoCode, shipping, subtotal, total }: OrderSummaryProps) {
     const { t } = useTranslation('cart');
 
     return (
@@ -22,8 +22,8 @@ export function OrderSummary({ discount, onApplyPromo, onPromoCodeChange, promoA
                     <dd className="font-semibold text-stone-700">{gelFormatter.format(shipping)}</dd>
                 </div>
                 <div className="flex items-center justify-between gap-4 text-stone-500">
-                    <dt>{t('tax')}</dt>
-                    <dd className="font-semibold text-stone-700">{gelFormatter.format(tax)}</dd>
+                    <dt>{t('productCount', { count: productCount })}</dt>
+                    <dd className="font-semibold text-stone-700">{productCount}</dd>
                 </div>
                 {discount > 0 && (
                     <div className="flex items-center justify-between gap-4 text-emerald-600">

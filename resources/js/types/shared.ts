@@ -10,6 +10,7 @@ export type SharedPageProps = {
     auth: {
         user: AppUser | null;
     };
+    cartCount?: number;
 };
 
 export type LocaleQuery = {

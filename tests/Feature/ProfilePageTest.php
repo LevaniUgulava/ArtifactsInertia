@@ -13,7 +13,6 @@ it('renders the profile dashboard for an authenticated user', function () {
         ->assertInertia(fn ($page) => $page
             ->component('Profile/Profile')
             ->has('profile.orders', 3)
-            ->has('profile.savedItems', 4)
             ->where('profile.name', 'Camille Rousseau')
             ->where('profile.email', 'camille@example.com'));
 });

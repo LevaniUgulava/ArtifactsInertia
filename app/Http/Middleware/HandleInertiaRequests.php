@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -42,6 +43,24 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'cartCount' => $this->cartItemCount($request),
         ];
+    }
+
+    /**
+     * Total quantity of items in the authenticated user's cart.
+     */
+    private function cartItemCount(Request $request): int
+    {
+        /** @var User|null $user */
+        $user = $request->user();
+
+        if ($user === null) {
+            return 0;
+        }
+
+        return (int) ($user->cart()
+            ->withSum('items as total_quantity', 'quantity')
+            ->first()?->total_quantity ?? 0);
     }
 }

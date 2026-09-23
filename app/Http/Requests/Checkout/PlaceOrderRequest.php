@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Checkout;
 
+use App\Enums\PaymentType;
+use Closure;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PlaceOrderRequest extends FormRequest
 {
@@ -26,11 +29,21 @@ class PlaceOrderRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
-            'postal_code' => ['required', 'string', 'max:32'],
-            'country' => ['required', 'string', 'max:2'],
-            'phone' => ['required', 'string', 'max:32'],
-            'delivery_method' => ['required', 'string', 'in:express,standard,next_day'],
-            'payment_method' => ['required', 'string', 'in:card,apple_pay,google_pay,paypal'],
+            'phone' => [
+                'required',
+                'string',
+                'max:32',
+                function (string $attribute, mixed $value, Closure $fail): void {
+                    $phone = preg_replace('/[\s\-.()]/', '', (string) $value);
+
+                    if (! preg_match('/^\+995[3-9]\d{8}$/', (string) $phone)) {
+                        $fail(__('validation.phone_georgia'));
+                    }
+                },
+            ],
+            'delivery_method' => ['required', 'string', Rule::exists('delivery_types', 'value')],
+            'payment_method' => ['required', 'string', Rule::enum(PaymentType::class)],
+            'promo_code' => ['nullable', 'string', 'max:32'],
             'terms' => ['accepted'],
             'card_number' => ['prohibited'],
             'cvv' => ['prohibited'],

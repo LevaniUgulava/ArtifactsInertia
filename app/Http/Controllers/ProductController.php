@@ -22,6 +22,7 @@ class ProductController extends Controller
 
         return Inertia::render('Product/Product', [
             'product' => (new ProductResource($productModel))->resolve(),
+            'favorited' => $request->user()?->favorites()->where('product_id', $productModel->id)->exists() ?? false,
         ]);
     }
 }
