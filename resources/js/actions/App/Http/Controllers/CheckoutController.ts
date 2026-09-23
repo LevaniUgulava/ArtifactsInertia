@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\CheckoutController::show
-* @see app/Http/Controllers/CheckoutController.php:17
+* @see app/Http/Controllers/CheckoutController.php:26
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -17,7 +17,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\CheckoutController::show
-* @see app/Http/Controllers/CheckoutController.php:17
+* @see app/Http/Controllers/CheckoutController.php:26
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -49,7 +49,7 @@ show.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CheckoutController::show
-* @see app/Http/Controllers/CheckoutController.php:17
+* @see app/Http/Controllers/CheckoutController.php:26
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -60,7 +60,7 @@ show.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CheckoutController::show
-* @see app/Http/Controllers/CheckoutController.php:17
+* @see app/Http/Controllers/CheckoutController.php:26
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -71,7 +71,7 @@ show.head = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\CheckoutController::placeOrder
-* @see app/Http/Controllers/CheckoutController.php:80
+* @see app/Http/Controllers/CheckoutController.php:75
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout/place-order'
 */
@@ -87,7 +87,7 @@ placeOrder.definition = {
 
 /**
 * @see \App\Http\Controllers\CheckoutController::placeOrder
-* @see app/Http/Controllers/CheckoutController.php:80
+* @see app/Http/Controllers/CheckoutController.php:75
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout/place-order'
 */
@@ -119,7 +119,7 @@ placeOrder.url = (args?: { lang?: string | number } | [lang: string | number ] |
 
 /**
 * @see \App\Http\Controllers\CheckoutController::placeOrder
-* @see app/Http/Controllers/CheckoutController.php:80
+* @see app/Http/Controllers/CheckoutController.php:75
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout/place-order'
 */

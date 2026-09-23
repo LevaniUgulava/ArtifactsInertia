@@ -2,6 +2,7 @@ export type DeliveryMethod = {
     id: string;
     label: string;
     description: string;
+    icon: string;
     price: number;
 };
 
@@ -15,15 +16,15 @@ export type ShippingFields = {
     last_name: string;
     address: string;
     city: string;
-    postal_code: string;
-    country: string;
     phone: string;
 };
 
 export type CheckoutItem = {
     id: string;
     name: string;
-    variant: string;
+    size: string;
+    color: string;
+    colorHex?: string;
     quantity: number;
     price: number;
     image: string;
@@ -36,7 +37,7 @@ export type CheckoutPageProps = {
         items: CheckoutItem[];
         deliveryMethods: DeliveryMethod[];
         paymentMethods: PaymentMethod[];
-        taxRate: number;
+        promoCode: string | null;
     };
 };
 
@@ -63,13 +64,14 @@ export type CheckoutOrderSummaryProps = {
     items: CheckoutItem[];
     onApplyPromo: () => void;
     onPromoCodeChange: (value: string) => void;
+    productCount: number;
     promoApplied: boolean;
     promoCode: string;
     shipping: number;
     subtotal: number;
-    tax: number;
     total: number;
     terms: boolean;
     onTermsChange: (value: boolean) => void;
     processing: boolean;
+    formComplete: boolean;
 };

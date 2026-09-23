@@ -21,22 +21,33 @@ function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
         last_name: checkoutData.customer.last_name,
         address: checkoutData.customer.address,
         city: checkoutData.customer.city,
-        postal_code: checkoutData.customer.postal_code,
-        country: checkoutData.customer.country,
         phone: checkoutData.customer.phone,
         delivery_method: checkoutData.deliveryMethods[0]?.id ?? 'express',
         payment_method: checkoutData.paymentMethods[0]?.id ?? 'card',
+        promo_code: checkoutData.promoCode ?? '',
         terms: false,
     });
-    const [promoCode, setPromoCode] = useState('');
-    const [promoApplied, setPromoApplied] = useState(false);
+    const [promoCode, setPromoCode] = useState(checkoutData.promoCode ?? '');
+    const [promoApplied, setPromoApplied] = useState(checkoutData.promoCode !== null && checkoutData.promoCode.toUpperCase() === PROMO_CODE);
 
-    const subtotal = useMemo(() => checkoutData.items.reduce((total, item) => total + item.price * item.quantity, 0), [checkoutData.items]);
+    const subtotal = useMemo(
+        () => checkoutData.items.reduce((total, item) => total + (Number(item.price) || 0) * (Number(item.quantity) || 0), 0),
+        [checkoutData.items],
+    );
+    const productCount = checkoutData.items.reduce((count, item) => count + (Number(item.quantity) || 0), 0);
     const selectedDelivery = checkoutData.deliveryMethods.find((method) => method.id === form.data.delivery_method);
-    const shipping = selectedDelivery?.price ?? 0;
+    const shipping = Number(selectedDelivery?.price) || 0;
     const discount = promoApplied ? PROMO_DISCOUNT : 0;
-    const tax = Math.max(0, (subtotal - discount) * checkoutData.taxRate);
-    const total = subtotal + shipping + tax - discount;
+    const total = Math.max(0, subtotal + shipping - discount);
+    const formComplete = Boolean(
+        form.data.first_name.trim() &&
+        form.data.last_name.trim() &&
+        form.data.address.trim() &&
+        form.data.city.trim() &&
+        form.data.phone.trim().length > 4 &&
+        form.data.delivery_method &&
+        form.data.payment_method,
+    );
 
     function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -68,16 +79,17 @@ function Checkout({ checkout: checkoutData, status }: CheckoutPageProps) {
                     <div className="flex flex-col gap-5">
                         <CheckoutOrderSummary
                             discount={discount}
+                            formComplete={formComplete}
                             items={checkoutData.items}
                             onApplyPromo={applyPromoCode}
                             onPromoCodeChange={setPromoCode}
                             onTermsChange={(value) => form.setData('terms', value)}
                             processing={form.processing}
+                            productCount={productCount}
                             promoApplied={promoApplied}
                             promoCode={promoCode}
                             shipping={shipping}
                             subtotal={subtotal}
-                            tax={tax}
                             terms={form.data.terms}
                             total={total}
                         />

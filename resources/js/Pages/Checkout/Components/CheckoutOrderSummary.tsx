@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { gelFormatter } from '@/constants/format';
 import type { CheckoutOrderSummaryProps } from '../types/CheckoutTypes';
 
-export function CheckoutOrderSummary({ discount, items, onApplyPromo, onPromoCodeChange, onTermsChange, promoApplied, promoCode, processing, shipping, subtotal, tax, terms, total }: CheckoutOrderSummaryProps) {
+export function CheckoutOrderSummary({ discount, formComplete, items, onApplyPromo, onPromoCodeChange, onTermsChange, productCount, promoApplied, promoCode, processing, shipping, subtotal, terms, total }: CheckoutOrderSummaryProps) {
     const { t } = useTranslation('checkout');
 
     return (
@@ -16,7 +16,8 @@ export function CheckoutOrderSummary({ discount, items, onApplyPromo, onPromoCod
                         <img alt={item.name} className="size-14 rounded-md object-cover" src={item.image} />
                         <div className="min-w-0 flex-1">
                             <h3 className="truncate text-[11px] font-semibold text-stone-900">{item.name}</h3>
-                            <p className="mt-1 text-[10px] text-stone-400">{item.variant}</p>
+                            <p className="mt-1 text-[10px] text-stone-400">{t('sizeLabel', { size: item.size })}</p>
+                            <p className="text-[10px] text-stone-400">{t('colorLabel')}: {item.color}</p>
                             <p className="mt-1 text-[10px] text-stone-500">{t('qtyLabel', { count: item.quantity })}</p>
                         </div>
                         <p className="text-[11px] font-semibold text-stone-700">{gelFormatter.format(item.price * item.quantity)}</p>
@@ -27,7 +28,7 @@ export function CheckoutOrderSummary({ discount, items, onApplyPromo, onPromoCod
             <dl className="mt-5 space-y-3 border-t border-stone-100 pt-5 text-xs">
                 <div className="flex justify-between gap-4 text-stone-500"><dt>{t('subtotal')}</dt><dd className="font-semibold text-stone-700">{gelFormatter.format(subtotal)}</dd></div>
                 <div className="flex justify-between gap-4 text-stone-500"><dt>{t('expressDelivery')}</dt><dd className="font-semibold text-stone-700">{shipping > 0 ? gelFormatter.format(shipping) : t('free')}</dd></div>
-                <div className="flex justify-between gap-4 text-stone-500"><dt>{t('taxLine')}</dt><dd className="font-semibold text-stone-700">{gelFormatter.format(tax)}</dd></div>
+                <div className="flex justify-between gap-4 text-stone-500"><dt>{t('productCount', { count: productCount })}</dt><dd className="font-semibold text-stone-700">{productCount}</dd></div>
                 {discount > 0 && <div className="flex justify-between gap-4 text-emerald-600"><dt>{t('promoDiscount')}</dt><dd className="font-semibold">-{gelFormatter.format(discount)}</dd></div>}
             </dl>
 
@@ -49,7 +50,7 @@ export function CheckoutOrderSummary({ discount, items, onApplyPromo, onPromoCod
                 <input className="mt-0.5 accent-[#b38145]" type="checkbox" checked={terms} onChange={(event) => onTermsChange(event.target.checked)} />
                 <span>{t('termsText')}</span>
             </label>
-            <button className="mt-5 flex w-full items-center justify-center rounded-md bg-[#b88b52] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#a77e4c] disabled:cursor-not-allowed disabled:opacity-60" disabled={!terms || processing} type="submit">
+            <button className="mt-5 flex w-full items-center justify-center rounded-md bg-[#b88b52] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#a77e4c] disabled:cursor-not-allowed disabled:opacity-60" disabled={!terms || !formComplete || processing} type="submit">
                 {processing ? t('validating') : t('placeOrder')}
             </button>
             <p className="mt-2 flex items-center justify-center gap-1.5 text-[10px] text-stone-400"><LockKeyholeIcon aria-hidden="true" size={12} /> {t('sslEncryption')}</p>
