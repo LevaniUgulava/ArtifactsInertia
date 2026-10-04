@@ -13,7 +13,7 @@ export function CollectionBanners({ collections }: CollectionBannersProps) {
     return (
         <section className="mx-auto grid max-w-[1920px] gap-4 px-5 pb-14 sm:gap-5 sm:px-8 sm:pb-20 lg:px-12 2xl:gap-8 2xl:px-16 2xl:pb-28 md:grid-cols-2">
             {collections.map(({ name, slug, image }) => (
-                <Link className="group relative isolate min-h-[24rem] overflow-hidden sm:min-h-[27rem] lg:min-h-[31rem] 2xl:min-h-[42rem]" href={catalog.url({ lang }, { query: { collection: slug } })} key={slug}>
+                <Link className="group relative isolate min-h-[24rem] overflow-hidden rounded-2xl border border-stone-200/70 sm:min-h-[27rem] lg:min-h-[31rem] 2xl:min-h-[42rem]" href={catalog.url({ lang }, { query: { collection: slug } })} key={slug}>
                     <img
                         alt={copy(name)}
                         className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105"
@@ -25,7 +25,7 @@ export function CollectionBanners({ collections }: CollectionBannersProps) {
                             <h2 className="text-3xl font-semibold">{copy(name)}</h2>
                             <p className="mt-1 text-sm text-stone-200">{slug === 'mens' ? t('men.description') : t('women.description')}</p>
                         </div>
-                        <span className="inline-flex bg-white px-4 py-3 text-xs font-bold text-stone-950">{t('exploreCollection')}</span>
+                        <span className="inline-flex rounded-lg bg-white px-4 py-3 text-xs font-bold text-stone-950">{t('exploreCollection')}</span>
                     </div>
                 </Link>
             ))}

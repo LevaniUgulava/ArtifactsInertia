@@ -40,3 +40,32 @@ body {
         }
     }
 }
+
+:lang(ka) {
+    --font-sans: 'Noto Sans Georgian', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --text-xs: 0.8125rem;
+    --text-xs--line-height: 1.5;
+    --text-sm: 0.9375rem;
+    --text-sm--line-height: 1.6;
+    --text-base: 1.0625rem;
+    --text-base--line-height: 1.65;
+}
+
+:lang(ka) :is(h1, h2, h3, h4, h5, h6, a, button, label, input, select, textarea) {
+    letter-spacing: normal;
+}
+
+:lang(ka) :is(h1, h2, h3, h4, h5, h6) {
+    line-height: 1.2;
+}
+
+:lang(ka) .text-\[10px\] {
+    font-size: 0.6875rem;
+    line-height: 1.5;
+}
+
+:lang(ka) .text-\[11px\] {
+    font-size: 0.75rem;
+    line-height: 1.5;
+}

@@ -1,7 +1,7 @@
 import { HomeIcon, LogOutIcon, ShoppingBagIcon, UserRoundIcon, XIcon } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { cart, home, login, logout, profile } from '@/routes';
+import { cart, home, login, logout, profile, register } from '@/routes';
 import { USER_AVATAR_IMAGE } from '@/constants/images';
 import type { MobileHeaderProps } from '../types/HeaderTypes';
 
@@ -46,10 +46,16 @@ export function MobileHeader({ user, lang, onClose }: MobileHeaderProps) {
                             </Link>
                         </>
                     ) : (
-                        <Link className="flex items-center w-full gap-3 rounded-md px-3 py-3 text-xs font-medium text-brand-olive transition hover:bg-white hover:text-brand-charcoal" href={login.url({ lang })} onClick={onClose}>
-                            <UserRoundIcon aria-hidden="true" size={16} strokeWidth={1.8} />
-                            {t('signIn')}
-                        </Link>
+                        <>
+                            <Link className="flex w-full items-center gap-3 rounded-md px-3 py-3 text-xs font-medium text-brand-olive transition hover:bg-white hover:text-brand-charcoal" href={login.url({ lang })} onClick={onClose}>
+                                <UserRoundIcon aria-hidden="true" size={16} strokeWidth={1.8} />
+                                {t('signIn')}
+                            </Link>
+                            <Link className="flex w-full items-center gap-3 rounded-md bg-brand-charcoal px-3 py-3 text-xs font-medium text-brand-stone transition hover:bg-brand-olive" href={register.url({ lang })} onClick={onClose}>
+                                <UserRoundIcon aria-hidden="true" size={16} strokeWidth={1.8} />
+                                {t('signUp')}
+                            </Link>
+                        </>
                     )}
                     {user ? (
                         <Link aria-label={t('signOut')} className="mt-5 flex items-center w-full gap-3 border-t border-brand-olive/15 px-3 pt-5 text-xs font-medium text-brand-olive transition hover:text-brand-charcoal" href={logout.url()} method="post" as="button" onClick={onClose}>

@@ -7,6 +7,9 @@ import type { InertiaPage } from './types/app';
 function syncLocale(page: InertiaPage) {
     const locale = page.props.locale as string | undefined;
 
+    if (locale) {
+        document.documentElement.lang = locale;
+    }
 
     if (locale && locale !== i18n.language) {
         i18n.changeLanguage(locale);

@@ -44,11 +44,6 @@ export function SearchModal({ initialQuery, lang, onClose }: SearchModalProps) {
                             ))}
                         </div>
                     </div>
-
-                    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-brand-olive/15 pt-4 text-[9px] uppercase tracking-[0.16em] text-brand-olive/55 sm:text-[10px] sm:tracking-[0.18em]">
-                        <span>{t('searchSubmitHint')}</span>
-                        <span>{t('searchCloseHint')}</span>
-                    </div>
                 </div>
             </div>
         </div>

@@ -1,15 +1,13 @@
 import { Link } from '@inertiajs/react';
 import {
-    ChevronDownIcon,
     MenuIcon,
     SearchIcon,
     ShoppingBagIcon,
-    UserRoundIcon,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { brand } from '@/constants/brand';
 import { USER_AVATAR_IMAGE } from '@/constants/images';
-import { cart, home, login, profile } from '@/routes';
+import { cart, home, login, profile, register } from '@/routes';
 import { focusRing } from './constants/focusRing';
 import { CartBadge } from './Components/CartBadge';
 import { MobileHeader } from './Components/MobileHeader';
@@ -21,14 +19,12 @@ export function Header() {
     const {
         user,
         lang,
-        availableLocales,
         isSearchOpen,
         searchQuery,
         isMobileAccountOpen,
         setIsMobileAccountOpen,
         openSearch,
         closeSearch,
-        handleLanguageChange,
     } = useHeader();
 
     return (
@@ -78,31 +74,17 @@ export function Header() {
                     ) : (
                         <>
                             <Link
-                                className={`hidden items-center rounded-full border border-brand-charcoal/15 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-charcoal transition hover:border-brand-charcoal/30 hover:bg-brand-charcoal/5 sm:inline-flex ${focusRing} focus-visible:outline-brand-charcoal`}
+                                className={`hidden items-center rounded-full border border-brand-charcoal/15 px-4 py-2 text-[11px] font-semibold text-brand-charcoal transition hover:border-brand-charcoal/30 hover:bg-brand-charcoal/5 sm:inline-flex ${focusRing} focus-visible:outline-brand-charcoal`}
                                 href={login.url({ lang })}
                             >
                                 {t('signIn')}
                             </Link>
-                            <div className="relative shrink-0">
-                                <select
-                                    aria-label={t('language')}
-                                    className={`h-8 cursor-pointer appearance-none rounded-full border border-brand-charcoal/15 bg-transparent pl-3 pr-8 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-charcoal outline-none transition hover:border-brand-charcoal/30 hover:bg-brand-charcoal/5 ${focusRing} focus-visible:outline-brand-charcoal`}
-                                    onChange={handleLanguageChange}
-                                    value={lang}
-                                >
-                                    {availableLocales.map((locale) => (
-                                        <option key={locale} value={locale}>
-                                            {t(`lang.${locale}`, locale.toUpperCase())}
-                                        </option>
-                                    ))}
-                                </select>
-                                <ChevronDownIcon
-                                    aria-hidden="true"
-                                    className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-brand-olive/70"
-                                    size={13}
-                                    strokeWidth={1.8}
-                                />
-                            </div>
+                            <Link
+                                className={`hidden items-center rounded-full bg-brand-charcoal px-4 py-2 text-[11px] font-semibold text-brand-stone transition hover:bg-brand-olive sm:inline-flex ${focusRing} focus-visible:outline-brand-charcoal`}
+                                href={register.url({ lang })}
+                            >
+                                {t('signUp')}
+                            </Link>
                         </>
                     )}
                 </div>

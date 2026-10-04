@@ -9,7 +9,7 @@ export function Hero() {
     const lang = (props.locale as string) ?? 'en';
 
     return (
-        <section className="relative isolate min-h-124 overflow-hidden bg-stone-900 sm:min-h-160 lg:min-h-176 2xl:min-h-216">
+        <section className="relative mt-5 max-lg:mt-3 isolate mx-3 min-h-124 overflow-hidden rounded-2xl bg-stone-900 sm:mx-5 sm:min-h-160 lg:mx-8 lg:min-h-176 2xl:mx-12 2xl:min-h-216">
             <img
                 alt={t('hero.title')}
                 className="absolute inset-0 size-full object-cover opacity-70"
@@ -22,10 +22,10 @@ export function Hero() {
                     <h1 className="text-4xl font-semibold leading-[0.92] tracking-tight sm:text-7xl 2xl:text-8xl">{t('hero.title')}</h1>
                     <p className="max-w-sm text-sm leading-6 text-stone-200 2xl:max-w-lg 2xl:text-base">{t('hero.description')}</p>
                     <div className="flex flex-wrap gap-3">
-                        <Link className="bg-white px-5 py-3 text-xs font-bold tracking-wide text-stone-950 transition hover:bg-stone-200" href={catalog.url({ lang }, { query: { collection: 'womens' } })}>
+                        <Link className="rounded-lg bg-white px-5 py-3 text-xs font-bold text-stone-950 transition hover:bg-stone-200" href={catalog.url({ lang }, { query: { collection: 'womens' } })}>
                             {t('hero.shopWomen')}
                         </Link>
-                        <Link className="border border-white/70 px-5 py-3 text-xs font-bold tracking-wide text-white transition hover:bg-white hover:text-stone-950" href={catalog.url({ lang }, { query: { collection: 'mens' } })}>
+                        <Link className="rounded-lg border border-white/70 px-5 py-3 text-xs font-bold text-white transition hover:bg-white hover:text-stone-950" href={catalog.url({ lang }, { query: { collection: 'mens' } })}>
                             {t('hero.shopMen')}
                         </Link>
                     </div>
