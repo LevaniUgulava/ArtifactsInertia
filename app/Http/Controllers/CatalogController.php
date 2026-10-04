@@ -3,37 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Catalog\CatalogResource;
-use App\Models\Collection as ProductCollection;
-use App\Models\Product;
-use App\Services\CatalogFilterService;
+use App\Services\CatalogService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class CatalogController extends Controller
 {
-    public function __construct(private readonly CatalogFilterService $filters) {}
+    public function __construct(private readonly CatalogService $catalogService) {}
 
     /**
      * Show the public product catalog.
      */
     public function index(Request $request): Response
     {
-        $filters = $this->filters->from($request);
-
-        $collection = $filters['collection'] !== ''
-            ? ProductCollection::query()
-                ->withCount('products')
-                ->where('slug', $filters['collection'])
-                ->firstOrFail()
-            : null;
-
-        $products = Product::query()
-            ->forCatalog($collection, $filters['search'], $filters['sort'], $filters['activeFilters'])
-            ->paginate(6, ['*'], 'page', $filters['page']);
+        $catalog = $this->catalogService->browse($request);
 
         return Inertia::render('Catalog/Catalog', [
-            'catalog' => (new CatalogResource($products, $collection, $filters))->resolve($request),
+            'catalog' => (new CatalogResource($catalog['products'], $catalog['collection'], $catalog['filters']))->resolve($request),
         ]);
     }
 }

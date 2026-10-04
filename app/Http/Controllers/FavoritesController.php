@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Catalog\CatalogProductResource;
-use App\Models\Product;
 use App\Models\User;
+use App\Services\FavoriteService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,6 +12,8 @@ use Inertia\Response;
 
 class FavoritesController extends Controller
 {
+    public function __construct(private readonly FavoriteService $favoriteService) {}
+
     /**
      * Show the authenticated user's saved (favorited) products.
      */
@@ -38,9 +40,7 @@ class FavoritesController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $productModel = Product::query()->where('slug', $product)->firstOrFail();
-
-        $user->favorites()->syncWithoutDetaching([$productModel->id]);
+        $this->favoriteService->add($user, $product);
 
         return response()->json(['favorited' => true]);
     }
@@ -53,9 +53,7 @@ class FavoritesController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $productModel = Product::query()->where('slug', $product)->firstOrFail();
-
-        $user->favorites()->detach($productModel->id);
+        $this->favoriteService->remove($user, $product);
 
         return response()->json(['favorited' => false]);
     }

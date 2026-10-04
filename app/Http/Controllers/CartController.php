@@ -6,19 +6,18 @@ use App\Http\Requests\Cart\CartStoreRequest;
 use App\Http\Requests\Cart\CartUpdateQuantityRequest;
 use App\Http\Resources\Cart\CartResource;
 use App\Models\CartItem;
-use App\Models\Product;
 use App\Models\User;
-use App\Models\Variant;
+use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class CartController extends Controller
 {
+    public function __construct(private readonly CartService $cartService) {}
+
     /**
      * Show the authenticated user's shopping cart.
      */
@@ -45,44 +44,8 @@ class CartController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $product = Product::query()->where('slug', $request->slug)->first();
-
-        $variant = $product->variants()
-            ->where('color', $request->color)
-            ->where('size', $request->size)
-            ->first();
-
-        if ($variant === null) {
-            throw ValidationException::withMessages([
-                'size' => 'This color and size combination is not available.',
-            ]);
-        }
-
-        $quantity = DB::transaction(function () use ($user, $variant): int {
-            $cart = $user->cart()->firstOrCreate();
-
-            $item = $cart->items()->where('variant_id', $variant->id)->lockForUpdate()->first();
-
-            $quantity = ($item?->quantity ?? 0) + 1;
-
-            if ($quantity > $variant->stock) {
-                throw ValidationException::withMessages([
-                    'size' => 'Not enough stock for this size.',
-                ]);
-            }
-
-            if ($item === null) {
-                $cart->items()->create([
-                    'variant_id' => $variant->id,
-                    'quantity' => 1,
-                    'price' => $variant->price,
-                ]);
-            } else {
-                $item->update(['quantity' => $quantity]);
-            }
-
-            return $quantity;
-        });
+        $data = $request->validated();
+        $quantity = $this->cartService->addItem($user, $data['slug'], $data['color'], $data['size']);
 
         return response()->json(['quantity' => $quantity]);
     }
@@ -95,19 +58,9 @@ class CartController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $cartItem = $user->cart?->items()->findOrFail($item->id);
+        $quantity = $this->cartService->updateQuantity($user, $item, $request->integer('quantity'));
 
-        abort_if($cartItem === null, 404);
-
-        if ($request->quantity > $cartItem->variant->stock) {
-            throw ValidationException::withMessages([
-                'quantity' => 'Not enough stock for this size.',
-            ]);
-        }
-
-        $cartItem->update(['quantity' => $request->quantity]);
-
-        return response()->json(['quantity' => $cartItem->quantity]);
+        return response()->json(['quantity' => $quantity]);
     }
 
     /**
@@ -118,11 +71,7 @@ class CartController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $cartItem = $user->cart?->items()->findOrFail($item->id);
-
-        abort_if($cartItem === null, 404);
-
-        $cartItem->delete();
+        $this->cartService->remove($user, $item);
 
         return response()->noContent();
     }
@@ -135,18 +84,7 @@ class CartController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $cartItem = $user->cart?->items()->findOrFail($item->id);
-
-        abort_if($cartItem === null, 404);
-
-        $productId = $cartItem->variant?->product_id;
-
-        abort_if($productId === null, 422);
-
-        DB::transaction(function () use ($user, $cartItem, $productId): void {
-            $cartItem->delete();
-            $user->favorites()->syncWithoutDetaching([$productId]);
-        });
+        $this->cartService->saveForLater($user, $item);
 
         return response()->json(['saved' => true]);
     }
