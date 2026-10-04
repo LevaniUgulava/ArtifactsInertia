@@ -35,7 +35,7 @@ export function ProductPurchasePanel({ product, favorited }: ProductPurchasePane
             </div>
             <p className="max-w-xl text-xs leading-5 text-stone-600">{product.description}</p>
             <ProductVariantSelector availableSizes={availableSizes} colors={product.colors} onColorChange={handleColorChange} onSizeChange={handleSizeChange} onSizeChart={() => setShowSizeChart((visible) => !visible)} selectedColor={selectedColor} selectedSize={selectedSize} sizes={product.sizes} />
-            {showSizeChart ? <div className="border border-stone-200 bg-stone-50 p-4 text-[10px] leading-5 text-stone-600">{t('sizeChartText')}</div> : null}
+            {showSizeChart ? <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 text-[10px] leading-5 text-stone-600">{t('sizeChartText')}</div> : null}
             <ProductActions
                 addedToCart={addedToCart}
                 canAddToCart={Boolean(selectedColor && selectedSize)}

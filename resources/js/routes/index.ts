@@ -141,7 +141,7 @@ register.head = (args?: { lang?: string | number } | [lang: string | number ] | 
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:25
+* @see app/Http/Controllers/CartController.php:24
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -157,7 +157,7 @@ cart.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:25
+* @see app/Http/Controllers/CartController.php:24
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -189,7 +189,7 @@ cart.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:25
+* @see app/Http/Controllers/CartController.php:24
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -200,7 +200,7 @@ cart.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\CartController::cart
-* @see app/Http/Controllers/CartController.php:25
+* @see app/Http/Controllers/CartController.php:24
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart'
 */
@@ -211,7 +211,7 @@ cart.head = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\FavoritesController::favorites
-* @see app/Http/Controllers/FavoritesController.php:18
+* @see app/Http/Controllers/FavoritesController.php:20
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites'
 */
@@ -227,7 +227,7 @@ favorites.definition = {
 
 /**
 * @see \App\Http\Controllers\FavoritesController::favorites
-* @see app/Http/Controllers/FavoritesController.php:18
+* @see app/Http/Controllers/FavoritesController.php:20
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites'
 */
@@ -259,7 +259,7 @@ favorites.url = (args?: { lang?: string | number } | [lang: string | number ] | 
 
 /**
 * @see \App\Http\Controllers\FavoritesController::favorites
-* @see app/Http/Controllers/FavoritesController.php:18
+* @see app/Http/Controllers/FavoritesController.php:20
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites'
 */
@@ -270,7 +270,7 @@ favorites.get = (args?: { lang?: string | number } | [lang: string | number ] | 
 
 /**
 * @see \App\Http\Controllers\FavoritesController::favorites
-* @see app/Http/Controllers/FavoritesController.php:18
+* @see app/Http/Controllers/FavoritesController.php:20
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites'
 */
@@ -421,7 +421,7 @@ account.head = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:26
+* @see app/Http/Controllers/CheckoutController.php:21
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -437,7 +437,7 @@ checkout.definition = {
 
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:26
+* @see app/Http/Controllers/CheckoutController.php:21
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -469,7 +469,7 @@ checkout.url = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:26
+* @see app/Http/Controllers/CheckoutController.php:21
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -480,7 +480,7 @@ checkout.get = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\CheckoutController::checkout
-* @see app/Http/Controllers/CheckoutController.php:26
+* @see app/Http/Controllers/CheckoutController.php:21
 * @param lang - Default: '$lang'
 * @route '/{lang?}/checkout'
 */
@@ -525,7 +525,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:20
+* @see app/Http/Controllers/CatalogController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
@@ -541,7 +541,7 @@ catalog.definition = {
 
 /**
 * @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:20
+* @see app/Http/Controllers/CatalogController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
@@ -573,7 +573,7 @@ catalog.url = (args?: { lang?: string | number } | [lang: string | number ] | st
 
 /**
 * @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:20
+* @see app/Http/Controllers/CatalogController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
@@ -584,7 +584,7 @@ catalog.get = (args?: { lang?: string | number } | [lang: string | number ] | st
 
 /**
 * @see \App\Http\Controllers\CatalogController::catalog
-* @see app/Http/Controllers/CatalogController.php:20
+* @see app/Http/Controllers/CatalogController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
@@ -595,7 +595,7 @@ catalog.head = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\HomeController::home
-* @see app/Http/Controllers/HomeController.php:17
+* @see app/Http/Controllers/HomeController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
@@ -611,7 +611,7 @@ home.definition = {
 
 /**
 * @see \App\Http\Controllers\HomeController::home
-* @see app/Http/Controllers/HomeController.php:17
+* @see app/Http/Controllers/HomeController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
@@ -643,7 +643,7 @@ home.url = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\HomeController::home
-* @see app/Http/Controllers/HomeController.php:17
+* @see app/Http/Controllers/HomeController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
@@ -654,7 +654,7 @@ home.get = (args?: { lang?: string | number } | [lang: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\HomeController::home
-* @see app/Http/Controllers/HomeController.php:17
+* @see app/Http/Controllers/HomeController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}'
 */

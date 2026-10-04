@@ -11,7 +11,7 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
     return (
         <article className="group min-w-0">
             <Link aria-label={t('viewProduct', { name: product.name })} className="block" href={productRoutes.show.url({ lang, product: product.id })}>
-            <div className="relative aspect-4/5 overflow-hidden bg-stone-100">
+            <div className="relative aspect-4/5 overflow-hidden rounded-2xl bg-stone-100">
                 <img alt={product.name} className="size-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" src={product.image} />
                 {product.badge ? <span className="absolute left-3 top-3 text-[9px] font-semibold uppercase tracking-widest text-white">{product.badge}</span> : null}
             </div>

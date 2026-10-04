@@ -1,24 +1,22 @@
+import {usePage} from '@inertiajs/react';
 import ProfileLayout from '@/Layouts/ProfileLayout';
-import { AccountSettings } from '@/Pages/Profile/Components/AccountSettings';
-import { OrderHistory } from '@/Pages/Profile/Components/OrderHistory';
-import { ProfileOverview } from '@/Pages/Profile/Components/ProfileOverview';
-import type { ProfilePageProps } from '@/Pages/Profile/types/ProfileTypes';
+import {OrdersView} from '@/Pages/Profile/Components/OrdersView';
+import type {ProfilePageProps} from '@/Pages/Profile/types/ProfileTypes';
+import {ProfileForm} from "@/Pages/Profile/Components/ProfileForm";
 
-function Profile({ profile }: ProfilePageProps) {
+function Profile({profile}: ProfilePageProps) {
+    const {url} = usePage();
+    const isOrdersView = new URLSearchParams(url.split('?')[1] ?? '').get('section') === 'orders';
+
     return (
         <div className="mx-auto w-full max-w-360 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-            <ProfileOverview
+            {isOrdersView ? <OrdersView orders={profile.orders}/> : <ProfileForm
                 avatarUrl={profile.avatarUrl}
                 email={profile.email}
                 memberSince={profile.memberSince}
                 name={profile.name}
                 stats={profile.stats}
-            />
-
-            <div className="mt-9 space-y-12 sm:mt-12 sm:space-y-14">
-                <OrderHistory orders={profile.orders} />
-                <AccountSettings />
-            </div>
+            />}
         </div>
     );
 }

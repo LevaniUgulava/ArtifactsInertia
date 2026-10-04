@@ -20,6 +20,8 @@ Route::prefix('{lang}')->group(function () {
     Route::post('/favorites/{product}', [FavoritesController::class, 'store'])->middleware('auth:sanctum')->name('favorites.store');
     Route::delete('/favorites/{product}', [FavoritesController::class, 'destroy'])->middleware('auth:sanctum')->name('favorites.destroy');
     Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth:sanctum')->name('profile');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->middleware('auth:sanctum')->name('profile.update');
+
     Route::get('/account', [ProfileController::class, 'show'])->middleware('auth:sanctum')->name('account');
 
     Route::middleware(['auth', 'verified'])->group(function () {

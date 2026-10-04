@@ -33,7 +33,7 @@ export function ProductVariantSelector({ availableSizes, colors, sizes, selected
                     {sizes.map((size) => (
                         <button
                             aria-pressed={selectedSize === size.value}
-                            className={`min-w-10 border px-3 py-2 text-[10px] transition ${selectedSize === size.value ? 'border-amber-700 bg-amber-700 text-white' : 'border-stone-200 text-stone-700 hover:border-stone-500'} ${!availableSizes.includes(size.value) ? 'cursor-not-allowed opacity-40 line-through' : ''}`}
+                            className={`min-w-10 rounded-lg border px-3 py-2 text-[10px] transition ${selectedSize === size.value ? 'border-amber-700 bg-amber-700 text-white' : 'border-stone-200 text-stone-700 hover:border-stone-500'} ${!availableSizes.includes(size.value) ? 'cursor-not-allowed opacity-40 line-through' : ''}`}
                             disabled={!availableSizes.includes(size.value)}
                             key={size.value}
                             onClick={() => onSizeChange(size.value)}

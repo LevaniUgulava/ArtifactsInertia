@@ -11,15 +11,19 @@ export type Order = {
     image: string;
 };
 
-export type OrderHistoryProps = {
-    orders: Order[];
-};
-
 export type ProfileSummary = {
     stats: { label: string; value: number }[];
 };
 
-export type ProfileOverviewProps = {
+export type ProfileFormData = {
+    avatar: File | null;
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+};
+
+export type ProfileFormProps = {
     avatarUrl: string;
     email: string;
     memberSince: string | null;

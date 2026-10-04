@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\FavoritesController::index
-* @see app/Http/Controllers/FavoritesController.php:18
+* @see app/Http/Controllers/FavoritesController.php:20
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites'
 */
@@ -17,7 +17,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\FavoritesController::index
-* @see app/Http/Controllers/FavoritesController.php:18
+* @see app/Http/Controllers/FavoritesController.php:20
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites'
 */
@@ -49,7 +49,7 @@ index.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\FavoritesController::index
-* @see app/Http/Controllers/FavoritesController.php:18
+* @see app/Http/Controllers/FavoritesController.php:20
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites'
 */
@@ -60,7 +60,7 @@ index.get = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\FavoritesController::index
-* @see app/Http/Controllers/FavoritesController.php:18
+* @see app/Http/Controllers/FavoritesController.php:20
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites'
 */
@@ -71,7 +71,7 @@ index.head = (args?: { lang?: string | number } | [lang: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\FavoritesController::store
-* @see app/Http/Controllers/FavoritesController.php:36
+* @see app/Http/Controllers/FavoritesController.php:38
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites/{product}'
 */
@@ -87,7 +87,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\FavoritesController::store
-* @see app/Http/Controllers/FavoritesController.php:36
+* @see app/Http/Controllers/FavoritesController.php:38
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites/{product}'
 */
@@ -118,7 +118,7 @@ store.url = (args: { lang?: string | number, product: string | number } | [lang:
 
 /**
 * @see \App\Http\Controllers\FavoritesController::store
-* @see app/Http/Controllers/FavoritesController.php:36
+* @see app/Http/Controllers/FavoritesController.php:38
 * @param lang - Default: '$lang'
 * @route '/{lang?}/favorites/{product}'
 */

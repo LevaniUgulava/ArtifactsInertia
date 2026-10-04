@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\HomeController::index
-* @see app/Http/Controllers/HomeController.php:17
+* @see app/Http/Controllers/HomeController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
@@ -17,7 +17,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\HomeController::index
-* @see app/Http/Controllers/HomeController.php:17
+* @see app/Http/Controllers/HomeController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
@@ -49,7 +49,7 @@ index.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\HomeController::index
-* @see app/Http/Controllers/HomeController.php:17
+* @see app/Http/Controllers/HomeController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}'
 */
@@ -60,7 +60,7 @@ index.get = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\HomeController::index
-* @see app/Http/Controllers/HomeController.php:17
+* @see app/Http/Controllers/HomeController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}'
 */

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\CartController::store
-* @see app/Http/Controllers/CartController.php:42
+* @see app/Http/Controllers/CartController.php:41
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items'
 */
@@ -17,7 +17,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::store
-* @see app/Http/Controllers/CartController.php:42
+* @see app/Http/Controllers/CartController.php:41
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items'
 */
@@ -49,7 +49,7 @@ store.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\CartController::store
-* @see app/Http/Controllers/CartController.php:42
+* @see app/Http/Controllers/CartController.php:41
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items'
 */
@@ -60,7 +60,7 @@ store.post = (args?: { lang?: string | number } | [lang: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\CartController::update
-* @see app/Http/Controllers/CartController.php:93
+* @see app/Http/Controllers/CartController.php:56
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -76,7 +76,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::update
-* @see app/Http/Controllers/CartController.php:93
+* @see app/Http/Controllers/CartController.php:56
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -109,7 +109,7 @@ update.url = (args: { lang?: string | number, item: number | { id: number } } | 
 
 /**
 * @see \App\Http\Controllers\CartController::update
-* @see app/Http/Controllers/CartController.php:93
+* @see app/Http/Controllers/CartController.php:56
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -120,7 +120,7 @@ update.patch = (args: { lang?: string | number, item: number | { id: number } } 
 
 /**
 * @see \App\Http\Controllers\CartController::destroy
-* @see app/Http/Controllers/CartController.php:116
+* @see app/Http/Controllers/CartController.php:69
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -136,7 +136,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::destroy
-* @see app/Http/Controllers/CartController.php:116
+* @see app/Http/Controllers/CartController.php:69
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -169,7 +169,7 @@ destroy.url = (args: { lang?: string | number, item: number | { id: number } } |
 
 /**
 * @see \App\Http\Controllers\CartController::destroy
-* @see app/Http/Controllers/CartController.php:116
+* @see app/Http/Controllers/CartController.php:69
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
@@ -180,7 +180,7 @@ destroy.delete = (args: { lang?: string | number, item: number | { id: number } 
 
 /**
 * @see \App\Http\Controllers\CartController::save
-* @see app/Http/Controllers/CartController.php:133
+* @see app/Http/Controllers/CartController.php:82
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}/save'
 */
@@ -196,7 +196,7 @@ save.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::save
-* @see app/Http/Controllers/CartController.php:133
+* @see app/Http/Controllers/CartController.php:82
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}/save'
 */
@@ -229,7 +229,7 @@ save.url = (args: { lang?: string | number, item: number | { id: number } } | [l
 
 /**
 * @see \App\Http\Controllers\CartController::save
-* @see app/Http/Controllers/CartController.php:133
+* @see app/Http/Controllers/CartController.php:82
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}/save'
 */

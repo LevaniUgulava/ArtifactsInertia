@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:20
+* @see app/Http/Controllers/CatalogController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
@@ -17,7 +17,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:20
+* @see app/Http/Controllers/CatalogController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
@@ -49,7 +49,7 @@ index.url = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:20
+* @see app/Http/Controllers/CatalogController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */
@@ -60,7 +60,7 @@ index.get = (args?: { lang?: string | number } | [lang: string | number ] | stri
 
 /**
 * @see \App\Http\Controllers\CatalogController::index
-* @see app/Http/Controllers/CatalogController.php:20
+* @see app/Http/Controllers/CatalogController.php:18
 * @param lang - Default: '$lang'
 * @route '/{lang?}/catalog'
 */

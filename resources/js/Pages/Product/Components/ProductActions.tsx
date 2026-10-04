@@ -7,10 +7,10 @@ export function ProductActions({ canAddToCart, addedToCart, wishlisted, processi
 
     return (
         <div className="space-y-3">
-            <button className="w-full bg-[#b58a52] px-4 py-3 text-xs font-semibold text-white transition hover:bg-[#9d7442] disabled:cursor-not-allowed disabled:bg-stone-300" disabled={!canAddToCart || processing} onClick={onAddToCart} type="button">
+            <button className="w-full rounded-lg bg-[#b58a52] px-4 py-3 text-xs font-semibold text-white transition hover:bg-[#9d7442] disabled:cursor-not-allowed disabled:bg-stone-300" disabled={!canAddToCart || processing} onClick={onAddToCart} type="button">
                 {processing ? '…' : (addedToCart ? t('addedToBag') : t('addToBag'))}
             </button>
-            <button aria-pressed={wishlisted} className="flex w-full items-center justify-center gap-2 border border-stone-200 px-4 py-3 text-xs font-semibold text-stone-700 transition hover:border-stone-500" onClick={onWishlist} type="button">
+            <button aria-pressed={wishlisted} className="flex w-full items-center justify-center gap-2 rounded-lg border border-stone-200 px-4 py-3 text-xs font-semibold text-stone-700 transition hover:border-stone-500" onClick={onWishlist} type="button">
                 <HeartIcon aria-hidden="true" fill={wishlisted ? 'currentColor' : 'none'} size={14} />
                 {wishlisted ? t('addedToWishlist') : t('addToWishlist')}
             </button>
