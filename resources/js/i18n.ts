@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 import auth from './locales/en/auth.json';
+import admin from './locales/en/admin.json';
 import catalog from './locales/en/catalog.json';
 import cart from './locales/en/cart.json';
 import checkout from './locales/en/checkout.json';
@@ -13,6 +14,7 @@ import product from './locales/en/product.json';
 import profile from './locales/en/profile.json';
 
 import authKa from './locales/ka/auth.json';
+import adminKa from './locales/ka/admin.json';
 import catalogKa from './locales/ka/catalog.json';
 import cartKa from './locales/ka/cart.json';
 import checkoutKa from './locales/ka/checkout.json';
@@ -26,6 +28,7 @@ import profileKa from './locales/ka/profile.json';
 i18n.use(initReactI18next).init({
     resources: {
         en: {
+            admin,
             auth,
             catalog,
             cart,
@@ -38,6 +41,7 @@ i18n.use(initReactI18next).init({
             profile,
         },
         ka: {
+            admin: adminKa,
             auth: authKa,
             catalog: catalogKa,
             cart: cartKa,

@@ -198,3 +198,9 @@ body {
     @apply font-sans;
     }
 }
+
+@layer components {
+    .admin-input {
+        @apply min-h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-normal text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-600 focus:ring-4 focus:ring-cyan-600/10;
+    }
+}

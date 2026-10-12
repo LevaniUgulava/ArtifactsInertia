@@ -285,7 +285,7 @@ showUpdatePassword.head = (args?: { lang?: string | number } | [lang: string | n
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-export const verifyEmail = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const verifyEmail = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: verifyEmail.url(args, options),
     method: 'get',
 })
@@ -301,7 +301,7 @@ verifyEmail.definition = {
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verifyEmail.url = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions) => {
+verifyEmail.url = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             lang: args[0],
@@ -337,7 +337,7 @@ verifyEmail.url = (args: { lang?: string | number, user: number | { id: number }
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verifyEmail.get = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+verifyEmail.get = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: verifyEmail.url(args, options),
     method: 'get',
 })
@@ -348,7 +348,7 @@ verifyEmail.get = (args: { lang?: string | number, user: number | { id: number }
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verifyEmail.head = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+verifyEmail.head = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: verifyEmail.url(args, options),
     method: 'head',
 })

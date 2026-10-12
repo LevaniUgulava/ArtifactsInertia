@@ -22,3 +22,7 @@ export type ProfileLayoutProps = {
 export type CheckoutLayoutProps = {
     children: ReactNode;
 };
+
+export type AdminLayoutProps = {
+    children: ReactNode;
+};
