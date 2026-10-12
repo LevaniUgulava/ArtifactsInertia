@@ -6,7 +6,7 @@ import type { CollectionBannersProps } from '../types/HomeTypes';
 export function CollectionBanners({ collections }: CollectionBannersProps) {
     const { t } = useTranslation('home');
     const { props } = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const lang = (props.locale as string) ?? 'ka';
 
     const copy = (key: string) => (key === "Women's" ? t('women.title') : t('men.title'));
 

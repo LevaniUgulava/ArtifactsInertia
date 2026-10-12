@@ -6,8 +6,8 @@ import type { SharedPageProps } from '@/types/shared';
 export function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
     const { t } = useTranslation('profile');
     const { props, url } = usePage<SharedPageProps>();
-    const currentLocale = props.locale ?? 'en';
-    const availableLocales = props.availableLocales ?? ['en'];
+    const currentLocale = props.locale ?? 'ka';
+    const availableLocales = props.availableLocales ?? ['en', 'ka'];
 
     const [path, query = ''] = url.replace(/^https?:\/\/[^/]+/, '').split('?');
     const suffix = path.split('/').filter(Boolean).slice(1).join('/');

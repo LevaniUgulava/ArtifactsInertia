@@ -4,7 +4,7 @@ import type { ProductGridProps } from '../types/HomeTypes';
 
 export function ProductGrid({ products }: ProductGridProps) {
     const { props } = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const lang = (props.locale as string) ?? 'ka';
 
     return (
         <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-4 sm:gap-x-5 lg:gap-x-7 2xl:gap-x-10">

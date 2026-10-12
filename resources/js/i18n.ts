@@ -52,7 +52,7 @@ i18n.use(initReactI18next).init({
     },
     ns: ['common'],
     defaultNS: 'common',
-    lng: 'en',
+    lng: 'ka',
     fallbackLng: 'en',
     interpolation: {
         escapeValue: false,

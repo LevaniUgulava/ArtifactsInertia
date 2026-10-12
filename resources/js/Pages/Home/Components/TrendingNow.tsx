@@ -8,7 +8,7 @@ import type {TrendingNowProps} from '../types/HomeTypes';
 export function TrendingNow({products}: TrendingNowProps) {
     const {t} = useTranslation('home');
     const {props} = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const lang = (props.locale as string) ?? 'ka';
 
     return (
         <section className="bg-stone-100" id="trending">

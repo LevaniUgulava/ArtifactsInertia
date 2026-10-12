@@ -6,7 +6,7 @@ import { catalog } from '@/routes';
 export function Hero() {
     const { t } = useTranslation('home');
     const { props } = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const lang = (props.locale as string) ?? 'ka';
 
     return (
         <section className="relative mt-5 max-lg:mt-3 isolate mx-3 min-h-124 overflow-hidden rounded-2xl bg-stone-900 sm:mx-5 sm:min-h-160 lg:mx-8 lg:min-h-176 2xl:mx-12 2xl:min-h-216">

@@ -17,7 +17,7 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         $lang = $request->route('lang');
-        $availableLocales = config('app.available_locales', ['en']);
+        $availableLocales = config('app.available_locales', ['en', 'ka']);
         if ($lang && in_array($lang, $availableLocales, true)) {
             app()->setLocale($lang);
             URL::defaults(['lang' => $lang]);

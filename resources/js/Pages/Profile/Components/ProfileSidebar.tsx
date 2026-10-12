@@ -8,7 +8,7 @@ import type { ProfileSidebarPageProps } from '../types/ProfileTypes';
 export function ProfileSidebar() {
     const { t } = useTranslation('profile');
     const { url, props } = usePage<ProfileSidebarPageProps>();
-    const lang = props.locale ?? 'en';
+    const lang = props.locale ?? 'ka';
     const currentPath = url.split('?')[0];
     const isOrdersView = new URLSearchParams(url.split('?')[1] ?? '').get('section') === 'orders';
 

@@ -5,7 +5,7 @@ import type { HeaderPageProps } from '../types/HeaderTypes';
 export function useHeader() {
     const { props } = usePage<HeaderPageProps>();
     const user = props.auth.user;
-    const lang = props.locale ?? 'en';
+    const lang = props.locale ?? 'ka';
     const activeSearch = props.catalog?.search ?? '';
 
     const [isSearchOpen, setIsSearchOpen] = useState(false);

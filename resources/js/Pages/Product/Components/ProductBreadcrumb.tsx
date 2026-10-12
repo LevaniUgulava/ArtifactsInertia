@@ -6,7 +6,7 @@ import type { ProductBreadcrumbProps } from '../types/ProductTypes';
 export function ProductBreadcrumb({ category, name }: ProductBreadcrumbProps) {
     const { t } = useTranslation('common');
     const { props } = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const lang = (props.locale as string) ?? 'ka';
 
     return (
         <nav aria-label={t('breadcrumb')} className="flex flex-wrap items-center gap-2 text-[10px] text-stone-500">

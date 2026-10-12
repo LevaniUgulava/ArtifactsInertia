@@ -6,7 +6,7 @@ import { cart } from '@/routes';
 export function CheckoutBreadcrumb() {
     const { t } = useTranslation('checkout');
     const { props } = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const lang = (props.locale as string) ?? 'ka';
 
     return (
         <nav aria-label={t('breadcrumbLabel')} className="flex items-center gap-2 text-[10px] text-stone-500">

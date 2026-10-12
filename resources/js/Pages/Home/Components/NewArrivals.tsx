@@ -8,7 +8,7 @@ import type { NewArrivalsProps } from '../types/HomeTypes';
 export function NewArrivals({ products }: NewArrivalsProps) {
     const { t } = useTranslation('home');
     const { props } = usePage();
-    const lang = (props.locale as string) ?? 'en';
+    const lang = (props.locale as string) ?? 'ka';
 
     return (
         <section className="mx-auto max-w-[1920px] px-5 py-14 sm:px-8 sm:py-20 lg:px-12 2xl:px-16 2xl:py-28" id="new-arrivals">
