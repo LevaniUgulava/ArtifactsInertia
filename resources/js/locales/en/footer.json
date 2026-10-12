@@ -1,4 +1,32 @@
 {
+  "intro": "Thoughtful clothing for everyday life — made to be worn often, kept longer, and remembered well.",
+  "shop": {
+    "title": "Shop"
+  },
+  "account": {
+    "title": "Account"
+  },
+  "help": {
+    "title": "Need help?",
+    "description": "Questions about an order, delivery, or a product? Our support team is here to help.",
+    "contact": "Contact support"
+  },
+  "links": {
+    "home": "Home",
+    "shopAll": "Shop all",
+    "favorites": "Favorites",
+    "profile": "My profile",
+    "bag": "Shopping bag",
+    "signIn": "Sign in",
+    "createAccount": "Create account"
+  },
+  "policies": {
+    "privacy": "Privacy",
+    "terms": "Terms & conditions",
+    "shipping": "Shipping & returns"
+  },
+  "copyright": "© {{year}} {{brand}}. All rights reserved.",
+  "footerNote": "Made for everyday wear.",
   "artisanCraftsmanship": {
     "title": "Artisan Craftsmanship",
     "description": "Every piece is curated with materials designed to last beyond a single season."
