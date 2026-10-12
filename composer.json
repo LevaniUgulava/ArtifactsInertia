@@ -11,9 +11,11 @@
         "filament/spatie-laravel-media-library-plugin": "^5.8",
         "inertiajs/inertia-laravel": "^3.3",
         "laravel/framework": "^13.17",
+        "laravel/reverb": "^1.12",
         "laravel/sanctum": "^4.3",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.21",
+        "pusher/pusher-php-server": "*",
         "spatie/laravel-medialibrary": "^11.23"
     },
     "require-dev": {

@@ -98,4 +98,19 @@ class User extends Authenticatable implements MustVerifyEmail
 
         $this->notify(new EmailVerification($verificationUrl));
     }
+
+    public function chats(): HasMany
+    {
+        return $this->hasMany(SupportChat::class, 'user_id');
+    }
+
+    public function operatorChats(): HasMany
+    {
+        return $this->hasMany(SupportChat::class, 'operator_id');
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(SupportMessage::class, 'sender_id');
+    }
 }

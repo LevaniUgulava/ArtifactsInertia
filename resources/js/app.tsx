@@ -3,6 +3,11 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import type { InertiaPage } from './types/app';
+import { configureEcho } from '@laravel/echo-react';
+
+configureEcho({
+    broadcaster: 'reverb',
+});
 
 function syncLocale(page: InertiaPage) {
     const locale = page.props.locale as string | undefined;
