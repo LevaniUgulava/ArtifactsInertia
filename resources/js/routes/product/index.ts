@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:24
+* @see app/Http/Controllers/ProductController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/products/{product}'
 */
@@ -17,7 +17,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:24
+* @see app/Http/Controllers/ProductController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/products/{product}'
 */
@@ -48,7 +48,7 @@ show.url = (args: { lang?: string | number, product: string | number } | [lang: 
 
 /**
 * @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:24
+* @see app/Http/Controllers/ProductController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/products/{product}'
 */
@@ -59,7 +59,7 @@ show.get = (args: { lang?: string | number, product: string | number } | [lang: 
 
 /**
 * @see \App\Http\Controllers\ProductController::show
-* @see app/Http/Controllers/ProductController.php:24
+* @see app/Http/Controllers/ProductController.php:25
 * @param lang - Default: '$lang'
 * @route '/{lang?}/products/{product}'
 */

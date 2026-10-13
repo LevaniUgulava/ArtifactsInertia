@@ -37,7 +37,7 @@ function FilterPanel({ filters, value, onChange, onClear }: CatalogFiltersProps)
                 <div className="grid grid-cols-5 gap-1 text-center text-[10px]">
                     {filters.sizes.map((size) => (
                         <button
-                            className={`border py-2 transition ${value.sizes.includes(size) ? 'border-amber-700 bg-amber-700 text-white' : 'border-stone-200 hover:border-stone-500'}`}
+                            className={`rounded-lg border px-1 py-2 transition ${value.sizes.includes(size) ? 'border-amber-700 bg-amber-700 text-white' : 'border-stone-200 hover:border-stone-500'}`}
                             key={size}
                             onClick={() => toggleValue('sizes', size)}
                             type="button"

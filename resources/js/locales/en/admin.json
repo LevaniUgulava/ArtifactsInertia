@@ -1,5 +1,9 @@
 {
     "title": "Admin overview",
+    "loginTitle": "Admin sign in",
+    "loginDescription": "Sign in with an authorized administrator account to manage ARTIFACTS.",
+    "loginSubmit": "Enter admin panel",
+    "loginProcessing": "Signing in…",
     "navigation": "Admin navigation",
     "dashboard": "Dashboard",
     "products": "Products",

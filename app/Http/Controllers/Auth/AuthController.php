@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -21,6 +22,14 @@ class AuthController extends Controller
     public function showLogin(): Response
     {
         return Inertia::render('Auth/Login');
+    }
+
+    /**
+     * Show the dedicated admin login page.
+     */
+    public function showAdminLogin(): Response
+    {
+        return Inertia::render('Admin/Auth/Login');
     }
 
     /**
@@ -89,6 +98,30 @@ class AuthController extends Controller
         }
 
         return redirect('/');
+    }
+
+    /**
+     * Authenticate an administrator and send them to the admin dashboard.
+     */
+    public function adminLogin(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        if (! $request->user()->hasRole('admin')) {
+            Auth::logout();
+
+            throw ValidationException::withMessages([
+                'email' => __('auth.failed'),
+            ]);
+        }
+
+        $request->session()->regenerate();
+
+        if (! $request->user()->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice')->with('status', 'verification-required');
+        }
+
+        return redirect()->intended(route('admin.dashboard'));
     }
 
     /**

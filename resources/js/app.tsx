@@ -4,7 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import type { InertiaPage } from './types/app';
 import { configureEcho } from '@laravel/echo-react';
-
+import {setUrlDefaults} from "@/wayfinder";
 configureEcho({
     broadcaster: 'reverb',
 });
@@ -32,12 +32,18 @@ createInertiaApp({
     },
     setup({ el, App, props }) {
         syncLocale(props.initialPage);
+        const currentLocale = props.initialPage.props.locale || 'en';
+
 
         const app = (
             <I18nextProvider i18n={i18n}>
                 <App {...props} />
             </I18nextProvider>
         );
+        setUrlDefaults({
+            lang: currentLocale
+        });
+
 
         if (!el) {
             return app;

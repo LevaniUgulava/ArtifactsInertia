@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,10 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'Gucci Demo Admin',
             'email' => 'admin@gucci-demo.test',
         ]);
+        $admin->assignRole(Role::findOrCreate('admin'));
 
         $this->call([
             CatalogSeeder::class,

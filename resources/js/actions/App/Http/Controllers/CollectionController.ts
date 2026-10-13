@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\CollectionController::index
-* @see app/Http/Controllers/CollectionController.php:18
+* @see app/Http/Controllers/CollectionController.php:19
 * @route '/admin/collections'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\CollectionController::index
-* @see app/Http/Controllers/CollectionController.php:18
+* @see app/Http/Controllers/CollectionController.php:19
 * @route '/admin/collections'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\CollectionController::index
-* @see app/Http/Controllers/CollectionController.php:18
+* @see app/Http/Controllers/CollectionController.php:19
 * @route '/admin/collections'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\CollectionController::index
-* @see app/Http/Controllers/CollectionController.php:18
+* @see app/Http/Controllers/CollectionController.php:19
 * @route '/admin/collections'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\CollectionController::create
-* @see app/Http/Controllers/CollectionController.php:28
+* @see app/Http/Controllers/CollectionController.php:29
 * @route '/admin/collections/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -60,7 +60,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\CollectionController::create
-* @see app/Http/Controllers/CollectionController.php:28
+* @see app/Http/Controllers/CollectionController.php:29
 * @route '/admin/collections/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\CollectionController::create
-* @see app/Http/Controllers/CollectionController.php:28
+* @see app/Http/Controllers/CollectionController.php:29
 * @route '/admin/collections/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -79,7 +79,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\CollectionController::create
-* @see app/Http/Controllers/CollectionController.php:28
+* @see app/Http/Controllers/CollectionController.php:29
 * @route '/admin/collections/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -89,7 +89,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\CollectionController::store
-* @see app/Http/Controllers/CollectionController.php:33
+* @see app/Http/Controllers/CollectionController.php:34
 * @route '/admin/collections'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -104,7 +104,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\CollectionController::store
-* @see app/Http/Controllers/CollectionController.php:33
+* @see app/Http/Controllers/CollectionController.php:34
 * @route '/admin/collections'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -113,7 +113,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\CollectionController::store
-* @see app/Http/Controllers/CollectionController.php:33
+* @see app/Http/Controllers/CollectionController.php:34
 * @route '/admin/collections'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -123,10 +123,10 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\CollectionController::edit
-* @see app/Http/Controllers/CollectionController.php:40
+* @see app/Http/Controllers/CollectionController.php:41
 * @route '/admin/collections/{collection}/edit'
 */
-export const edit = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const edit = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -138,10 +138,10 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\CollectionController::edit
-* @see app/Http/Controllers/CollectionController.php:40
+* @see app/Http/Controllers/CollectionController.php:41
 * @route '/admin/collections/{collection}/edit'
 */
-edit.url = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+edit.url = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { collection: args }
     }
@@ -171,30 +171,30 @@ edit.url = (args: { collection: number | { id: number } } | [collection: number 
 
 /**
 * @see \App\Http\Controllers\CollectionController::edit
-* @see app/Http/Controllers/CollectionController.php:40
+* @see app/Http/Controllers/CollectionController.php:41
 * @route '/admin/collections/{collection}/edit'
 */
-edit.get = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+edit.get = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
 
 /**
 * @see \App\Http\Controllers\CollectionController::edit
-* @see app/Http/Controllers/CollectionController.php:40
+* @see app/Http/Controllers/CollectionController.php:41
 * @route '/admin/collections/{collection}/edit'
 */
-edit.head = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+edit.head = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: edit.url(args, options),
     method: 'head',
 })
 
 /**
 * @see \App\Http\Controllers\CollectionController::update
-* @see app/Http/Controllers/CollectionController.php:45
+* @see app/Http/Controllers/CollectionController.php:46
 * @route '/admin/collections/{collection}'
 */
-export const update = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -206,10 +206,10 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\CollectionController::update
-* @see app/Http/Controllers/CollectionController.php:45
+* @see app/Http/Controllers/CollectionController.php:46
 * @route '/admin/collections/{collection}'
 */
-update.url = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+update.url = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { collection: args }
     }
@@ -239,30 +239,30 @@ update.url = (args: { collection: number | { id: number } } | [collection: numbe
 
 /**
 * @see \App\Http\Controllers\CollectionController::update
-* @see app/Http/Controllers/CollectionController.php:45
+* @see app/Http/Controllers/CollectionController.php:46
 * @route '/admin/collections/{collection}'
 */
-update.put = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
 
 /**
 * @see \App\Http\Controllers\CollectionController::update
-* @see app/Http/Controllers/CollectionController.php:45
+* @see app/Http/Controllers/CollectionController.php:46
 * @route '/admin/collections/{collection}'
 */
-update.patch = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+update.patch = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: update.url(args, options),
     method: 'patch',
 })
 
 /**
 * @see \App\Http\Controllers\CollectionController::destroy
-* @see app/Http/Controllers/CollectionController.php:52
+* @see app/Http/Controllers/CollectionController.php:53
 * @route '/admin/collections/{collection}'
 */
-export const destroy = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -274,10 +274,10 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\CollectionController::destroy
-* @see app/Http/Controllers/CollectionController.php:52
+* @see app/Http/Controllers/CollectionController.php:53
 * @route '/admin/collections/{collection}'
 */
-destroy.url = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { collection: args }
     }
@@ -307,10 +307,10 @@ destroy.url = (args: { collection: number | { id: number } } | [collection: numb
 
 /**
 * @see \App\Http\Controllers\CollectionController::destroy
-* @see app/Http/Controllers/CollectionController.php:52
+* @see app/Http/Controllers/CollectionController.php:53
 * @route '/admin/collections/{collection}'
 */
-destroy.delete = (args: { collection: number | { id: number } } | [collection: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { collection: string | number | { id: string | number } } | [collection: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })

@@ -1,7 +1,7 @@
 export const brand = {
     name: 'ARTIFACTS',
     tagline: 'WEAR A BETTER STORY',
-    markSrc: '/branding/artifacts-mark.png',
+    markSrc: '/branding/artifacts-mark1.png',
     wordmarkSrc: '/branding/artifacts-wordmark.svg',
 } as const;
 

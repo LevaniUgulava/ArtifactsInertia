@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\AuthController::notice
-* @see app/Http/Controllers/Auth/AuthController.php:37
+* @see app/Http/Controllers/Auth/AuthController.php:45
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification'
 */
@@ -17,7 +17,7 @@ notice.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::notice
-* @see app/Http/Controllers/Auth/AuthController.php:37
+* @see app/Http/Controllers/Auth/AuthController.php:45
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification'
 */
@@ -49,7 +49,7 @@ notice.url = (args?: { lang?: string | number } | [lang: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::notice
-* @see app/Http/Controllers/Auth/AuthController.php:37
+* @see app/Http/Controllers/Auth/AuthController.php:45
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification'
 */
@@ -60,7 +60,7 @@ notice.get = (args?: { lang?: string | number } | [lang: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::notice
-* @see app/Http/Controllers/Auth/AuthController.php:37
+* @see app/Http/Controllers/Auth/AuthController.php:45
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification'
 */
@@ -71,11 +71,11 @@ notice.head = (args?: { lang?: string | number } | [lang: string | number ] | st
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::verify
-* @see app/Http/Controllers/Auth/AuthController.php:97
+* @see app/Http/Controllers/Auth/AuthController.php:129
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-export const verify = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const verify = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: verify.url(args, options),
     method: 'get',
 })
@@ -87,11 +87,11 @@ verify.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::verify
-* @see app/Http/Controllers/Auth/AuthController.php:97
+* @see app/Http/Controllers/Auth/AuthController.php:129
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verify.url = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions) => {
+verify.url = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             lang: args[0],
@@ -123,29 +123,29 @@ verify.url = (args: { lang?: string | number, user: number | { id: number }, has
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::verify
-* @see app/Http/Controllers/Auth/AuthController.php:97
+* @see app/Http/Controllers/Auth/AuthController.php:129
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verify.get = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+verify.get = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: verify.url(args, options),
     method: 'get',
 })
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::verify
-* @see app/Http/Controllers/Auth/AuthController.php:97
+* @see app/Http/Controllers/Auth/AuthController.php:129
 * @param lang - Default: '$lang'
 * @route '/{lang?}/verification/verify/{user}/{hash}'
 */
-verify.head = (args: { lang?: string | number, user: number | { id: number }, hash: string | number } | [lang: string | number, user: number | { id: number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+verify.head = (args: { lang?: string | number, user: string | number | { id: string | number }, hash: string | number } | [lang: string | number, user: string | number | { id: string | number }, hash: string | number ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: verify.url(args, options),
     method: 'head',
 })
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::send
-* @see app/Http/Controllers/Auth/AuthController.php:116
+* @see app/Http/Controllers/Auth/AuthController.php:148
 * @route '/verification-notification'
 */
 export const send = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -160,7 +160,7 @@ send.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::send
-* @see app/Http/Controllers/Auth/AuthController.php:116
+* @see app/Http/Controllers/Auth/AuthController.php:148
 * @route '/verification-notification'
 */
 send.url = (options?: RouteQueryOptions) => {
@@ -169,7 +169,7 @@ send.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::send
-* @see app/Http/Controllers/Auth/AuthController.php:116
+* @see app/Http/Controllers/Auth/AuthController.php:148
 * @route '/verification-notification'
 */
 send.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({

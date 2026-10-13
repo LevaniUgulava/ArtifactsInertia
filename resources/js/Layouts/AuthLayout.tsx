@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BrandLockup } from '@/Components/Brand/Brand';
@@ -54,9 +54,9 @@ export default function AuthLayout({
                         {footerPrompt && footerAction && (
                             <div className="mt-6 border-t border-slate-200 pt-5 text-center">
                                 <p className="text-sm text-slate-500">{footerPrompt}</p>
-                                <a className="mt-2 inline-block text-sm font-semibold text-amber-700 hover:underline" href={footerActionHref}>
+                                <Link className="mt-2 inline-block text-sm font-semibold text-amber-700 hover:underline" href={footerActionHref}>
                                     {footerAction}
-                                </a>
+                                </Link>
                             </div>
                         )}
 

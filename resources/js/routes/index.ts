@@ -211,7 +211,7 @@ login.head = (args?: { lang?: string | number } | [lang: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::register
-* @see app/Http/Controllers/Auth/AuthController.php:29
+* @see app/Http/Controllers/Auth/AuthController.php:37
 * @param lang - Default: '$lang'
 * @route '/{lang?}/register'
 */
@@ -227,7 +227,7 @@ register.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::register
-* @see app/Http/Controllers/Auth/AuthController.php:29
+* @see app/Http/Controllers/Auth/AuthController.php:37
 * @param lang - Default: '$lang'
 * @route '/{lang?}/register'
 */
@@ -259,7 +259,7 @@ register.url = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::register
-* @see app/Http/Controllers/Auth/AuthController.php:29
+* @see app/Http/Controllers/Auth/AuthController.php:37
 * @param lang - Default: '$lang'
 * @route '/{lang?}/register'
 */
@@ -270,7 +270,7 @@ register.get = (args?: { lang?: string | number } | [lang: string | number ] | s
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::register
-* @see app/Http/Controllers/Auth/AuthController.php:29
+* @see app/Http/Controllers/Auth/AuthController.php:37
 * @param lang - Default: '$lang'
 * @route '/{lang?}/register'
 */
@@ -281,7 +281,7 @@ register.head = (args?: { lang?: string | number } | [lang: string | number ] | 
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::logout
-* @see app/Http/Controllers/Auth/AuthController.php:126
+* @see app/Http/Controllers/Auth/AuthController.php:158
 * @route '/logout'
 */
 export const logout = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -296,7 +296,7 @@ logout.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::logout
-* @see app/Http/Controllers/Auth/AuthController.php:126
+* @see app/Http/Controllers/Auth/AuthController.php:158
 * @route '/logout'
 */
 logout.url = (options?: RouteQueryOptions) => {
@@ -305,7 +305,7 @@ logout.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::logout
-* @see app/Http/Controllers/Auth/AuthController.php:126
+* @see app/Http/Controllers/Auth/AuthController.php:158
 * @route '/logout'
 */
 logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({

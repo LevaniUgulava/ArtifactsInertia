@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Models\User;
 
 it('renders every admin catalog destination for a verified user', function (string $uri, string $component) {
-    $user = User::factory()->create();
+    $user = User::factory()->admin()->create();
 
     $this->actingAs($user)
         ->get($uri)
@@ -19,7 +19,7 @@ it('renders every admin catalog destination for a verified user', function (stri
 ]);
 
 it('creates a category from the admin form', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->admin()->create();
 
     $this->actingAs($user)
         ->post('/admin/categories', ['name' => 'Outerwear'])
@@ -29,7 +29,7 @@ it('creates a category from the admin form', function () {
 });
 
 it('creates a collection and synchronizes its products', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->admin()->create();
     $product = Product::factory()->create();
 
     $this->actingAs($user)
@@ -46,7 +46,7 @@ it('creates a collection and synchronizes its products', function () {
 });
 
 it('creates a product with a variant and category assignment', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->admin()->create();
     $category = Category::create(['name' => 'Tops']);
 
     $this->actingAs($user)

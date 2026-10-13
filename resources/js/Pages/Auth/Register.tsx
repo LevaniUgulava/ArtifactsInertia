@@ -44,7 +44,7 @@ export default function Register() {
             <AuthInput
                 autoComplete="email"
                 error={form.errors.email}
-                label={t('email')}
+                label={t('common:email')}
                 name="email"
                 onBlur={() => form.validate('email')}
                 onChange={(e) => form.setData('email', e.target.value)}
@@ -56,7 +56,7 @@ export default function Register() {
             <AuthInput
                 autoComplete="new-password"
                 error={form.errors.password}
-                label={t('password')}
+                label={t('common:password')}
                 name="password"
                 onBlur={() => form.validate('password')}
                 onChange={(e) => form.setData('password', e.target.value)}
@@ -68,7 +68,7 @@ export default function Register() {
             <AuthInput
                 autoComplete="new-password"
                 error={form.errors.password_confirmation}
-                label={t('passwordConfirmation')}
+                label={t('common:passwordConfirmation')}
                 name="password_confirmation"
                 onBlur={() => form.validate('password_confirmation')}
                 onChange={(e) => form.setData('password_confirmation', e.target.value)}

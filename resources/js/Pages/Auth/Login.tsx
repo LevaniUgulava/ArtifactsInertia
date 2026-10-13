@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/react';
+import {Link, useForm} from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AuthLayout from '@/Layouts/AuthLayout';
 import { AuthInput } from '@/Components/Auth/AuthInput';
@@ -31,7 +31,7 @@ export default function Login() {
             <AuthInput
                 autoComplete="email"
                 error={form.errors.email}
-                label={t('email')}
+                label={t('common:email')}
                 name="email"
                 onBlur={() => form.validate('email')}
                 onChange={(e) => form.setData('email', e.target.value)}
@@ -43,7 +43,7 @@ export default function Login() {
             <AuthInput
                 autoComplete="current-password"
                 error={form.errors.password}
-                label={t('password')}
+                label={t('common:password')}
                 name="password"
                 onBlur={() => form.validate('password')}
                 onChange={(e) => form.setData('password', e.target.value)}
@@ -54,9 +54,9 @@ export default function Login() {
             />
 
             <div className="flex justify-end">
-                <a className="text-sm text-amber-700 hover:underline" href={password.update.url()}>
-                    {t('forgotPassword')}
-                </a>
+                <Link className="text-sm text-amber-700 hover:underline" href={password.update.url()}>
+                    {t('common:forgotPassword')}
+                </Link>
             </div>
 
             <button

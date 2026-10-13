@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\AuthController::update
-* @see app/Http/Controllers/Auth/AuthController.php:47
+* @see app/Http/Controllers/Auth/AuthController.php:55
 * @param lang - Default: '$lang'
 * @route '/{lang?}/password/update'
 */
@@ -17,7 +17,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::update
-* @see app/Http/Controllers/Auth/AuthController.php:47
+* @see app/Http/Controllers/Auth/AuthController.php:55
 * @param lang - Default: '$lang'
 * @route '/{lang?}/password/update'
 */
@@ -49,7 +49,7 @@ update.url = (args?: { lang?: string | number } | [lang: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::update
-* @see app/Http/Controllers/Auth/AuthController.php:47
+* @see app/Http/Controllers/Auth/AuthController.php:55
 * @param lang - Default: '$lang'
 * @route '/{lang?}/password/update'
 */
@@ -60,7 +60,7 @@ update.get = (args?: { lang?: string | number } | [lang: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::update
-* @see app/Http/Controllers/Auth/AuthController.php:47
+* @see app/Http/Controllers/Auth/AuthController.php:55
 * @param lang - Default: '$lang'
 * @route '/{lang?}/password/update'
 */

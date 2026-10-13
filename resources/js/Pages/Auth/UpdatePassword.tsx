@@ -14,8 +14,8 @@ export default function UpdatePassword() {
             footerPrompt={t('updatePassword.footerPrompt')}
             title={t('updatePassword.title')}
         >
-            <AuthInput autoComplete="new-password" label={t('password')} name="password" placeholder="••••••••" type="password" />
-            <AuthInput autoComplete="new-password" label={t('passwordConfirmation')} name="password_confirmation" placeholder="••••••••" type="password" />
+            <AuthInput autoComplete="new-password" label={t('common:password')} name="password" placeholder="••••••••" type="password" />
+            <AuthInput autoComplete="new-password" label={t('common:passwordConfirmation')} name="password_confirmation" placeholder="••••••••" type="password" />
 
             <button className="min-h-16 w-full rounded-md bg-[#bb915b] px-5 text-base font-semibold text-white transition hover:bg-[#a77e4c]" type="submit">
                 {t('updatePassword.submit')}
