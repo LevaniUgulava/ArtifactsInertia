@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Database\Factories\SupportMessageFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,6 +13,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['support_chat_id', 'sender_id', 'message', 'image_urls'])]
 class SupportMessage extends Model
 {
+    /** @use HasFactory<SupportMessageFactory> */
+    use HasFactory;
+
     protected function casts(): array
     {
         return [

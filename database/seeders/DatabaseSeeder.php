@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CatalogSeeder::class,
             DeliveryTypeSeeder::class,
             PromoCodeSeeder::class,
+            SupportChatSeeder::class,
         ]);
     }
 }

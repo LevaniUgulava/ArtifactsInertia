@@ -1,12 +1,13 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
 import loginDf2c2a from './login'
+import chat from './chat'
 import products from './products'
 import categories from './categories'
 import collections from './collections'
 import media from './media'
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
-* @see app/Http/Controllers/Auth/AuthController.php:29
+* @see app/Http/Controllers/Auth/AuthController.php:30
 * @route '/admin/login'
 */
 export const login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -21,7 +22,7 @@ login.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
-* @see app/Http/Controllers/Auth/AuthController.php:29
+* @see app/Http/Controllers/Auth/AuthController.php:30
 * @route '/admin/login'
 */
 login.url = (options?: RouteQueryOptions) => {
@@ -30,7 +31,7 @@ login.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
-* @see app/Http/Controllers/Auth/AuthController.php:29
+* @see app/Http/Controllers/Auth/AuthController.php:30
 * @route '/admin/login'
 */
 login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -40,7 +41,7 @@ login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
-* @see app/Http/Controllers/Auth/AuthController.php:29
+* @see app/Http/Controllers/Auth/AuthController.php:30
 * @route '/admin/login'
 */
 login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -200,6 +201,7 @@ const admin = {
     login: Object.assign(login, loginDf2c2a),
     index: Object.assign(index, index),
     dashboard: Object.assign(dashboard, dashboard),
+    chat: Object.assign(chat, chat),
     products: Object.assign(products, products),
     categories: Object.assign(categories, categories),
     collections: Object.assign(collections, collections),

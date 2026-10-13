@@ -1,5 +1,5 @@
 import {Link, usePage} from '@inertiajs/react';
-import {ChevronRight, FolderKanban, Images, LayoutDashboard, LogOut, Package, Tags} from 'lucide-react';
+import {ChevronRight, FolderKanban, Images, LayoutDashboard, LogOut, MessagesSquare, Package, Tags} from 'lucide-react';
 import {useTranslation} from 'react-i18next';
 import {BrandLockup} from "@/Components/Brand/Brand";
 import admin from "@/routes/admin";
@@ -19,6 +19,7 @@ export function AdminSidebar() {
         {icon: Tags, label: 'categories', href: admin.categories.index.url()},
         {icon: FolderKanban, label: 'collections', href: admin.collections.index.url()},
         {icon: Images, label: 'media', href: admin.media.index.url()},
+        {icon: MessagesSquare, label: 'chat', href: admin.chat.index.url()},
     ];
     const [isOpen, setIsOpen] = useState(false);
 

@@ -10,6 +10,7 @@
     "categories": "Categories",
     "collections": "Collections",
     "media": "Media",
+    "chat": "Support chat",
     "search": "Search the admin panel",
     "dateRange": "Last 30 days",
     "catalogHealth": "Catalog health",
@@ -24,5 +25,19 @@
     "noProducts": "No products have been added yet.",
     "catalogManagement": "Catalog management",
     "catalogManagementDescription": "Products, variants, collections, and media will be available here as each admin section is enabled.",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "chatDescription": "Review customer conversations and reply from one place.",
+    "chatInbox": "Conversations",
+    "chatEmpty": "No support conversations yet.",
+    "chatSelect": "Select a conversation to view its history.",
+    "chatNoMessages": "No messages yet.",
+    "chatPending": "Pending",
+    "chatOpen": "Open",
+    "chatClosed": "Closed",
+    "chatClose": "Close conversation",
+    "chatCloseTitle": "Close conversation?",
+    "cancel": "Cancel",
+    "chatCloseConfirm": "Close this conversation?",
+    "chatPlaceholder": "Write a reply…",
+    "chatSend": "Send reply"
 }

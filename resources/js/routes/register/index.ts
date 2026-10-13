@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\AuthController::submit
-* @see app/Http/Controllers/Auth/AuthController.php:71
+* @see app/Http/Controllers/Auth/AuthController.php:72
 * @route '/register'
 */
 export const submit = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ submit.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::submit
-* @see app/Http/Controllers/Auth/AuthController.php:71
+* @see app/Http/Controllers/Auth/AuthController.php:72
 * @route '/register'
 */
 submit.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ submit.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\AuthController::submit
-* @see app/Http/Controllers/Auth/AuthController.php:71
+* @see app/Http/Controllers/Auth/AuthController.php:72
 * @route '/register'
 */
 submit.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({

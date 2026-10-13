@@ -1,5 +1,6 @@
 import Auth from './Auth'
 import DashboardController from './DashboardController'
+import ChatController from './ChatController'
 import ProductController from './ProductController'
 import CategoryController from './CategoryController'
 import CollectionController from './CollectionController'
@@ -14,6 +15,7 @@ import CheckoutController from './CheckoutController'
 const Controllers = {
     Auth: Object.assign(Auth, Auth),
     DashboardController: Object.assign(DashboardController, DashboardController),
+    ChatController: Object.assign(ChatController, ChatController),
     ProductController: Object.assign(ProductController, ProductController),
     CategoryController: Object.assign(CategoryController, CategoryController),
     CollectionController: Object.assign(CollectionController, CollectionController),

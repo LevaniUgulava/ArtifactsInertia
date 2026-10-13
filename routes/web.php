@@ -13,3 +13,4 @@ require __DIR__.'/web/cart.php';
 require __DIR__.'/web/favorites.php';
 require __DIR__.'/web/profile.php';
 require __DIR__.'/web/checkout.php';
+require __DIR__.'/web/chat.php';

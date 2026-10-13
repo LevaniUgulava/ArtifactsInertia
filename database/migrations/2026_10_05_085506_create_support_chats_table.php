@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('operator_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->string('status')->default('open');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
