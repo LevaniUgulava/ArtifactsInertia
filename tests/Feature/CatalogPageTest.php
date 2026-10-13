@@ -13,14 +13,14 @@ it('renders the public catalog page with all products when no collection filter 
             ->has('catalog.products', 6)
             ->has('catalog.filters.categories', 5)
             ->where('catalog.pagination.currentPage', 1)
-            ->where('catalog.pagination.total', 7));
+            ->where('catalog.pagination.total', 6));
 });
 
 it('renders catalog filtered by collection slug', function () {
-    $this->get('/en/catalog?collection=womens')
+    $this->get('/en/catalog?collection=gucci-edit')
         ->assertInertia(fn ($page) => $page
             ->component('Catalog/Catalog')
-            ->where('catalog.collection.name', "Women's")
+            ->where('catalog.collection.name', 'Gucci Edit')
             ->has('catalog.products', 4));
 });
 
@@ -45,10 +45,10 @@ it('filters products by size', function () {
 });
 
 it('filters products by collection from the sidebar', function () {
-    $this->get('/en/catalog?collection[]=mens')
+    $this->get('/en/catalog?collection[]=trending-now')
         ->assertInertia(fn ($page) => $page
             ->where('catalog.collection.name', '')
-            ->where('catalog.activeFilters.collections', ['mens'])
+            ->where('catalog.activeFilters.collections', ['trending-now'])
             ->where('catalog.pagination.total', 3));
 });
 
@@ -60,11 +60,11 @@ it('falls back to safe catalog defaults for unsupported query state', function (
 });
 
 it('filters products by search query', function () {
-    $this->get('/en/catalog?q=camel')
+    $this->get('/en/catalog?q=emerald')
         ->assertInertia(fn ($page) => $page
-            ->where('catalog.search', 'camel')
+            ->where('catalog.search', 'emerald')
             ->where('catalog.pagination.total', 1)
-            ->where('catalog.products.0.name', 'Belted Camel Trench'));
+            ->where('catalog.products.0.name', 'GG Emerald Silk Dress'));
 });
 
 it('returns no products for an unmatched search query', function () {

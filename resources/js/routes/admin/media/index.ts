@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../wayfinder'
 /**
-* @see \App\Http\Controllers\Admin\MediaController::index
-* @see app/Http/Controllers/Admin/MediaController.php:12
+* @see \App\Http\Controllers\MediaController::index
+* @see app/Http/Controllers/MediaController.php:13
 * @route '/admin/media'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +15,8 @@ index.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Admin\MediaController::index
-* @see app/Http/Controllers/Admin/MediaController.php:12
+* @see \App\Http\Controllers\MediaController::index
+* @see app/Http/Controllers/MediaController.php:13
 * @route '/admin/media'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -24,8 +24,8 @@ index.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Admin\MediaController::index
-* @see app/Http/Controllers/Admin/MediaController.php:12
+* @see \App\Http\Controllers\MediaController::index
+* @see app/Http/Controllers/MediaController.php:13
 * @route '/admin/media'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,8 +34,8 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Admin\MediaController::index
-* @see app/Http/Controllers/Admin/MediaController.php:12
+* @see \App\Http\Controllers\MediaController::index
+* @see app/Http/Controllers/MediaController.php:13
 * @route '/admin/media'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

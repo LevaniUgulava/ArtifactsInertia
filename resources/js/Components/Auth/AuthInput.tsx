@@ -22,7 +22,7 @@ export function AuthInput({ error, id, label, name, valid = false, ...inputProps
                     {...inputProps}
                     aria-describedby={errorId}
                     aria-invalid={Boolean(error)}
-                    className={`min-h-14 w-full rounded-none border bg-white px-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-amber-700 focus:ring-2 focus:ring-amber-700/20 ${
+                    className={`min-h-12 w-full rounded-md border bg-white px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-amber-700 focus:ring-2 focus:ring-amber-700/20 ${
                         showIcon ? 'pr-10' : ''
                     } ${borderClass}`}
                     id={inputId}

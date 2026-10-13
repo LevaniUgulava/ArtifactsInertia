@@ -5,15 +5,15 @@ use Database\Seeders\CatalogSeeder;
 beforeEach(fn () => $this->seed(CatalogSeeder::class));
 
 it('renders the public product detail page', function () {
-    $this->get('/en/products/cashmere-wrap-coat')
+    $this->get('/en/products/gg-wool-wrap-coat')
         ->assertInertia(fn ($page) => $page
             ->component('Product/Product')
-            ->where('product.slug', 'cashmere-wrap-coat')
-            ->where('product.name', 'Cashmere Wrap Coat')
-            ->has('product.images', 4)
-            ->has('product.colors', 4)
+            ->where('product.slug', 'gg-wool-wrap-coat')
+            ->where('product.name', 'GG Wool Wrap Coat')
+            ->has('product.images', 1)
+            ->has('product.colors', 2)
             ->has('product.colors.0.availableSizes')
-            ->has('product.sizes', 5)
+            ->has('product.sizes', 4)
         );
 });
 

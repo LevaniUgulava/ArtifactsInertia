@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CollectionController;
-use App\Http\Controllers\Admin\MediaController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ProductController;
 
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'verified'])
     ->group(function (): void {
-        Route::get('/', AdminDashboardController::class)->name('dashboard');
+        Route::get('/', DashboardController::class)->name('dashboard');
         Route::resource('products', ProductController::class)->except(['show']);
         Route::resource('categories', CategoryController::class)->except(['show']);
         Route::resource('collections', CollectionController::class)->except(['show']);

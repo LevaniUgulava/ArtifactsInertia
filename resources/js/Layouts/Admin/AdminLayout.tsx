@@ -3,7 +3,7 @@ import { Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { brandTitle } from '@/constants/brand';
 import type { AdminLayoutProps } from '@/types/layouts';
-import { AdminSidebar } from './AdminSidebar';
+import { AdminSidebar } from './AdminSidebar/AdminSidebar';
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
     const { t } = useTranslation('admin');

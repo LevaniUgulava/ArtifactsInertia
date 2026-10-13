@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Collection as ProductCollection;
 use App\Models\Product;
-use App\Models\Variant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -16,123 +15,118 @@ class CatalogSeeder extends Seeder
 
     public function run(): void
     {
-        $categories = collect(['Dresses', 'Outerwear', 'Tops', 'Knitwear', 'Bottoms'])
-            ->mapWithKeys(fn (string $name): array => [$name => Category::firstOrCreate(['name' => $name])]);
+        $categories = collect(['Dresses', 'Outerwear', 'Tops', 'Accessories', 'Shoes'])
+            ->mapWithKeys(fn (string $name): array => [$name => Category::create(['name' => $name])]);
 
         $collections = collect([
-            ['name' => 'Essentials', 'image' => '/storage/catalog/frock-coat.jpg'],
-            ['name' => "Women's", 'image' => '/storage/catalog/dress.jpg'],
-            ['name' => "Men's", 'image' => '/storage/catalog/evening-coat.jpg'],
-            ['name' => 'Fall/Winter Collection', 'image' => '/storage/catalog/summer-dress.jpg'],
+            ['name' => 'Gucci Edit', 'image' => '/storage/catalog/gucci-fashion-look.jpg'],
+            ['name' => 'Trending Now', 'image' => '/storage/catalog/gucci-pink-evening.jpg'],
+            ['name' => 'House Signatures', 'image' => '/storage/catalog/gucci-black-evening.jpg'],
+            ['name' => 'The Evening Edit', 'image' => '/storage/catalog/gucci-dress-coat.jpg'],
         ])->mapWithKeys(function (array $data): array {
-            $collection = ProductCollection::updateOrCreate(['slug' => Str::slug($data['name'])], $data);
+            $collection = ProductCollection::create([
+                'name' => $data['name'],
+                'slug' => Str::slug($data['name']),
+                'image' => $data['image'],
+            ]);
 
             return [$data['name'] => $collection];
         });
 
-        $products = $this->productDefinitions();
+        foreach ($this->productDefinitions() as $definition) {
+            $product = Product::create([
+                'spu' => $definition['spu'],
+                'slug' => $definition['slug'],
+                'name' => $definition['name'],
+                'eyebrow' => $definition['eyebrow'],
+                'description' => $definition['description'],
+                'badge' => $definition['badge'],
+                'sex' => $definition['sex'],
+                'benefits' => $definition['benefits'],
+                'details' => $definition['details'],
+            ]);
 
-        foreach ($products as $definition) {
-            $product = Product::updateOrCreate(
-                ['slug' => $definition['slug']],
-                [
-                    'spu' => Str::upper(Str::substr(Str::slug($definition['slug'], ''), 0, 12)),
-                    'name' => $definition['name'],
-                    'eyebrow' => $definition['eyebrow'],
-                    'description' => $definition['description'],
-                    'badge' => $definition['badge'] ?? null,
-                    'sex' => $definition['sex'] ?? 'unisex',
-                    'benefits' => $definition['benefits'],
-                    'details' => $definition['details'],
-                ],
+            $product->categories()->attach($categories[$definition['category']]);
+            $product->collections()->attach(
+                collect($definition['collections'])
+                    ->map(fn (string $name): int => $collections[$name]->id)
+                    ->all(),
             );
-
-            $product->categories()->sync([$categories[$definition['category']]->id]);
-            $product->collections()->sync(collect($definition['collections'])->map(fn (string $name): int => $collections[$name]->id));
-            $product->variants()
-                ->whereNotIn('size', $definition['sizes'])
-                ->get()
-                ->each(function (Variant $variant): void {
-                    $variant->clearMediaCollection('images');
-                    $variant->delete();
-                });
 
             foreach ($definition['colors'] as $color) {
                 foreach ($definition['sizes'] as $size) {
-                    $variant = $product->variants()->updateOrCreate(
-                        ['color' => $color['value'], 'size' => $size],
-                        [
-                            'sku' => Str::upper("{$definition['slug']}-{$color['value']}-{$size}"),
-                            'color_label' => $color['label'],
-                            'color_hex' => $color['hex'],
-                            'price' => $definition['price'],
-                            'stock' => 10,
-                        ],
-                    );
+                    $variant = $product->variants()->create([
+                        'sku' => "GG-{$definition['spu']}-{$color['value']}-{$size}",
+                        'color' => $color['value'],
+                        'color_label' => $color['label'],
+                        'color_hex' => $color['hex'],
+                        'size' => $size,
+                        'price' => $definition['price'],
+                        'stock' => 12,
+                    ]);
 
-                    $this->seedVariantImages($variant, $definition['images'], $product->name);
+                    $variant->addMedia($definition['image'])
+                        ->preservingOriginal()
+                        ->usingName($product->name)
+                        ->withCustomProperties(['alt' => $product->name])
+                        ->toMediaCollection('images');
                 }
             }
         }
     }
 
-    /** @param list<string> $imageUrls */
-    private function seedVariantImages(Variant $variant, array $imageUrls, string $productName): void
-    {
-        $variant->clearMediaCollection('images');
-
-        foreach ($imageUrls as $order => $imageUrl) {
-            $variant->addMedia($imageUrl)
-                ->preservingOriginal()
-                ->usingName($productName)
-                ->withCustomProperties(['alt' => $productName])
-                ->setOrder($order + 1)
-                ->toMediaCollection('images');
-        }
-    }
-
-    /** @return list<array<string, mixed>> */
+    /**
+     * @return list<array<string, mixed>>
+     */
     private function productDefinitions(): array
     {
-        $images = [
-            storage_path('app/public/catalog/frock-coat.jpg'),
-            storage_path('app/public/catalog/evening-coat.jpg'),
-            storage_path('app/public/catalog/blouse.jpg'),
-            storage_path('app/public/catalog/work-blouse.jpg'),
-        ];
-        $localImages = [
-            'overcoat' => storage_path('app/public/catalog/evening-coat.jpg'),
-            'blouse' => storage_path('app/public/catalog/blouse.jpg'),
-            'turtleneck' => storage_path('app/public/catalog/work-blouse.jpg'),
-            'blazer' => storage_path('app/public/catalog/frock-coat.jpg'),
-            'skirt' => storage_path('app/public/catalog/dress.jpg'),
-            'trench' => storage_path('app/public/catalog/evening-coat.jpg'),
-        ];
         $benefits = [
             ['label' => 'Complimentary shipping on orders over $500', 'icon' => 'truck'],
             ['label' => 'Free returns within 30 days', 'icon' => 'rotate'],
             ['label' => 'Authenticity guaranteed', 'icon' => 'shield'],
         ];
-        $genericDetails = [['title' => 'Product Details', 'paragraphs' => ['Designed to become a dependable part of your seasonal wardrobe, with refined proportions and premium finishing.']], ['title' => 'Material & Care', 'bullets' => ['Premium seasonal fabric', 'Dry clean only', 'Store on a padded hanger']], ['title' => 'Fit & Sizing', 'paragraphs' => ['This style runs true to size. Choose your usual size for the intended fit.']]];
-
-        $products = [
-            ['slug' => 'cashmere-wrap-coat', 'name' => 'Cashmere Wrap Coat', 'category' => 'Outerwear', 'collections' => ['Essentials', "Women's"], 'sex' => 'woman', 'price' => 1295, 'badge' => null, 'eyebrow' => 'Atelier Street Essentials', 'description' => 'An investment piece crafted from pure Italian cashmere. This wrap coat offers timeless elegance with its wide lapels, self-tie belt, and a relaxed yet refined silhouette that layers beautifully over any outfit.', 'colors' => [['value' => 'camel', 'label' => 'Camel', 'hex' => '#c69768'], ['value' => 'black', 'label' => 'Black', 'hex' => '#262626'], ['value' => 'ivory', 'label' => 'Ivory', 'hex' => '#f5f0e6'], ['value' => 'burgundy', 'label' => 'Burgundy', 'hex' => '#6b3035']],             'sizes' => ['XS', 'S', 'M', 'L', 'XL'], 'images' => $images, 'benefits' => $benefits, 'details' => $genericDetails],
-            ['slug' => 'structured-wool-overcoat', 'name' => 'Structured Wool Overcoat', 'category' => 'Outerwear', 'collections' => ["Men's", 'Fall/Winter Collection'], 'sex' => 'man', 'price' => 1290, 'badge' => 'New', 'colors' => [['value' => 'charcoal', 'label' => 'Charcoal', 'hex' => '#262626']], 'sizes' => ['S', 'M', 'L', 'XL'], 'images' => [$localImages['overcoat'], ...array_slice($images, 1, 2)]],
-            ['slug' => 'pearl-button-silk-blouse', 'name' => 'Pearl Button Silk Blouse', 'category' => 'Tops', 'collections' => ["Women's", 'Fall/Winter Collection'], 'sex' => 'woman', 'price' => 485, 'badge' => 'Trending', 'colors' => [['value' => 'ivory', 'label' => 'Ivory', 'hex' => '#f5f0e6'], ['value' => 'black', 'label' => 'Black', 'hex' => '#171717']], 'sizes' => ['XS', 'S', 'M', 'L'], 'images' => [$localImages['blouse'], ...array_slice($images, 0, 2)]],
-            ['slug' => 'cashmere-turtleneck', 'name' => 'Cashmere Turtleneck', 'category' => 'Knitwear', 'collections' => ["Women's", 'Fall/Winter Collection'], 'sex' => 'woman', 'price' => 620, 'badge' => null, 'colors' => [['value' => 'teal', 'label' => 'Teal', 'hex' => '#315c5b'], ['value' => 'red', 'label' => 'Red', 'hex' => '#9f1239']], 'sizes' => ['XS', 'S', 'M', 'L', 'XL'], 'images' => [$localImages['turtleneck'], ...array_slice($images, 0, 1)]],
-            ['slug' => 'pinstripe-tailored-blazer', 'name' => 'Pinstripe Tailored Blazer', 'category' => 'Outerwear', 'collections' => ["Men's", 'Fall/Winter Collection'], 'sex' => 'man', 'price' => 890, 'badge' => 'New', 'colors' => [['value' => 'black', 'label' => 'Black', 'hex' => '#171717'], ['value' => 'navy', 'label' => 'Navy', 'hex' => '#1e3a5f']], 'sizes' => ['S', 'M', 'L', 'XL'], 'images' => [$localImages['blazer'], ...array_slice($images, 0, 1)]],
-            ['slug' => 'pleated-midi-skirt', 'name' => 'Pleated Midi Skirt', 'category' => 'Bottoms', 'collections' => ["Women's", 'Fall/Winter Collection'], 'sex' => 'woman', 'price' => 420, 'badge' => null, 'colors' => [['value' => 'camel', 'label' => 'Camel', 'hex' => '#c69768'], ['value' => 'ivory', 'label' => 'Ivory', 'hex' => '#f5f0e6'], ['value' => 'teal', 'label' => 'Teal', 'hex' => '#315c5b']], 'sizes' => ['XS', 'S', 'M', 'L'], 'images' => [$localImages['skirt'], ...array_slice($images, 0, 1)]],
-            ['slug' => 'belted-camel-trench', 'name' => 'Belted Camel Trench', 'category' => 'Outerwear', 'collections' => ["Men's", 'Fall/Winter Collection'], 'sex' => 'man', 'price' => 1450, 'badge' => 'Trending', 'colors' => [['value' => 'camel', 'label' => 'Camel', 'hex' => '#c69768'], ['value' => 'black', 'label' => 'Black', 'hex' => '#262626']], 'sizes' => ['S', 'M', 'L', 'XL'], 'images' => [$localImages['trench'], ...array_slice($images, 0, 2)]],
+        $details = [
+            ['title' => 'Product Details', 'paragraphs' => ['A statement piece cut with the polished ease of the House. Designed for a refined wardrobe and made to be worn season after season.']],
+            ['title' => 'Material & Care', 'bullets' => ['Premium Italian fabric', 'Dry clean only', 'Store on a padded hanger']],
+            ['title' => 'Fit & Sizing', 'paragraphs' => ['This style runs true to size. Choose your usual size for the intended fit.']],
         ];
 
-        foreach ($products as &$product) {
-            $product['eyebrow'] ??= 'Atelier Street Collection';
-            $product['description'] ??= 'A considered Atelier Street layer designed with refined proportions, premium materials, and everyday versatility.';
-            $product['benefits'] ??= $benefits;
-            $product['details'] ??= $genericDetails;
-        }
-        unset($product);
+        return [
+            $this->definition('GG-COAT-001', 'gg-wool-wrap-coat', 'GG Wool Wrap Coat', 'House Signatures', 'A sculpted wool wrap coat with a generous collar and an effortless belted waist, photographed in a rich editorial silhouette.', 'Outerwear', ['Gucci Edit', 'House Signatures'], 'woman', 1295, 'New', 'gucci-portrait-coat.jpg', [['camel', 'Camel', '#c69768'], ['black', 'Black', '#262626']], ['XS', 'S', 'M', 'L'], $benefits, $details),
+            $this->definition('GG-DRESS-002', 'gg-emerald-silk-dress', 'GG Emerald Silk Dress', 'The Evening Edit', 'A fluid evening dress with a jewel-toned finish and a graceful line inspired by the drama of an Italian palazzo.', 'Dresses', ['Gucci Edit', 'The Evening Edit'], 'woman', 980, 'Trending', 'gucci-editorial-green.jpg', [['emerald', 'Emerald', '#315c5b'], ['black', 'Black', '#171717']], ['XS', 'S', 'M', 'L'], $benefits, $details),
+            $this->definition('GG-DRESS-003', 'gg-rose-evening-gown', 'GG Rose Evening Gown', 'The Evening Edit', 'A romantic rose-toned gown with couture energy, designed for entrances, celebrations, and memorable nights.', 'Dresses', ['Trending Now', 'The Evening Edit'], 'woman', 1480, 'Trending', 'gucci-pink-evening.jpg', [['rose', 'Rose', '#be6f7a'], ['ivory', 'Ivory', '#f5f0e6']], ['XS', 'S', 'M', 'L'], $benefits, $details),
+            $this->definition('GG-BLAZER-004', 'gg-black-tailored-blazer', 'GG Black Tailored Blazer', 'House Signatures', 'A sharp black blazer with a long, elegant line that brings modern structure to evening dressing and everyday tailoring.', 'Outerwear', ['Gucci Edit', 'House Signatures'], 'unisex', 890, 'New', 'gucci-black-evening.jpg', [['black', 'Black', '#171717'], ['navy', 'Navy', '#1e3a5f']], ['S', 'M', 'L', 'XL'], $benefits, $details),
+            $this->definition('GG-COAT-005', 'gg-draped-evening-coat', 'GG Draped Evening Coat', 'Atelier Evening', 'A long draped coat with an understated, architectural presence and a silhouette made for city nights.', 'Outerwear', ['Trending Now', 'The Evening Edit'], 'unisex', 1190, null, 'gucci-dress-coat.jpg', [['charcoal', 'Charcoal', '#3f3f46'], ['camel', 'Camel', '#c69768']], ['S', 'M', 'L', 'XL'], $benefits, $details),
+            $this->definition('GG-LOOK-006', 'gg-runway-silk-look', 'GG Runway Silk Look', 'Gucci Edit', 'A complete silk-forward look balancing soft drape with a confident runway attitude and distinctive styling.', 'Tops', ['Gucci Edit', 'Trending Now'], 'unisex', 720, 'Trending', 'gucci-fashion-look.jpg', [['black', 'Black', '#171717'], ['ivory', 'Ivory', '#f5f0e6']], ['XS', 'S', 'M', 'L', 'XL'], $benefits, $details),
+        ];
+    }
 
-        return $products;
+    /**
+     * @param  list<array{0: string, 1: string, 2: string}>  $colors
+     * @param  list<string>  $sizes
+     * @param  list<array{label: string, icon: string}>  $benefits
+     * @param  list<array<string, mixed>>  $details
+     * @param  list<string>  $collections
+     * @return array<string, mixed>
+     */
+    private function definition(string $spu, string $slug, string $name, string $eyebrow, string $description, string $category, array $collections, string $sex, int $price, ?string $badge, string $image, array $colors, array $sizes, array $benefits, array $details): array
+    {
+        return [
+            'spu' => $spu,
+            'slug' => $slug,
+            'name' => $name,
+            'eyebrow' => $eyebrow,
+            'description' => $description,
+            'category' => $category,
+            'collections' => $collections,
+            'sex' => $sex,
+            'price' => $price,
+            'badge' => $badge,
+            'image' => storage_path("app/public/catalog/{$image}"),
+            'colors' => collect($colors)->map(fn (array $color): array => ['value' => $color[0], 'label' => $color[1], 'hex' => $color[2]])->all(),
+            'sizes' => $sizes,
+            'benefits' => $benefits,
+            'details' => $details,
+        ];
     }
 }

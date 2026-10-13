@@ -134,7 +134,7 @@ store.post = (args?: { lang?: string | number } | [lang: string | number ] | str
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
-export const updateQuantity = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const updateQuantity = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateQuantity.url(args, options),
     method: 'patch',
 })
@@ -150,7 +150,7 @@ updateQuantity.definition = {
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
-updateQuantity.url = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions) => {
+updateQuantity.url = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             lang: args[0],
@@ -183,7 +183,7 @@ updateQuantity.url = (args: { lang?: string | number, item: string | number | { 
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
-updateQuantity.patch = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+updateQuantity.patch = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateQuantity.url(args, options),
     method: 'patch',
 })
@@ -194,7 +194,7 @@ updateQuantity.patch = (args: { lang?: string | number, item: string | number | 
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
-export const remove = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const remove = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: remove.url(args, options),
     method: 'delete',
 })
@@ -210,7 +210,7 @@ remove.definition = {
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
-remove.url = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions) => {
+remove.url = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             lang: args[0],
@@ -243,7 +243,7 @@ remove.url = (args: { lang?: string | number, item: string | number | { id: stri
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}'
 */
-remove.delete = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+remove.delete = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: remove.url(args, options),
     method: 'delete',
 })
@@ -254,7 +254,7 @@ remove.delete = (args: { lang?: string | number, item: string | number | { id: s
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}/save'
 */
-export const saveForLater = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const saveForLater = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: saveForLater.url(args, options),
     method: 'post',
 })
@@ -270,7 +270,7 @@ saveForLater.definition = {
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}/save'
 */
-saveForLater.url = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions) => {
+saveForLater.url = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             lang: args[0],
@@ -303,7 +303,7 @@ saveForLater.url = (args: { lang?: string | number, item: string | number | { id
 * @param lang - Default: '$lang'
 * @route '/{lang?}/cart/items/{item}/save'
 */
-saveForLater.post = (args: { lang?: string | number, item: string | number | { id: string | number } } | [lang: string | number, item: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+saveForLater.post = (args: { lang?: string | number, item: number | { id: number } } | [lang: string | number, item: number | { id: number } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: saveForLater.url(args, options),
     method: 'post',
 })

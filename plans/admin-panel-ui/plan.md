@@ -18,9 +18,11 @@ Replace the removed Filament admin panel with a custom, authenticated Inertia Re
 ## Architectural Decisions
 
 - Use a dedicated admin layout under `resources/js/Layouts/Admin/` with the reference's persistent desktop sidebar, compact mobile navigation, branded mark, active mint-highlighted navigation item, top toolbar, page title, breadcrumbs, and shared page feedback.
+- Treat Admin as a separate frontend functional area: keep page entry points grouped under `resources/js/Pages/Admin/Main`, `Products`, `Categories`, `Collections`, and `Media`, with shared admin components isolated under `resources/js/Pages/Admin/Components`.
 - Keep admin URLs unlocalized and prefixed with `/admin`; storefront language prefixes and the public `RootLayout` do not wrap admin pages.
 - Keep admin controllers, Form Requests, policies/middleware, and API/Inertia resources under the existing Laravel feature conventions.
 - Use Wayfinder-generated route functions for all React-to-Laravel navigation and form submissions.
+- Use the shared `cn` utility for conditional or optional class composition in admin React components so layout markup remains readable.
 - Reuse existing `Product`, `Variant`, `Category`, `Collection`, and Media Library behavior rather than introducing an admin-specific data model.
 - Use server-side validation and authorization for every write; the React UI is not the security boundary.
 

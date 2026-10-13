@@ -4,8 +4,8 @@ import categories from './categories'
 import collections from './collections'
 import media from './media'
 /**
-* @see \App\Http\Controllers\Admin\AdminDashboardController::__invoke
-* @see app/Http/Controllers/Admin/AdminDashboardController.php:18
+* @see \App\Http\Controllers\DashboardController::__invoke
+* @see app/Http/Controllers/DashboardController.php:13
 * @route '/admin'
 */
 export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -19,8 +19,8 @@ dashboard.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Admin\AdminDashboardController::__invoke
-* @see app/Http/Controllers/Admin/AdminDashboardController.php:18
+* @see \App\Http\Controllers\DashboardController::__invoke
+* @see app/Http/Controllers/DashboardController.php:13
 * @route '/admin'
 */
 dashboard.url = (options?: RouteQueryOptions) => {
@@ -28,8 +28,8 @@ dashboard.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Admin\AdminDashboardController::__invoke
-* @see app/Http/Controllers/Admin/AdminDashboardController.php:18
+* @see \App\Http\Controllers\DashboardController::__invoke
+* @see app/Http/Controllers/DashboardController.php:13
 * @route '/admin'
 */
 dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -38,8 +38,8 @@ dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Admin\AdminDashboardController::__invoke
-* @see app/Http/Controllers/Admin/AdminDashboardController.php:18
+* @see \App\Http\Controllers\DashboardController::__invoke
+* @see app/Http/Controllers/DashboardController.php:13
 * @route '/admin'
 */
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

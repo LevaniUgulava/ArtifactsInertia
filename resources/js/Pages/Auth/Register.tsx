@@ -27,7 +27,6 @@ export default function Register() {
             footerActionHref={login.url()}
             footerPrompt={t('register.footerPrompt')}
             onSubmit={handleSubmit}
-            showSocial
             title={t('register.title')}
         >
             <AuthInput
@@ -80,7 +79,7 @@ export default function Register() {
             />
 
             <button
-                className="min-h-16 w-full rounded-md bg-[#bb915b] px-5 text-base font-semibold text-white transition hover:bg-[#a77e4c] disabled:cursor-not-allowed disabled:opacity-60"
+                className="min-h-12 w-full rounded-md bg-[#bb915b] px-4 text-sm font-semibold text-white transition hover:bg-[#a77e4c] disabled:cursor-not-allowed disabled:opacity-60"
                 disabled={form.processing}
                 type="submit"
             >

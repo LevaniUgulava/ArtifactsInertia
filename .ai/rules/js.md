@@ -14,3 +14,6 @@ Currency is Georgian Lari only. frontend Intl money formatters must use { style:
 
 ## Global types/constants folders and gelFormatter idiom
 Global types live in resources/js/types/ (shared.ts, components.ts for Components/*Props, layouts.ts, app.ts); global constants live in resources/js/constants/ files (brand.ts, format.ts, promo.ts, images.ts) — never inline brand strings, currency formatters, promo codes, or unsplash URLs in components. Use `gelFormatter` from @/constants/format for ₾ money formatting (GEL + narrowSymbol; narrowSymbol is cast for older TS lib). useFormatCurrency still wraps gelFormatter. This supersedes the hooks.md "useFormatCurrency idiom" for new code.
+
+## Use cn for conditional class composition
+Use the shared `cn` utility from `@/lib/utils` when class names need conditional or optional composition. Keep JSX readable and avoid long template-string class expressions.

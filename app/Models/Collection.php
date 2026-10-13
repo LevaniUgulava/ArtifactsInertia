@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-#[Fillable('name', 'slug')]
+#[Fillable('name', 'slug', 'image')]
 class Collection extends Model implements HasMedia
 {
     use InteractsWithMedia;

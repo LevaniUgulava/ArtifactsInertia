@@ -12,7 +12,7 @@ it('renders the admin dashboard for authenticated users', function () {
     $this->actingAs($user)
         ->get('/admin')
         ->assertInertia(fn ($page) => $page
-            ->component('Admin/Dashboard')
+            ->component('Admin/Main/Dashboard')
             ->has('stats')
         );
 });

@@ -7,7 +7,6 @@ export type RootLayoutProps = {
 export type AuthLayoutProps = {
     children: ReactNode;
     description: string;
-    showSocial?: boolean;
     title: string;
     footerPrompt?: string;
     footerAction?: string;
