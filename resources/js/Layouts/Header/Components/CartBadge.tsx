@@ -1,20 +1,7 @@
-import { usePage } from '@inertiajs/react';
-import { useEffect, useRef, useState } from 'react';
-import type { SharedPageProps } from '@/types/shared';
+import { useCartBadge } from '@/Layouts/Header/hooks/useCartBadge';
 
 export function CartBadge() {
-    const { props } = usePage<SharedPageProps>();
-    const cartCount = props.cartCount ?? 0;
-    const previous = useRef<number | null>(null);
-    const [bounceKey, setBounceKey] = useState(0);
-
-    useEffect(() => {
-        if (previous.current !== null && cartCount > previous.current) {
-            setBounceKey((key) => key + 1);
-        }
-
-        previous.current = cartCount;
-    }, [cartCount]);
+    const { cartCount, bounceKey } = useCartBadge();
 
     if (cartCount <= 0) {
         return null;

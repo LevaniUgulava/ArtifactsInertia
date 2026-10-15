@@ -3,7 +3,7 @@ import { LockKeyholeIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { gelFormatter } from '@/constants/format';
 import { checkout } from '@/routes';
-import type { OrderSummaryProps } from '../types/CartTypes';
+import type { OrderSummaryProps } from '@/Pages/Cart/CartTypes';
 
 export function OrderSummary({ discount, onApplyPromo, onPromoCodeChange, productCount, promoApplied, promoCode, shipping, subtotal, total }: OrderSummaryProps) {
     const { t } = useTranslation('cart');

@@ -1,16 +1,10 @@
-import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { useLanguageSwitcher } from '@/Components/hooks/useLanguageSwitcher';
 import type { LanguageSwitcherProps } from '@/types/components';
-import type { SharedPageProps } from '@/types/shared';
 
 export function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
     const { t } = useTranslation('profile');
-    const { props, url } = usePage<SharedPageProps>();
-    const currentLocale = props.locale ?? 'ka';
-    const availableLocales = props.availableLocales ?? ['en', 'ka'];
-
-    const [path, query = ''] = url.replace(/^https?:\/\/[^/]+/, '').split('?');
-    const suffix = path.split('/').filter(Boolean).slice(1).join('/');
+    const { currentLocale, availableLocales, localeHref } = useLanguageSwitcher();
 
     return (
         <div>
@@ -19,7 +13,7 @@ export function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
                 {availableLocales.map((locale) => (
                     <a
                         className={`rounded px-2.5 py-1 transition ${locale === currentLocale ? 'bg-stone-900 text-white' : 'text-stone-500 hover:text-stone-900'}`}
-                        href={`/${locale}${suffix ? `/${suffix}` : ''}${query ? `?${query}` : ''}`}
+                        href={localeHref(locale)}
                         key={locale}
                     >
                         {locale.toUpperCase()}

@@ -2,7 +2,7 @@ import { HeartIcon, Trash2Icon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { gelFormatter } from '@/constants/format';
 import { QuantityControl } from '@/Pages/Cart/Components/QuantityControl';
-import type { CartItem, CartItemRowProps } from '../types/CartTypes';
+import type { CartItem, CartItemRowProps } from '@/Pages/Cart/CartTypes';
 
 export function CartItemRow({ error = '', item, onQuantityChange, onRemove, onSave }: CartItemRowProps) {
     const { t } = useTranslation('cart');

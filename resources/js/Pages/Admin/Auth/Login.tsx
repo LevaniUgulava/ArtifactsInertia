@@ -1,18 +1,11 @@
-import { useForm } from '@inertiajs/react';
-import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuthInput } from '@/Components/Auth/AuthInput';
 import AdminAuthLayout from '@/Layouts/Admin/AdminAuthLayout';
-import admin from '@/routes/admin';
+import { useAdminLogin } from '@/Pages/Admin/Auth/hooks/useAdminLogin';
 
 export default function Login() {
     const { t } = useTranslation(['admin', 'common']);
-    const form = useForm({ email: '', password: '' }).withPrecognition('post', admin.login.submit.url());
-
-    function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-        event.preventDefault();
-        form.submit();
-    }
+    const { form, handleSubmit } = useAdminLogin();
 
     return (
         <AdminAuthLayout description={t('loginDescription')} onSubmit={handleSubmit} title={t('loginTitle')}>

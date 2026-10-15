@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { paymentIcons } from '../constants/paymentIcons';
-import type { PaymentDetailsProps } from '../types/CheckoutTypes';
+import { paymentIcons } from '@/constants/paymentIcons';
+import type { PaymentDetailsProps } from '@/Pages/Checkout/CheckoutTypes';
 
 export function PaymentDetails({ methods, onChange, selected }: PaymentDetailsProps) {
     const { t } = useTranslation('checkout');

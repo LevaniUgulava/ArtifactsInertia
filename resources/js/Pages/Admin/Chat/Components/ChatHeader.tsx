@@ -1,35 +1,14 @@
-import { useHttp } from '@inertiajs/react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StatusBadge } from '@/Pages/Admin/Chat/Components/StatusBadge';
-import { useInitials } from '@/Pages/Admin/Chat/hooks/useChat';
-import type { SelectedChat } from '@/Pages/Admin/Chat/ChatTypes';
-import admin from '@/routes/admin';
 import { ConfirmationModal } from '@/Components/ui/ConfirmationModal';
-
-type ChatHeaderProps = {
-    chat: SelectedChat;
-    onClosed: () => void;
-};
+import { StatusBadge } from '@/Pages/Admin/Chat/Components/StatusBadge';
+import { useChatHeader } from '@/Pages/Admin/Chat/hooks/useChatHeader';
+import { useInitials } from '@/Pages/Admin/Chat/hooks/useChat';
+import type { ChatHeaderProps } from '@/Pages/Admin/Chat/ChatTypes';
 
 export function ChatHeader({ chat, onClosed }: ChatHeaderProps) {
     const { t } = useTranslation('admin');
     const initials = useInitials(chat.user.name);
-    const http = useHttp();
-    const [closeModalOpen, setCloseModalOpen] = useState(false);
-
-    function closeConversation(): void {
-        if (chat.status === 'close' || http.processing) {
-            return;
-        }
-
-        http.post(admin.chat.close({ chat: chat.id }).url, {
-            onSuccess: () => {
-                setCloseModalOpen(false);
-                onClosed();
-            },
-        });
-    }
+    const { closeModalOpen, processing, openCloseModal, cancelClose, closeConversation } = useChatHeader(chat, onClosed);
 
     return (
         <header className="border-b border-slate-200 px-5 py-4 sm:px-6">
@@ -40,16 +19,16 @@ export function ChatHeader({ chat, onClosed }: ChatHeaderProps) {
                     <p className="truncate text-xs text-slate-500">{chat.user.email}</p>
                 </div>
                 <StatusBadge status={chat.status} t={t} />
-                {chat.status !== 'close' ? <button className="ml-auto rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-red-200 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50" disabled={http.processing} onClick={() => setCloseModalOpen(true)} type="button">{t('chatClose')}</button> : null}
+                {chat.status !== 'close' ? <button className="ml-auto rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-red-200 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50" disabled={processing} onClick={openCloseModal} type="button">{t('chatClose')}</button> : null}
             </div>
             <ConfirmationModal
                 cancelLabel={t('cancel')}
                 confirmLabel={t('chatClose')}
                 description={t('chatCloseConfirm')}
-                onCancel={() => setCloseModalOpen(false)}
+                onCancel={cancelClose}
                 onConfirm={closeConversation}
                 open={closeModalOpen}
-                processing={http.processing}
+                processing={processing}
                 title={t('chatCloseTitle')}
             />
         </header>

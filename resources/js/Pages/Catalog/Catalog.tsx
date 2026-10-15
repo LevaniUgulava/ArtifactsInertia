@@ -2,12 +2,12 @@ import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { brandTitle } from '@/constants/brand';
 import RootLayout from '@/Layouts/RootLayout';
-import { CatalogFilters } from './Components/CatalogFilters';
-import { CatalogPagination } from './Components/CatalogPagination';
-import { CatalogProductGrid } from './Components/CatalogProductGrid';
-import { CollectionHeader } from './Components/CollectionHeader';
-import type { CatalogPageProps } from './types/CatalogTypes';
-import { useCatalog } from './hooks/useCatalog';
+import { CatalogFilters } from '@/Pages/Catalog/Components/CatalogFilters';
+import { CatalogPagination } from '@/Pages/Catalog/Components/CatalogPagination';
+import { CatalogProductGrid } from '@/Pages/Catalog/Components/CatalogProductGrid';
+import { CollectionHeader } from '@/Pages/Catalog/Components/CollectionHeader';
+import type { CatalogPageProps } from '@/Pages/Catalog/CatalogTypes';
+import { useCatalog } from '@/Pages/Catalog/hooks/useCatalog';
 
 function Catalog({ catalog }: CatalogPageProps) {
     const { t } = useTranslation('catalog');

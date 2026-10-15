@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import type { ShippingFields, ShippingInformationProps } from '../types/CheckoutTypes';
+import type { ShippingFieldProps, ShippingInformationProps } from '@/Pages/Checkout/CheckoutTypes';
 
-function Field({ error, inputMode, label, name, onChange, placeholder, type = 'text', value }: { error?: string; inputMode?: 'tel' | 'text'; label: string; name: keyof ShippingFields; onChange: ShippingInformationProps['onChange']; placeholder?: string; type?: string; value: string }) {
+function Field({ error, inputMode, label, name, onChange, placeholder, type = 'text', value }: ShippingFieldProps) {
     return (
         <label className="flex min-w-0 flex-1 flex-col gap-2 text-[10px] font-medium text-stone-500" htmlFor={name}>
             {label}

@@ -1,4 +1,4 @@
-import ChatWrapper from '@/Components/ChatWrapper';
+import ChatWrapper from '@/Components/ChatWrapper/ChatWrapper';
 import { SupportChatButton } from '@/Components/SupportChatButton';
 import { Footer } from '@/Layouts/Footer/Footer';
 import { Header } from '@/Layouts/Header/Header';

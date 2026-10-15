@@ -1,15 +1,11 @@
 import { ArrowLeftIcon, ChevronDownIcon, SearchIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useOrderHistory, type OrderSort, type OrderStatusFilter } from '../hooks/useOrderHistory';
-import { statusKeys } from '../constants/statusKeys';
-import type { Order } from '../types/ProfileTypes';
+import { useOrderHistory } from '@/Pages/Profile/hooks/useOrderHistory';
+import { statusKeys } from '@/constants/statusKeys';
+import type { OrderSort, OrderStatusFilter, OrdersViewProps } from '@/Pages/Profile/ProfileTypes';
 import { profile } from '@/routes';
 import { useLocale } from '@/hooks/useLocale';
 import { Link } from '@inertiajs/react';
-
-type OrdersViewProps = {
-    orders: Order[];
-};
 
 function localizeItemCount(t: (key: string, opts?: Record<string, unknown>) => string, itemCount: string): string {
     const match = itemCount.match(/(\d+)/);

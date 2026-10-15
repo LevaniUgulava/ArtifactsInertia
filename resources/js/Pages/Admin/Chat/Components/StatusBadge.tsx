@@ -1,13 +1,5 @@
 import { cn } from '@/lib/utils';
-
-type Translate = (key: string) => string;
-
-type StatusBadgeProps = {
-    status: string;
-    t: Translate;
-    active?: boolean;
-    className?: string;
-};
+import type { StatusBadgeProps } from '@/Pages/Admin/Chat/ChatTypes';
 
 export function StatusBadge({ status, t, active = false, className = '' }: StatusBadgeProps) {
     const label = status === 'pending' ? t('chatPending') : status === 'open' ? t('chatOpen') : t('chatClosed');

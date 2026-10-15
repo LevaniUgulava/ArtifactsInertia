@@ -12,6 +12,6 @@ class MediaController extends Controller
 
     public function index(): Response
     {
-        return Inertia::render('Admin/Media/Index', ['media' => $this->adminService->mediaIndexData()]);
+        return Inertia::render('Admin/Media/Media', ['media' => $this->adminService->mediaIndexData()]);
     }
 }

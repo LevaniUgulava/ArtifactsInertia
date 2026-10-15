@@ -1,5 +1,5 @@
-import { benefitIcons } from '../constants/benefitIcons';
-import type { ProductBenefit, ProductBenefitsProps } from '../types/ProductTypes';
+import { benefitIcons } from '@/constants/benefitIcons';
+import type { ProductBenefit, ProductBenefitsProps } from '@/Pages/Product/ProductTypes';
 
 export function ProductBenefits({ benefits }: ProductBenefitsProps) {
     return (

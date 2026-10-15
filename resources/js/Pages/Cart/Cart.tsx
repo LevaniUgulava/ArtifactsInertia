@@ -1,35 +1,20 @@
 import { Head, Link } from '@inertiajs/react';
-import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { brandTitle } from '@/constants/brand';
-import { PROMO_CODE, PROMO_DISCOUNT } from '@/constants/promo';
 import ProfileLayout from '@/Layouts/ProfileLayout';
-import { useCartItems } from '@/Pages/Cart/hooks/useCartItems';
 import { CartBenefits } from '@/Pages/Cart/Components/CartBenefits';
 import { CartItemRow } from '@/Pages/Cart/Components/CartItemRow';
 import { EmptyCart } from '@/Pages/Cart/Components/EmptyCart';
 import { OrderSummary } from '@/Pages/Cart/Components/OrderSummary';
+import { useCartItems } from '@/Pages/Cart/hooks/useCartItems';
+import { useCartSummary } from '@/Pages/Cart/hooks/useCartSummary';
+import type { CartPageProps } from '@/Pages/Cart/CartTypes';
 import { home } from '@/routes';
-import type { CartPageProps } from '@/Pages/Cart/types/CartTypes';
 
 function Cart({ cart }: CartPageProps) {
     const { t } = useTranslation('cart');
     const { errors, items, removeItem, saveItem, setQuantity } = useCartItems(cart.items);
-    const [promoCode, setPromoCode] = useState('');
-    const [promoApplied, setPromoApplied] = useState(false);
-
-    const subtotal = useMemo(
-        () => items.reduce((total, item) => total + (Number(item.price) || 0) * (Number(item.quantity) || 0), 0),
-        [items],
-    );
-    const discount = promoApplied ? PROMO_DISCOUNT : 0;
-    const shipping = Number(cart.shipping) || 0;
-    const total = Math.max(0, subtotal + shipping - discount);
-    const itemCount = items.reduce((count, item) => count + (Number(item.quantity) || 0), 0);
-
-    function applyPromoCode() {
-        setPromoApplied(promoCode.trim().toUpperCase() === PROMO_CODE);
-    }
+    const summary = useCartSummary(items, cart.shipping);
 
     return (
         <>
@@ -39,7 +24,7 @@ function Cart({ cart }: CartPageProps) {
                 <div className="mb-7 flex items-end justify-between gap-5">
                     <div className="space-y-2">
                         <h1 className="text-2xl font-bold tracking-tight text-stone-950 sm:text-3xl">{t('title')}</h1>
-                        <p className="text-xs text-stone-500">{t('item', { count: itemCount })}</p>
+                        <p className="text-xs text-stone-500">{t('item', { count: summary.itemCount })}</p>
                     </div>
                     <Link className="hidden text-xs font-semibold text-[#b38145] transition hover:text-stone-950 sm:block" href={home.url()}>
                         {t('continueShopping')}
@@ -66,15 +51,15 @@ function Cart({ cart }: CartPageProps) {
 
                         <div className="space-y-5">
                             <OrderSummary
-                                discount={discount}
-                                onApplyPromo={applyPromoCode}
-                                onPromoCodeChange={setPromoCode}
-                                productCount={itemCount}
-                                promoApplied={promoApplied}
-                                promoCode={promoCode}
-                                shipping={shipping}
-                                subtotal={subtotal}
-                                total={total}
+                                discount={summary.discount}
+                                onApplyPromo={summary.applyPromoCode}
+                                onPromoCodeChange={summary.setPromoCode}
+                                productCount={summary.itemCount}
+                                promoApplied={summary.promoApplied}
+                                promoCode={summary.promoCode}
+                                shipping={summary.shipping}
+                                subtotal={summary.subtotal}
+                                total={summary.total}
                             />
                             <CartBenefits />
                         </div>

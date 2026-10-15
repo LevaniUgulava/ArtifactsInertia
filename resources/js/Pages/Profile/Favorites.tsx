@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { brandTitle } from '@/constants/brand';
 import ProfileLayout from '@/Layouts/ProfileLayout';
 import { CatalogProductGrid } from '@/Pages/Catalog/Components/CatalogProductGrid';
-import type { FavoritesPageProps } from '@/Pages/Profile/types/ProfileTypes';
+import type { FavoritesPageProps } from '@/Pages/Profile/ProfileTypes';
 
 function Favorites({ favorites }: FavoritesPageProps) {
     const { t } = useTranslation('profile');

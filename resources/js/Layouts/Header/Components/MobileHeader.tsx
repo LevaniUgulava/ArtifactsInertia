@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { cart, home, login, logout, profile, register } from '@/routes';
 import { USER_AVATAR_IMAGE } from '@/constants/images';
-import type { MobileHeaderProps } from '../types/HeaderTypes';
+import type { MobileHeaderProps } from '@/Layouts/Header/HeaderTypes';
 
 export function MobileHeader({ user, lang, onClose }: MobileHeaderProps) {
     const { t } = useTranslation('header');

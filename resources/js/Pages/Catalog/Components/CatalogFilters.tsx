@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { MAX_PRICE, MIN_PRICE } from '../constants/filters';
-import type { CatalogFiltersProps, ColorOption, FilterOption, FilterState } from '../types/CatalogTypes';
+import { MAX_PRICE, MIN_PRICE } from '@/constants/filters';
+import type { CatalogFiltersProps, ColorOption, FilterOption, FilterState } from '@/Pages/Catalog/CatalogTypes';
 
 function FilterPanel({ filters, value, onChange, onClear }: CatalogFiltersProps) {
     const { t } = useTranslation('catalog');

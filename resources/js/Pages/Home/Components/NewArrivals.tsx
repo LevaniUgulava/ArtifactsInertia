@@ -1,14 +1,14 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { catalog } from '@/routes';
+import { useLocale } from '@/hooks/useLocale';
 import { ProductGrid } from '@/Pages/Home/Components/ProductGrid';
 import { SectionTitle } from '@/Pages/Home/Components/SectionTitle';
-import type { NewArrivalsProps } from '../types/HomeTypes';
+import type { NewArrivalsProps } from '@/Pages/Home/HomeTypes';
+import { catalog } from '@/routes';
 
 export function NewArrivals({ products }: NewArrivalsProps) {
     const { t } = useTranslation('home');
-    const { props } = usePage();
-    const lang = (props.locale as string) ?? 'ka';
+    const lang = useLocale();
 
     return (
         <section className="mx-auto max-w-[1920px] px-5 py-14 sm:px-8 sm:py-20 lg:px-12 2xl:px-16 2xl:py-28" id="new-arrivals">

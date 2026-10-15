@@ -1,36 +1,11 @@
 import { ArrowDownUpIcon, CheckIcon, ChevronDownIcon } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { CollectionHeaderProps } from '../types/CatalogTypes';
+import { useCollectionHeader } from '@/Pages/Catalog/hooks/useCollectionHeader';
+import type { CollectionHeaderProps } from '@/Pages/Catalog/CatalogTypes';
 
 export function CollectionHeader({ name, count, sort, onSortChange }: CollectionHeaderProps) {
     const { t } = useTranslation('catalog');
-    const [isSortOpen, setIsSortOpen] = useState(false);
-    const sortMenuRef = useRef<HTMLSpanElement>(null);
-
-    const sortOptions = [
-        { label: t('newest'), value: 'newest' },
-        { label: t('priceLowToHigh'), value: 'price-low' },
-        { label: t('priceHighToLow'), value: 'price-high' },
-    ];
-
-    useEffect(() => {
-        if (!isSortOpen) {
-            return;
-        }
-
-        const closeOnOutsideClick = (event: MouseEvent) => {
-            if (sortMenuRef.current && !sortMenuRef.current.contains(event.target as Node)) {
-                setIsSortOpen(false);
-            }
-        };
-
-        document.addEventListener('mousedown', closeOnOutsideClick);
-
-        return () => document.removeEventListener('mousedown', closeOnOutsideClick);
-    }, [isSortOpen]);
-
-    const selectedSort = sortOptions.find((option) => option.value === sort) ?? sortOptions[0];
+    const { isSortOpen, sortMenuRef, sortOptions, selectedSort, toggleSort, selectSort } = useCollectionHeader(sort, onSortChange);
 
     return (
         <div className="flex flex-col gap-5 border-b border-stone-200 pb-5 sm:flex-row sm:items-end sm:justify-between">
@@ -46,7 +21,7 @@ export function CollectionHeader({ name, count, sort, onSortChange }: Collection
                         aria-haspopup="listbox"
                         aria-label={t('sortBy')}
                         className="flex min-w-40 items-center justify-between gap-3 rounded-lg border border-stone-200 bg-white px-3 py-2 text-left text-xs text-stone-700 outline-none transition hover:border-stone-400 focus:border-amber-700 focus:ring-2 focus:ring-amber-700/15"
-                        onClick={() => setIsSortOpen((open) => !open)}
+                        onClick={toggleSort}
                         type="button"
                     >
                         <span className="flex items-center gap-2">
@@ -62,10 +37,7 @@ export function CollectionHeader({ name, count, sort, onSortChange }: Collection
                                     aria-selected={option.value === sort}
                                     className="flex w-full items-center justify-between gap-4 rounded-md px-3 py-2 text-left text-xs text-stone-700 transition hover:bg-stone-50"
                                     key={option.value}
-                                    onClick={() => {
-                                        onSortChange(option.value);
-                                        setIsSortOpen(false);
-                                    }}
+                                    onClick={() => selectSort(option.value)}
                                     role="option"
                                     type="button"
                                 >

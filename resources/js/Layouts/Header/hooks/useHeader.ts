@@ -1,6 +1,6 @@
 import { usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import type { HeaderPageProps } from '../types/HeaderTypes';
+import type { HeaderPageProps } from '@/Layouts/Header/HeaderTypes';
 
 export function useHeader() {
     const { props } = usePage<HeaderPageProps>();

@@ -1,17 +1,5 @@
 import { CircleAlertIcon, XIcon } from 'lucide-react';
-import type { ReactNode } from 'react';
-
-type ConfirmationModalProps = {
-    open: boolean;
-    title: string;
-    description: string;
-    confirmLabel: string;
-    cancelLabel: string;
-    onConfirm: () => void;
-    onCancel: () => void;
-    processing?: boolean;
-    children?: ReactNode;
-};
+import type { ConfirmationModalProps } from '@/types/components';
 
 export function ConfirmationModal({ open, title, description, confirmLabel, cancelLabel, onConfirm, onCancel, processing = false }: ConfirmationModalProps) {
     if (!open) {

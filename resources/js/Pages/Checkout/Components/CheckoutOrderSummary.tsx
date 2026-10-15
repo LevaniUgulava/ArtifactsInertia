@@ -1,7 +1,7 @@
 import { LockKeyholeIcon, TagIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { gelFormatter } from '@/constants/format';
-import type { CheckoutOrderSummaryProps } from '../types/CheckoutTypes';
+import type { CheckoutOrderSummaryProps } from '@/Pages/Checkout/CheckoutTypes';
 
 export function CheckoutOrderSummary({ discount, formComplete, items, onApplyPromo, onPromoCodeChange, onTermsChange, productCount, promoApplied, promoCode, processing, shipping, subtotal, terms, total }: CheckoutOrderSummaryProps) {
     const { t } = useTranslation('checkout');

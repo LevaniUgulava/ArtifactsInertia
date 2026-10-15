@@ -1,5 +1,8 @@
 {
-  "intro": "Thoughtful clothing for everyday life — made to be worn often, kept longer, and remembered well.",
+  "intro": "Thoughtful essentials, made to be worn often and kept longer.",
+  "quickLinks": "Quick Link",
+  "socialLabel": "Social links",
+  "legalLabel": "Legal links",
   "shop": {
     "title": "Shop"
   },
@@ -23,7 +26,14 @@
   "policies": {
     "privacy": "Privacy",
     "terms": "Terms & conditions",
-    "shipping": "Shipping & returns"
+    "shipping": "Shipping & returns",
+    "cookies": "Cookies Settings"
+  },
+  "social": {
+    "email": "Email support",
+    "linkedin": "LinkedIn",
+    "twitter": "X",
+    "instagram": "Instagram"
   },
   "copyright": "© {{year}} {{brand}}. All rights reserved.",
   "footerNote": "Made for everyday wear.",

@@ -1,8 +1,8 @@
 import { CheckIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { gelFormatter } from '@/constants/format';
-import { deliveryIcons } from '../constants/deliveryIcons';
-import type { DeliveryMethod, DeliveryMethodsProps } from '../types/CheckoutTypes';
+import { deliveryIcons } from '@/constants/deliveryIcons';
+import type { DeliveryMethod, DeliveryMethodsProps } from '@/Pages/Checkout/CheckoutTypes';
 
 export function DeliveryMethods({ methods, onChange, selected }: DeliveryMethodsProps) {
     const { t } = useTranslation('checkout');

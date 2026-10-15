@@ -1,8 +1,5 @@
 import { useMemo, useState } from 'react';
-import type { Order } from '../types/ProfileTypes';
-
-export type OrderStatusFilter = 'all' | 'Delivered' | 'In Transit';
-export type OrderSort = 'newest' | 'oldest';
+import type { Order, OrderSort, OrderStatusFilter } from '@/Pages/Profile/ProfileTypes';
 
 export function useOrderHistory(orders: Order[]) {
     const [query, setQuery] = useState('');

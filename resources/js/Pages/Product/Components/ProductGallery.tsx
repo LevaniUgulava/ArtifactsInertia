@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { ProductGalleryProps } from '../types/ProductTypes';
+import { useProductGallery } from '@/Pages/Product/hooks/useProductGallery';
+import type { ProductGalleryProps } from '@/Pages/Product/ProductTypes';
 
 export function ProductGallery({ images }: ProductGalleryProps) {
     const { t } = useTranslation('product');
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const selectedImage = images[selectedIndex] ?? images[0];
+    const { selectedIndex, selectedImage, selectImage } = useProductGallery(images);
 
     return (
         <div className="grid gap-5 sm:grid-cols-[3.5rem_minmax(0,1fr)]">
@@ -16,7 +15,7 @@ export function ProductGallery({ images }: ProductGalleryProps) {
                         aria-pressed={selectedIndex === index}
                         className={`size-14 shrink-0 overflow-hidden rounded-xl border-2 transition sm:size-16 ${selectedIndex === index ? 'border-amber-700' : 'border-transparent hover:border-stone-300'}`}
                         key={image.src}
-                        onClick={() => setSelectedIndex(index)}
+                        onClick={() => selectImage(index)}
                         type="button"
                     >
                         <img alt="" className="size-full object-cover" src={image.src} />

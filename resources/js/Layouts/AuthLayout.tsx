@@ -1,9 +1,9 @@
-import {Head, Link} from '@inertiajs/react';
-import type { FormEvent } from 'react';
+import { Head, Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { BrandLockup } from '@/Components/Brand/Brand';
 import { brand, brandTitle } from '@/constants/brand';
 import { EDITORIAL_IMAGE } from '@/constants/images';
+import { useAuthLayout } from '@/Layouts/hooks/useAuthLayout';
 import type { AuthLayoutProps } from '@/types/layouts';
 
 export default function AuthLayout({
@@ -16,11 +16,7 @@ export default function AuthLayout({
     onSubmit,
 }: AuthLayoutProps) {
     const { t } = useTranslation('common');
-
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        onSubmit?.(event);
-    }
+    const { handleSubmit } = useAuthLayout(onSubmit);
 
     return (
         <>

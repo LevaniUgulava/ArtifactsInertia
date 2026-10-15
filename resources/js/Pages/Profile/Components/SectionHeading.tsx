@@ -1,4 +1,4 @@
-import type { SectionHeadingProps } from '../types/ProfileTypes';
+import type { SectionHeadingProps } from '@/Pages/Profile/ProfileTypes';
 
 export function SectionHeading({ action, title }: SectionHeadingProps) {
     return (

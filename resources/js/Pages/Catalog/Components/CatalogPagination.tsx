@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { CatalogPaginationProps } from '../types/CatalogTypes';
+import type { CatalogPaginationProps } from '@/Pages/Catalog/CatalogTypes';
 
 export function CatalogPagination({ currentPage, lastPage, onNavigate }: CatalogPaginationProps) {
     const { t } = useTranslation('catalog');

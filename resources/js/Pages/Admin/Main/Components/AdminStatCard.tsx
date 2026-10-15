@@ -1,12 +1,5 @@
-import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-type AdminStatCardProps = {
-    icon: LucideIcon;
-    label: string;
-    value: number;
-    tone: string;
-};
+import type { AdminStatCardProps } from '@/Pages/Admin/Main/MainTypes';
 
 export function AdminStatCard({ icon: Icon, label, value, tone }: AdminStatCardProps) {
     return (

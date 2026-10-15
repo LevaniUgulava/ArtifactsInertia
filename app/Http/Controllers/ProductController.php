@@ -37,7 +37,7 @@ class ProductController extends Controller
 
     public function index(): Response
     {
-        return Inertia::render('Admin/Products/Index', [
+        return Inertia::render('Admin/Products/Products', [
             'resource' => 'products',
             'title' => 'Products',
             'description' => 'Manage the products and variants available in the storefront.',

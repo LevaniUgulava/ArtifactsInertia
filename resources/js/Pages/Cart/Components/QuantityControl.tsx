@@ -1,6 +1,6 @@
 import { MinusIcon, PlusIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { QuantityControlProps } from '../types/CartTypes';
+import type { QuantityControlProps } from '@/Pages/Cart/CartTypes';
 
 export function QuantityControl({ onChange, value }: QuantityControlProps) {
     const { t } = useTranslation('cart');

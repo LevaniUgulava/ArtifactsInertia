@@ -1,11 +1,11 @@
 import { Head } from '@inertiajs/react';
 import { brandTitle } from '@/constants/brand';
 import RootLayout from '@/Layouts/RootLayout';
-import { ProductBreadcrumb } from './Components/ProductBreadcrumb';
-import { ProductDetails } from './Components/ProductDetails';
-import { ProductGallery } from './Components/ProductGallery';
-import { ProductPurchasePanel } from './Components/ProductPurchasePanel';
-import type { ProductPageProps } from './types/ProductTypes';
+import { ProductBreadcrumb } from '@/Pages/Product/Components/ProductBreadcrumb';
+import { ProductDetails } from '@/Pages/Product/Components/ProductDetails';
+import { ProductGallery } from '@/Pages/Product/Components/ProductGallery';
+import { ProductPurchasePanel } from '@/Pages/Product/Components/ProductPurchasePanel';
+import type { ProductPageProps } from '@/Pages/Product/ProductTypes';
 
 function Product({ product, favorited }: ProductPageProps) {
     return (

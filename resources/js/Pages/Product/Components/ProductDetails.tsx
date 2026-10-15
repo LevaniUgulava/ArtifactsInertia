@@ -1,4 +1,4 @@
-import type { ProductDetailsProps } from '../types/ProductTypes';
+import type { ProductDetailsProps } from '@/Pages/Product/ProductTypes';
 
 export function ProductDetails({ details }: ProductDetailsProps) {
     return (

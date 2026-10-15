@@ -18,7 +18,7 @@ class CollectionController extends Controller
 
     public function index(): Response
     {
-        return Inertia::render('Admin/Collections/Index', [
+        return Inertia::render('Admin/Collections/Collections', [
             'resource' => 'collections',
             'title' => 'Collections',
             'description' => 'Curate the editorial groups shown across the storefront.',

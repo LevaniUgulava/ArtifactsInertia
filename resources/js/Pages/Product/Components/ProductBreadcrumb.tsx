@@ -1,12 +1,12 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { useLocale } from '@/hooks/useLocale';
+import type { ProductBreadcrumbProps } from '@/Pages/Product/ProductTypes';
 import { catalog, home } from '@/routes';
-import type { ProductBreadcrumbProps } from '../types/ProductTypes';
 
 export function ProductBreadcrumb({ category, name }: ProductBreadcrumbProps) {
     const { t } = useTranslation('common');
-    const { props } = usePage();
-    const lang = (props.locale as string) ?? 'ka';
+    const lang = useLocale();
 
     return (
         <nav aria-label={t('breadcrumb')} className="flex flex-wrap items-center gap-2 text-[10px] text-stone-500">

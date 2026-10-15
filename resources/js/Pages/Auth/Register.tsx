@@ -1,24 +1,12 @@
-import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import AuthLayout from '@/Layouts/AuthLayout';
 import { AuthInput } from '@/Components/Auth/AuthInput';
+import AuthLayout from '@/Layouts/AuthLayout';
+import { useRegister } from '@/Pages/Auth/hooks/useRegister';
 import { login } from '@/routes';
-import register from '@/routes/register';
-import type { FormEvent } from 'react';
 
 export default function Register() {
     const { t } = useTranslation(['auth', 'common']);
-    const form = useForm({
-        username: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-    }).withPrecognition('post', register.submit.url());
-
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        form.submit();
-    }
+    const { form, handleSubmit } = useRegister();
 
     return (
         <AuthLayout

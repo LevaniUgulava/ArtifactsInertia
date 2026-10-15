@@ -1,10 +1,10 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import { useLocale } from '@/hooks/useLocale';
+import type { ProductGridProps } from '@/Pages/Home/HomeTypes';
 import productRoutes from '@/routes/product';
-import type { ProductGridProps } from '../types/HomeTypes';
 
 export function ProductGrid({ products }: ProductGridProps) {
-    const { props } = usePage();
-    const lang = (props.locale as string) ?? 'ka';
+    const lang = useLocale();
 
     return (
         <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-4 sm:gap-x-5 lg:gap-x-7 2xl:gap-x-10">

@@ -1,12 +1,12 @@
 import { ChevronRightIcon } from 'lucide-react';
-import { Link, usePage } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { useLocale } from '@/hooks/useLocale';
 import { cart } from '@/routes';
 
 export function CheckoutBreadcrumb() {
     const { t } = useTranslation('checkout');
-    const { props } = usePage();
-    const lang = (props.locale as string) ?? 'ka';
+    const lang = useLocale();
 
     return (
         <nav aria-label={t('breadcrumbLabel')} className="flex items-center gap-2 text-[10px] text-stone-500">

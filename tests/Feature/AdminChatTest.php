@@ -24,7 +24,7 @@ it('renders support conversations for admins', function () {
     $this->actingAs($admin)
         ->get('/admin/chat')
         ->assertInertia(fn ($page) => $page
-            ->component('Admin/Chat/Index')
+            ->component('Admin/Chat/Chat')
             ->has('chats', 1)
             ->where('selectedChat.id', $chat->id)
             ->where('selectedChat.messages.0.message', 'I need help with my order.')

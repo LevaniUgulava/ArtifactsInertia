@@ -42,3 +42,38 @@ export type ChatProps = {
     chats: ChatListItem[];
     selectedChat: SelectedChat | null;
 };
+
+export type Translate = (key: string) => string;
+
+export type StatusBadgeProps = {
+    status: string;
+    t: Translate;
+    active?: boolean;
+    className?: string;
+};
+
+export type ChatHeaderProps = {
+    chat: SelectedChat;
+    onClosed: () => void;
+};
+
+export type ChatListProps = {
+    chats: ChatListItem[];
+    selectedChatId?: string;
+    onSelect: (chatId: string) => void;
+};
+
+export type ChatThreadProps = {
+    chat: SelectedChat | null;
+    onSent: (message: ChatMessage) => void;
+    onClosed: () => void;
+};
+
+export type MessageComposerProps = {
+    chatId: string;
+    onSent: (message: ChatMessage) => void;
+};
+
+export type MessagesListProps = {
+    messages: ChatMessage[];
+};

@@ -1,14 +1,7 @@
 import { Head } from '@inertiajs/react';
-import type { FormEvent, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { brandTitle } from '@/constants/brand';
-
-type AdminAuthLayoutProps = {
-    children: ReactNode;
-    description: string;
-    onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    title: string;
-};
+import type { AdminAuthLayoutProps } from '@/Layouts/Admin/AdminTypes';
 
 export default function AdminAuthLayout({ children, description, onSubmit, title }: AdminAuthLayoutProps) {
     const { t } = useTranslation('admin');

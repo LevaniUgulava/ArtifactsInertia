@@ -1,30 +1,28 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAddToCart } from '../hooks/useAddToCart';
-import { useFavorite } from '../hooks/useFavorite';
-import { useProductVariantSelection } from '../hooks/useProductVariantSelection';
-import type { ProductPurchasePanelProps } from '../types/ProductTypes';
-import { ProductActions } from './ProductActions';
-import { ProductBenefits } from './ProductBenefits';
-import { ProductVariantSelector } from './ProductVariantSelector';
+import { ProductActions } from '@/Pages/Product/Components/ProductActions';
+import { ProductBenefits } from '@/Pages/Product/Components/ProductBenefits';
+import { ProductVariantSelector } from '@/Pages/Product/Components/ProductVariantSelector';
+import { useProductPurchasePanel } from '@/Pages/Product/hooks/useProductPurchasePanel';
+import type { ProductPurchasePanelProps } from '@/Pages/Product/ProductTypes';
 
 export function ProductPurchasePanel({ product, favorited }: ProductPurchasePanelProps) {
     const { t } = useTranslation('product');
-    const { availableSizes, changeColor, changeSize, selectedColor, selectedSize } = useProductVariantSelection(product);
-    const { addToCart, errors, processing } = useAddToCart();
-    const { favorited: isFavorited, toggleFavorite } = useFavorite(product.slug, favorited);
-    const [addedToCart, setAddedToCart] = useState(false);
-    const [showSizeChart, setShowSizeChart] = useState(false);
-
-    function handleColorChange(value: string) {
-        changeColor(value);
-        setAddedToCart(false);
-    }
-
-    function handleSizeChange(value: string) {
-        changeSize(value);
-        setAddedToCart(false);
-    }
+    const {
+        availableSizes,
+        selectedColor,
+        selectedSize,
+        handleColorChange,
+        handleSizeChange,
+        showSizeChart,
+        toggleSizeChart,
+        addedToCart,
+        canAddToCart,
+        error,
+        processing,
+        handleAddToCart,
+        isFavorited,
+        toggleFavorite,
+    } = useProductPurchasePanel(product, favorited);
 
     return (
         <section className="space-y-5">
@@ -34,13 +32,13 @@ export function ProductPurchasePanel({ product, favorited }: ProductPurchasePane
                 <p className="mt-1 text-base font-semibold text-stone-950">{product.price}</p>
             </div>
             <p className="max-w-xl text-xs leading-5 text-stone-600">{product.description}</p>
-            <ProductVariantSelector availableSizes={availableSizes} colors={product.colors} onColorChange={handleColorChange} onSizeChange={handleSizeChange} onSizeChart={() => setShowSizeChart((visible) => !visible)} selectedColor={selectedColor} selectedSize={selectedSize} sizes={product.sizes} />
+            <ProductVariantSelector availableSizes={availableSizes} colors={product.colors} onColorChange={handleColorChange} onSizeChange={handleSizeChange} onSizeChart={toggleSizeChart} selectedColor={selectedColor} selectedSize={selectedSize} sizes={product.sizes} />
             {showSizeChart ? <div className="rounded-lg border border-stone-200 bg-stone-50 p-4 text-[10px] leading-5 text-stone-600">{t('sizeChartText')}</div> : null}
             <ProductActions
                 addedToCart={addedToCart}
-                canAddToCart={Boolean(selectedColor && selectedSize)}
-                error={errors.size ?? ''}
-                onAddToCart={() => addToCart({ slug: product.slug, color: selectedColor, size: selectedSize }, () => setAddedToCart(true))}
+                canAddToCart={canAddToCart}
+                error={error}
+                onAddToCart={handleAddToCart}
                 onWishlist={toggleFavorite}
                 processing={processing}
                 wishlisted={isFavorited}

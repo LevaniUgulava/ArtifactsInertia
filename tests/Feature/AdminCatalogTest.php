@@ -12,10 +12,10 @@ it('renders every admin catalog destination for a verified user', function (stri
         ->get($uri)
         ->assertInertia(fn ($page) => $page->component($component));
 })->with([
-    'products' => ['/admin/products', 'Admin/Products/Index'],
-    'categories' => ['/admin/categories', 'Admin/Categories/Index'],
-    'collections' => ['/admin/collections', 'Admin/Collections/Index'],
-    'media' => ['/admin/media', 'Admin/Media/Index'],
+    'products' => ['/admin/products', 'Admin/Products/Products'],
+    'categories' => ['/admin/categories', 'Admin/Categories/Categories'],
+    'collections' => ['/admin/collections', 'Admin/Collections/Collections'],
+    'media' => ['/admin/media', 'Admin/Media/Media'],
 ]);
 
 it('creates a category from the admin form', function () {

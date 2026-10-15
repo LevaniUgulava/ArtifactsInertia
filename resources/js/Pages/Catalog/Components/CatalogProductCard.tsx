@@ -2,7 +2,7 @@ import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { useLocale } from '@/hooks/useLocale';
 import productRoutes from '@/routes/product';
-import type { CatalogProductCardProps } from '../types/CatalogTypes';
+import type { CatalogProductCardProps } from '@/Pages/Catalog/CatalogTypes';
 
 export function CatalogProductCard({ product }: CatalogProductCardProps) {
     const { t } = useTranslation('catalog');

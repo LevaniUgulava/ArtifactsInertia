@@ -1,11 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { useFormatDate } from '@/Pages/Admin/Chat/hooks/useChat';
-import type { ChatMessage } from '@/Pages/Admin/Chat/ChatTypes';
-
-type MessagesListProps = {
-    messages: ChatMessage[];
-};
+import type { MessagesListProps } from '@/Pages/Admin/Chat/ChatTypes';
 
 export function MessagesList({ messages }: MessagesListProps) {
     const { t } = useTranslation('admin');

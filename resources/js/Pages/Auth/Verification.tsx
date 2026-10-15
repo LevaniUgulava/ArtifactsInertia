@@ -1,25 +1,11 @@
-import { router, usePage } from '@inertiajs/react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AuthLayout from '@/Layouts/AuthLayout';
+import { useVerification } from '@/Pages/Auth/hooks/useVerification';
 import { login } from '@/routes';
-import verification from '@/routes/verification';
-import type { VerificationPageProps } from './types/AuthTypes';
 
 export default function Verification() {
     const { t } = useTranslation('auth');
-    const { auth, status } = usePage<VerificationPageProps>().props;
-    const [processing, setProcessing] = useState(false);
-    const [resent, setResent] = useState(false);
-
-    function resend() {
-        setProcessing(true);
-        router.post(verification.send.url(), {}, {
-            preserveScroll: true,
-            onSuccess: () => setResent(true),
-            onFinish: () => setProcessing(false),
-        });
-    }
+    const { auth, status, processing, resent, resend } = useVerification();
 
     return (
         <AuthLayout

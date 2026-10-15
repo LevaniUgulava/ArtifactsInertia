@@ -2,7 +2,7 @@ import { useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useLocale } from '@/hooks/useLocale';
 import { update } from '@/routes/profile';
-import type { ProfileFormData } from '../types/ProfileTypes';
+import type { ProfileFormData } from '@/Pages/Profile/ProfileTypes';
 
 export function useProfileForm(name: string, email: string) {
     const lang = useLocale();

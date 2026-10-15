@@ -5,7 +5,7 @@ import { CollectionBanners } from '@/Pages/Home/Components/CollectionBanners';
 import { Hero } from '@/Pages/Home/Components/Hero';
 import { NewArrivals } from '@/Pages/Home/Components/NewArrivals';
 import { TrendingNow } from '@/Pages/Home/Components/TrendingNow';
-import type { HomePageProps } from '@/Pages/Home/types/HomeTypes';
+import type { HomePageProps } from '@/Pages/Home/HomeTypes';
 
 function Home({ newArrivals, trendingProducts, collections }: HomePageProps) {
     return (

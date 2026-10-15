@@ -1,9 +1,9 @@
 import { UserRoundIcon } from 'lucide-react';
 import { type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { statKeys } from '../constants/statKeys';
-import { useProfileForm } from '../hooks/useProfileForm';
-import type { ProfileFormProps } from '../types/ProfileTypes';
+import { statKeys } from '@/constants/statKeys';
+import { useProfileForm } from '@/Pages/Profile/hooks/useProfileForm';
+import type { ProfileFormProps } from '@/Pages/Profile/ProfileTypes';
 
 export function ProfileForm({ avatarUrl, email, memberSince, name, stats }: ProfileFormProps) {
     const { t } = useTranslation('profile');

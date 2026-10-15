@@ -1,6 +1,6 @@
 import { HeartIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { ProductActionsProps } from '../types/ProductTypes';
+import type { ProductActionsProps } from '@/Pages/Product/ProductTypes';
 
 export function ProductActions({ canAddToCart, addedToCart, wishlisted, processing, error = '', onAddToCart, onWishlist }: ProductActionsProps) {
     const { t } = useTranslation('product');

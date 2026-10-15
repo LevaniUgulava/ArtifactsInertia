@@ -2,8 +2,8 @@ import { router } from '@inertiajs/react';
 import { useState } from 'react';
 import { useLocale } from '@/hooks/useLocale';
 import { catalog as catalogRoute } from '@/routes';
-import { MAX_PRICE, MIN_PRICE } from '../constants/filters';
-import type { CatalogPageProps, CatalogQueryState, FilterState } from '../types/CatalogTypes';
+import { MAX_PRICE, MIN_PRICE } from '@/constants/filters';
+import type { CatalogPageProps, CatalogQueryState, FilterState } from '@/Pages/Catalog/CatalogTypes';
 
 export function useCatalog(catalog: CatalogPageProps['catalog']) {
     const lang = useLocale();

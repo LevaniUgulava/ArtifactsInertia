@@ -10,3 +10,6 @@ Feature-folder pattern (matches Header): each feature keeps its Prismic types in
 
 ## Feature types/constants live in subfolders
 Supersedes .ai/rules/pages.md's `<Feature>Types.ts` at feature-root convention. Each feature keeps types in `<Feature>/types/<Feature>Types.ts` (page props, data shapes, and ALL component `*Props` types extracted) and feature-local constants in `<Feature>/constants/<file>.ts`. Existing `<Feature>Types.ts` at feature root and inline props/types inside components are legacy — migrate them. Per-feature derived arrays that need no props (e.g. ProfileSidebar navigationItems) may stay inline.
+
+## Page files use Component/Component.tsx, not Index
+Name a page file after its component inside a matching folder: `Pages/Admin/Categories/Categories.tsx`, never `Index.tsx`/`index.tsx`. The Inertia page name string (e.g. `Inertia::render('Admin/Categories/Categories')`) and `->component()` test assertions must match the file path.

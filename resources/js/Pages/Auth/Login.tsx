@@ -1,23 +1,14 @@
-import {Link, useForm} from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import AuthLayout from '@/Layouts/AuthLayout';
 import { AuthInput } from '@/Components/Auth/AuthInput';
+import AuthLayout from '@/Layouts/AuthLayout';
+import { useLogin } from '@/Pages/Auth/hooks/useLogin';
 import { register } from '@/routes';
-import login from '@/routes/login';
 import password from '@/routes/password';
-import type { FormEvent } from 'react';
 
 export default function Login() {
     const { t } = useTranslation(['auth', 'common']);
-    const form = useForm({
-        email: '',
-        password: '',
-    }).withPrecognition('post', login.submit.url());
-
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        form.submit();
-    }
+    const { form, handleSubmit } = useLogin();
 
     return (
         <AuthLayout

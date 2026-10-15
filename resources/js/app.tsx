@@ -1,8 +1,8 @@
 import { createInertiaApp, router, type ResolvedComponent } from '@inertiajs/react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
-import i18n from './i18n';
-import type { InertiaPage } from './types/app';
+import i18n from '@/i18n';
+import type { InertiaPage } from '@/types/app';
 import { configureEcho } from '@laravel/echo-react';
 import {setUrlDefaults} from "@/wayfinder";
 configureEcho({

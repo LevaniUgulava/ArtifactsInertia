@@ -1,4 +1,4 @@
-import type { SectionTitleProps } from '../types/HomeTypes';
+import type { SectionTitleProps } from '@/Pages/Home/HomeTypes';
 
 export function SectionTitle({ eyebrow, title }: SectionTitleProps) {
     return (

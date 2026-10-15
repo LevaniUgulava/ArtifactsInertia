@@ -1,18 +1,14 @@
 import { Link } from '@inertiajs/react';
-import {
-    MenuIcon,
-    SearchIcon,
-    ShoppingBagIcon,
-} from 'lucide-react';
+import { MenuIcon, SearchIcon, ShoppingBagIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { brand } from '@/constants/brand';
-import { USER_AVATAR_IMAGE } from '@/constants/images';
-import { cart, home, login, profile, register } from '@/routes';
-import { focusRing } from './constants/focusRing';
-import { CartBadge } from './Components/CartBadge';
-import { MobileHeader } from './Components/MobileHeader';
-import { SearchModal } from './Components/SearchModal';
-import { useHeader } from './hooks/useHeader';
+import { cart, home, login, register } from '@/routes';
+import { focusRing } from '@/constants/focusRing';
+import {useHeader} from "@/Layouts/Header/hooks/useHeader";
+import {SearchModal} from "@/Layouts/Header/Components/SearchModal";
+import {CartBadge} from "@/Layouts/Header/Components/CartBadge";
+import {AccountMenu} from "@/Layouts/Header/Components/AccountMenu";
+import {MobileHeader} from "@/Layouts/Header/Components/MobileHeader";
 
 export function Header() {
     const { t } = useTranslation('header');
@@ -60,16 +56,7 @@ export function Header() {
                             </Link>
                             <CartBadge />
                         </div>
-                            <Link
-                                className="hidden items-center gap-2 border-l border-brand-olive/20 pl-3 text-xs font-semibold text-brand-olive transition hover:text-brand-charcoal sm:flex sm:pl-4"
-                                href={profile.url({ lang })}>
-                                <span
-                                    className="grid size-8 place-items-center overflow-hidden rounded-full bg-brand-taupe/30">
-                                    <img alt="" className="size-full object-cover"
-                                         src={USER_AVATAR_IMAGE}/>
-                                </span>
-                                <span className="max-w-32 truncate">{user.name}</span>
-                            </Link>
+                            <AccountMenu user={user} lang={lang}/>
                         </>
                     ) : (
                         <>

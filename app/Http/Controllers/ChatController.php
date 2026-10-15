@@ -137,7 +137,7 @@ class ChatController extends Controller
             ? $chats->firstWhere('id', $selectedChat)?->load(['messages.sender', 'messages.chat:id,operator_id'])
             : null;
 
-        return Inertia::render('Admin/Chat/Index', [
+        return Inertia::render('Admin/Chat/Chat', [
             'chats' => ChatResource::collection($chats)->resolve(),
             'selectedChat' => $selected ? SelectedChatResource::make($selected)->resolve() : null,
         ]);

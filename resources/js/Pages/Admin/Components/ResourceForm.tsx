@@ -1,44 +1,17 @@
-import { Link, useForm } from '@inertiajs/react';
-import type { FormEvent, ReactNode } from 'react';
+import { Link } from '@inertiajs/react';
+import type { ReactNode } from 'react';
 import { ArrowLeft, Save } from 'lucide-react';
 import AdminLayout from '@/Layouts/Admin/AdminLayout';
-import admin from '@/routes/admin';
-
-type ProductOption = { id: number; name: string };
-
-type ResourceFormProps = {
-    resource: 'categories' | 'collections';
-    title: string;
-    values: {
-        name: string;
-        slug?: string;
-        product_ids?: number[];
-    };
-    products?: ProductOption[];
-    recordId?: number | null;
-};
+import { useResourceForm } from '@/Pages/Admin/Components/hooks/useResourceForm';
+import type { ResourceFormFieldProps, ResourceFormProps } from '@/Pages/Admin/Components/ResourceFormTypes';
 
 export default function ResourceForm({ resource, title, values, products = [], recordId }: ResourceFormProps) {
-    const form = useForm(values);
-    const isEditing = recordId != null;
-    const endpoint = resource === 'categories'
-        ? (isEditing ? admin.categories.update(recordId).url : admin.categories.store().url)
-        : (isEditing ? admin.collections.update(recordId).url : admin.collections.store().url);
-
-    function submit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-
-        if (isEditing) {
-            form.put(endpoint);
-        } else {
-            form.post(endpoint);
-        }
-    }
+    const { form, indexHref, submit } = useResourceForm({ resource, values, recordId });
 
     return (
         <div className="mx-auto max-w-3xl space-y-6">
             <div className="flex items-center gap-4">
-                <Link className="grid size-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-cyan-600 hover:text-cyan-700" href={resource === 'categories' ? admin.categories.index.url() : admin.collections.index.url()}>
+                <Link className="grid size-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-cyan-600 hover:text-cyan-700" href={indexHref}>
                     <ArrowLeft aria-hidden="true" size={17} />
                     <span className="sr-only">Back</span>
                 </Link>
@@ -75,7 +48,7 @@ export default function ResourceForm({ resource, title, values, products = [], r
     );
 }
 
-function Field({ children, error, label }: { children: ReactNode; error?: string; label: string }) {
+function Field({ children, error, label }: ResourceFormFieldProps) {
     return (
         <label className="block space-y-2 text-sm font-semibold text-slate-700">
             {label}

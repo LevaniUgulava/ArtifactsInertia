@@ -3,14 +3,11 @@ import { useState } from 'react';
 import { useLocale } from '@/hooks/useLocale';
 import { login } from '@/routes';
 import { destroy, store } from '@/routes/favorites';
-
-type AuthenticatedUser = {
-    id: number;
-};
+import type { SharedPageProps } from '@/types/shared';
 
 export function useFavorite(slug: string, initial: boolean) {
     const locale = useLocale();
-    const { props } = usePage<{ auth: { user: AuthenticatedUser | null } }>();
+    const { props } = usePage<SharedPageProps>();
     const { post, delete: requestDestroy } = useHttp<Record<string, never>>({});
     const [favorited, setFavorited] = useState(initial);
 

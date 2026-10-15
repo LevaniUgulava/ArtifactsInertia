@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function index(): Response
     {
-        return Inertia::render('Admin/Categories/Index', [
+        return Inertia::render('Admin/Categories/Categories', [
             'resource' => 'categories',
             'title' => 'Categories',
             'description' => 'Organize products into storefront categories.',

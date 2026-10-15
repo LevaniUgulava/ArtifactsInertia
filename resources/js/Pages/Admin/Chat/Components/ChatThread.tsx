@@ -3,13 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ChatHeader } from '@/Pages/Admin/Chat/Components/ChatHeader';
 import { MessageComposer } from '@/Pages/Admin/Chat/Components/MessageComposer';
 import { MessagesList } from '@/Pages/Admin/Chat/Components/MessagesList';
-import type { ChatMessage, SelectedChat } from '@/Pages/Admin/Chat/ChatTypes';
-
-type ChatThreadProps = {
-    chat: SelectedChat | null;
-    onSent: (message: ChatMessage) => void;
-    onClosed: () => void;
-};
+import type { ChatThreadProps } from '@/Pages/Admin/Chat/ChatTypes';
 
 export function ChatThread({ chat, onSent, onClosed }: ChatThreadProps) {
     const { t } = useTranslation('admin');

@@ -3,13 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { StatusBadge } from '@/Pages/Admin/Chat/Components/StatusBadge';
 import { useFormatDate } from '@/Pages/Admin/Chat/hooks/useChat';
-import type { ChatListItem } from '@/Pages/Admin/Chat/ChatTypes';
-
-type ChatListProps = {
-    chats: ChatListItem[];
-    selectedChatId?: string;
-    onSelect: (chatId: string) => void;
-};
+import type { ChatListProps } from '@/Pages/Admin/Chat/ChatTypes';
 
 export function ChatList({ chats, selectedChatId, onSelect }: ChatListProps) {
     const { t } = useTranslation('admin');

@@ -2,8 +2,8 @@ import { Boxes, FolderKanban, Package, Tags, TriangleAlert } from 'lucide-react'
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import AdminLayout from '@/Layouts/Admin/AdminLayout';
-import { AdminStatCard } from './Components/AdminStatCard';
-import type { AdminDashboardProps } from './types/MainTypes';
+import { AdminStatCard } from '@/Pages/Admin/Main/Components/AdminStatCard';
+import type { AdminDashboardProps } from '@/Pages/Admin/Main/MainTypes';
 
 function Dashboard({ stats, inventory, recentProducts }: AdminDashboardProps) {
     const { t } = useTranslation('admin');
