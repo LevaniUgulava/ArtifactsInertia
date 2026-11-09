@@ -44,8 +44,52 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \App\Http\Controllers\TryonController::credits
+* @see app/Http/Controllers/TryonController.php:32
+* @route '/admin/tryon/credits'
+*/
+export const credits = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: credits.url(options),
+    method: 'get',
+})
+
+credits.definition = {
+    methods: ["get","head"],
+    url: '/admin/tryon/credits',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\TryonController::credits
+* @see app/Http/Controllers/TryonController.php:32
+* @route '/admin/tryon/credits'
+*/
+credits.url = (options?: RouteQueryOptions) => {
+    return credits.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\TryonController::credits
+* @see app/Http/Controllers/TryonController.php:32
+* @route '/admin/tryon/credits'
+*/
+credits.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: credits.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\TryonController::credits
+* @see app/Http/Controllers/TryonController.php:32
+* @route '/admin/tryon/credits'
+*/
+credits.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: credits.url(options),
+    method: 'head',
+})
+
+/**
 * @see \App\Http\Controllers\TryonController::store
-* @see app/Http/Controllers/TryonController.php:25
+* @see app/Http/Controllers/TryonController.php:41
 * @route '/admin/tryon'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -60,7 +104,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\TryonController::store
-* @see app/Http/Controllers/TryonController.php:25
+* @see app/Http/Controllers/TryonController.php:41
 * @route '/admin/tryon'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -69,7 +113,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\TryonController::store
-* @see app/Http/Controllers/TryonController.php:25
+* @see app/Http/Controllers/TryonController.php:41
 * @route '/admin/tryon'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -79,7 +123,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\TryonController::refresh
-* @see app/Http/Controllers/TryonController.php:41
+* @see app/Http/Controllers/TryonController.php:57
 * @route '/admin/tryon/predictions/{tryonPrediction}/refresh'
 */
 export const refresh = (args: { tryonPrediction: string | number | { id: string | number } } | [tryonPrediction: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +138,7 @@ refresh.definition = {
 
 /**
 * @see \App\Http\Controllers\TryonController::refresh
-* @see app/Http/Controllers/TryonController.php:41
+* @see app/Http/Controllers/TryonController.php:57
 * @route '/admin/tryon/predictions/{tryonPrediction}/refresh'
 */
 refresh.url = (args: { tryonPrediction: string | number | { id: string | number } } | [tryonPrediction: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -127,7 +171,7 @@ refresh.url = (args: { tryonPrediction: string | number | { id: string | number 
 
 /**
 * @see \App\Http\Controllers\TryonController::refresh
-* @see app/Http/Controllers/TryonController.php:41
+* @see app/Http/Controllers/TryonController.php:57
 * @route '/admin/tryon/predictions/{tryonPrediction}/refresh'
 */
 refresh.post = (args: { tryonPrediction: string | number | { id: string | number } } | [tryonPrediction: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -135,6 +179,6 @@ refresh.post = (args: { tryonPrediction: string | number | { id: string | number
     method: 'post',
 })
 
-const TryonController = { index, store, refresh }
+const TryonController = { index, credits, store, refresh }
 
 export default TryonController

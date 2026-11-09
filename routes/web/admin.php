@@ -29,6 +29,7 @@ Route::prefix('admin')
         Route::resource('collections', CollectionController::class)->except(['show']);
         Route::get('/media', [MediaController::class, 'index'])->name('media.index');
         Route::get('/tryon', [TryonController::class, 'index'])->name('tryon.index');
+        Route::get('/tryon/credits', [TryonController::class, 'credits'])->name('tryon.credits');
         Route::post('/tryon', [TryonController::class, 'store'])->middleware('throttle:10,1')->name('tryon.store');
         Route::post('/tryon/predictions/{tryonPrediction}/refresh', [TryonController::class, 'refresh'])
             ->middleware('throttle:120,1')

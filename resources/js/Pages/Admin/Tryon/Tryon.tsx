@@ -1,4 +1,4 @@
-import { ImagePlus, LoaderCircle, RefreshCw, WandSparkles } from 'lucide-react';
+import { Coins, ImagePlus, LoaderCircle, RefreshCw, WandSparkles } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import AdminLayout from '@/Layouts/Admin/AdminLayout';
@@ -8,9 +8,10 @@ import { useTryon } from '@/Pages/Admin/Tryon/hooks/useTryon';
 import type { TryonImageUploadProps, TryonProps } from '@/Pages/Admin/Tryon/TryonTypes';
 import { tryonAccept } from '@/constants/tryon';
 
-export default function Tryon({ predictions: initialPredictions }: TryonProps) {
+export default function Tryon({ credits: initialCredits, predictions: initialPredictions }: TryonProps) {
     const { t } = useTranslation('admin');
     const {
+        credits,
         errorMessage,
         isProcessing,
         modelImage,
@@ -29,7 +30,7 @@ export default function Tryon({ predictions: initialPredictions }: TryonProps) {
         getRefreshHandler,
         refreshingPredictionId,
         refreshRequestProcessing,
-    } = useTryon({ predictions: initialPredictions });
+    } = useTryon({ credits: initialCredits, predictions: initialPredictions });
 
     const canSubmit = Boolean(modelImage && productImage) && !isProcessing;
 
@@ -41,6 +42,16 @@ export default function Tryon({ predictions: initialPredictions }: TryonProps) {
                     <h1 className="text-3xl font-semibold tracking-tight text-slate-950">{t('tryonTitle')}</h1>
                     <p className="max-w-2xl text-sm leading-6 text-slate-600">{t('tryonDescription')}</p>
                 </div>
+                <aside aria-label={t('tryonCreditsTitle')} className="w-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:max-w-sm">
+                    <div className="flex items-center gap-3">
+                        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-amber-50 text-amber-700">
+                            <Coins aria-hidden="true" size={20} />
+                        </span>
+                        <p className="text-sm font-semibold text-slate-700">
+                            {t('tryonCreditsTitle')}: <span className="text-2xl text-slate-950">{credits?.total ?? '—'}</span>
+                        </p>
+                    </div>
+                </aside>
             </header>
 
             <section className="grid gap-5 lg:grid-cols-2" aria-label={t('tryonInputs')}>

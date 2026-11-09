@@ -17,9 +17,25 @@ class TryonController extends Controller
 
     public function index(): Response
     {
+        try {
+            $credits = $this->tryonService->credits();
+        } catch (FashnApiException) {
+            $credits = null;
+        }
+
         return Inertia::render('Admin/Tryon/Tryon', [
             'predictions' => TryonPredictionResource::collection($this->tryonService->predictions())->resolve(),
+            'credits' => $credits,
         ]);
+    }
+
+    public function credits(): JsonResponse
+    {
+        try {
+            return response()->json(['credits' => $this->tryonService->credits()]);
+        } catch (FashnApiException $exception) {
+            return response()->json(['message' => $exception->getMessage()], $exception->statusCode);
+        }
     }
 
     public function store(StartTryonRequest $request): JsonResponse

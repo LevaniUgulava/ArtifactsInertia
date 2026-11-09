@@ -1,15 +1,17 @@
 import { useHttp } from '@inertiajs/react';
-import { useEffect, useState, type ChangeEvent } from 'react';
+import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { tryonActiveStatuses, tryonDateTimeOptions, tryonMaxImageSizeBytes, tryonPollIntervalMs } from '@/constants/tryon';
-import type { TryonFormData, TryonHistoryItem, TryonProps, TryonRefreshResponse, TryonStartedResponse } from '@/Pages/Admin/Tryon/TryonTypes';
+import type { TryonCredits, TryonCreditsResponse, TryonFormData, TryonHistoryItem, TryonProps, TryonRefreshResponse, TryonStartedResponse } from '@/Pages/Admin/Tryon/TryonTypes';
 import adminTryon from '@/routes/admin/tryon';
 
-export function useTryon({ predictions: initialPredictions }: TryonProps) {
+export function useTryon({ credits: initialCredits, predictions: initialPredictions }: TryonProps) {
     const { t } = useTranslation('admin');
     const startRequest = useHttp<TryonFormData, TryonStartedResponse>({ model_image: null, product_image: null });
     const refreshRequest = useHttp<Record<string, never>, TryonRefreshResponse>({});
+    const creditsRequest = useHttp<Record<string, never>, TryonCreditsResponse>({});
     const [predictions, setPredictions] = useState<TryonHistoryItem[]>(initialPredictions);
+    const [credits, setCredits] = useState<TryonCredits | null>(initialCredits);
     const [modelPreviewUrl, setModelPreviewUrl] = useState<string | null>(null);
     const [productPreviewUrl, setProductPreviewUrl] = useState<string | null>(null);
     const [activePredictionId, setActivePredictionId] = useState<string | null>(
@@ -20,9 +22,21 @@ export function useTryon({ predictions: initialPredictions }: TryonProps) {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [refreshingPredictionId, setRefreshingPredictionId] = useState<string | null>(null);
 
+    const fetchCredits = useCallback((): void => {
+        void creditsRequest.get(adminTryon.credits().url, {
+            onSuccess: (response) => setCredits(response.credits),
+        }).catch(() => {
+            setCredits(null);
+        });
+    }, [creditsRequest.get]);
+
     useEffect(() => {
         setPredictions(initialPredictions);
     }, [initialPredictions]);
+
+    useEffect(() => {
+        setCredits(initialCredits);
+    }, [initialCredits]);
 
     useEffect(() => {
         const image = startRequest.data.model_image;
@@ -78,6 +92,8 @@ export function useTryon({ predictions: initialPredictions }: TryonProps) {
                 setRefreshingPredictionId(null);
 
                 if (response.prediction.status === 'completed') {
+                    fetchCredits();
+
                     if (response.prediction.resultUrl) {
                         setResultUrl(response.prediction.resultUrl);
                     } else {
@@ -116,7 +132,7 @@ export function useTryon({ predictions: initialPredictions }: TryonProps) {
             isActive = false;
             clearTimeout(timeoutId);
         };
-    }, [activePredictionId, refreshRequest.post, t]);
+    }, [activePredictionId, fetchCredits, refreshRequest.post, t]);
 
     function applyPrediction(prediction: TryonHistoryItem): void {
         setPredictions((current) => {
@@ -210,6 +226,7 @@ export function useTryon({ predictions: initialPredictions }: TryonProps) {
                     setPredictionStatus(response.prediction.status);
                     setActivePredictionId(predictionId);
                 } else if (response.prediction.status === 'completed') {
+                    fetchCredits();
                     setResultUrl(response.prediction.resultUrl);
                     setPredictionStatus('completed');
                     setActivePredictionId(null);
@@ -246,6 +263,7 @@ export function useTryon({ predictions: initialPredictions }: TryonProps) {
     }
 
     return {
+        credits,
         errorMessage,
         formatCreatedAt,
         getRefreshHandler,

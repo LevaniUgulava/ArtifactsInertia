@@ -44,6 +44,7 @@
     "tryonBreadcrumb": "Artifacts / Admin",
     "tryonTitle": "AI try-on",
     "tryonDescription": "Preview a garment on a model with FASHN AI. Choose a person photo and a product photo to start a prediction.",
+    "tryonCreditsTitle": "Credits",
     "tryonInputs": "Try-on input images",
     "tryonModelImage": "Person photo",
     "tryonModelDescription": "Choose a clear, full-body photo of the person who will wear the product.",

@@ -11,6 +11,39 @@ use Illuminate\Support\Facades\Http;
 class FashnTryonService
 {
     /**
+     * @return array{total: int, subscription: int, on_demand: int}
+     */
+    public function credits(): array
+    {
+        try {
+            $response = $this->request()
+                ->timeout(15)
+                ->get('/credits');
+        } catch (ConnectionException) {
+            throw new FashnApiException('Could not retrieve FASHN credits.', 502);
+        }
+
+        if (! $response->successful()) {
+            throw new FashnApiException($this->errorMessage($response->json()), 502);
+        }
+
+        $credits = $response->json('credits');
+
+        if (! is_array($credits)
+            || ! is_int($credits['total'] ?? null)
+            || ! is_int($credits['subscription'] ?? null)
+            || ! is_int($credits['on_demand'] ?? null)) {
+            throw new FashnApiException('FASHN returned an invalid credits response.', 502);
+        }
+
+        return [
+            'total' => $credits['total'],
+            'subscription' => $credits['subscription'],
+            'on_demand' => $credits['on_demand'],
+        ];
+    }
+
+    /**
      * @return array{id: string}
      */
     public function startPrediction(UploadedFile $modelImage, UploadedFile $productImage): array

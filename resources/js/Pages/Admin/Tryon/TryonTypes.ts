@@ -24,6 +24,17 @@ export type TryonRefreshResponse = {
 
 export type TryonProps = {
     predictions: TryonHistoryItem[];
+    credits: TryonCredits | null;
+};
+
+export type TryonCredits = {
+    total: number;
+    subscription: number;
+    on_demand: number;
+};
+
+export type TryonCreditsResponse = {
+    credits: TryonCredits;
 };
 
 export type TryonImageUploadProps = {

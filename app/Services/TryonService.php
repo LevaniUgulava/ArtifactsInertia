@@ -11,6 +11,14 @@ class TryonService
     public function __construct(private readonly FashnTryonService $fashnTryonService) {}
 
     /**
+     * @return array{total: int, subscription: int, on_demand: int}
+     */
+    public function credits(): array
+    {
+        return $this->fashnTryonService->credits();
+    }
+
+    /**
      * @return Collection<int, TryonPrediction>
      */
     public function predictions(): Collection

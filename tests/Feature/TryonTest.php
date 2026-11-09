@@ -7,11 +7,17 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
 
 it('renders the try-on page for an admin', function () {
+    Http::fake(['api.fashn.ai/v1/credits' => Http::response([
+        'credits' => ['total' => 234, 'subscription' => 100, 'on_demand' => 134],
+    ])]);
+    config(['services.fashn.key' => 'test-fashn-key']);
+
     $this->actingAs(User::factory()->admin()->create())
         ->get('/admin/tryon')
         ->assertInertia(fn ($page) => $page
             ->component('Admin/Tryon/Tryon')
-            ->has('predictions', 0));
+            ->has('predictions', 0)
+            ->where('credits.total', 234));
 });
 
 it('lists saved predictions newest first', function () {
@@ -32,6 +38,25 @@ it('lists saved predictions newest first', function () {
             ->has('predictions', 2)
             ->where('predictions.0.id', (string) $newerPrediction->id)
             ->where('predictions.1.id', (string) $olderPrediction->id));
+});
+
+it('refreshes the FASHN credit balance through the admin endpoint', function () {
+    Http::preventStrayRequests();
+    Http::fake(['api.fashn.ai/v1/credits' => Http::response([
+        'credits' => ['total' => 234, 'subscription' => 100, 'on_demand' => 134],
+    ])]);
+    config(['services.fashn.key' => 'test-fashn-key']);
+
+    $this->actingAs(User::factory()->admin()->create())
+        ->getJson('/admin/tryon/credits')
+        ->assertOk()
+        ->assertJsonPath('credits.total', 234)
+        ->assertJsonPath('credits.subscription', 100)
+        ->assertJsonPath('credits.on_demand', 134);
+
+    Http::assertSent(fn (Request $request): bool => $request->url() === 'https://api.fashn.ai/v1/credits'
+        && $request->method() === 'GET'
+        && $request->header('Authorization') === ['Bearer test-fashn-key']);
 });
 
 it('redirects guests away from the try-on page', function () {
