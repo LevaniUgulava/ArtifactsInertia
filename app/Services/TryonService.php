@@ -29,9 +29,9 @@ class TryonService
             ->get();
     }
 
-    public function startPrediction(UploadedFile $modelImage, UploadedFile $productImage): TryonPrediction
+    public function startPrediction(UploadedFile $modelImage, UploadedFile $productImage, ?string $prompt = null): TryonPrediction
     {
-        $startedPrediction = $this->fashnTryonService->startPrediction($modelImage, $productImage);
+        $startedPrediction = $this->fashnTryonService->startPrediction($modelImage, $productImage, $prompt);
 
         return TryonPrediction::query()->create([
             'prediction_id' => $startedPrediction['id'],

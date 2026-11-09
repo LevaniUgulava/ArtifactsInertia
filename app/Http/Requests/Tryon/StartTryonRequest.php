@@ -25,6 +25,7 @@ class StartTryonRequest extends FormRequest
         return [
             'model_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
             'product_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
+            'prompt' => ['sometimes', 'nullable', 'string', 'max:1000'],
         ];
     }
 }

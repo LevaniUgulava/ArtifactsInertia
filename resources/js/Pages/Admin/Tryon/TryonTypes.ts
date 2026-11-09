@@ -3,6 +3,7 @@ import type { ChangeEvent } from 'react';
 export type TryonFormData = {
     model_image: File | null;
     product_image: File | null;
+    prompt: string;
 };
 
 export type TryonStartedResponse = {

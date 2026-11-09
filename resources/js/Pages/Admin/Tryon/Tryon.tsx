@@ -18,9 +18,11 @@ export default function Tryon({ credits: initialCredits, predictions: initialPre
         modelPreviewUrl,
         onModelImageChange,
         onProductImageChange,
+        onPromptChange,
         predictionStatus,
         productImage,
         productPreviewUrl,
+        prompt,
         resultUrl,
         setImage,
         submit,
@@ -75,6 +77,22 @@ export default function Tryon({ credits: initialCredits, predictions: initialPre
                     previewUrl={productPreviewUrl}
                     title={t('tryonProductImage')}
                 />
+            </section>
+
+            <section className="space-y-2">
+                <label className="text-sm font-semibold text-slate-900" htmlFor="tryon_prompt">
+                    {t('tryonPromptLabel')}
+                </label>
+                <textarea
+                    className="min-h-24 w-full resize-y rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-200 disabled:cursor-not-allowed disabled:bg-slate-50"
+                    disabled={isProcessing}
+                    id="tryon_prompt"
+                    maxLength={1000}
+                    onChange={onPromptChange}
+                    placeholder={t('tryonPromptPlaceholder')}
+                    value={prompt}
+                />
+                <p className="text-xs text-slate-500">{t('tryonPromptDescription')}</p>
             </section>
 
             <div className="flex flex-wrap items-center gap-3">

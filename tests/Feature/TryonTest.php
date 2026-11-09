@@ -91,7 +91,27 @@ it('submits images to FASHN and saves the returned prediction id', function () {
         && $request->header('Authorization') === ['Bearer test-fashn-key']
         && data_get($request->data(), 'model_name') === 'tryon-max'
         && str_starts_with(data_get($request->data(), 'inputs.model_image'), 'data:image/png;base64,')
-        && str_starts_with(data_get($request->data(), 'inputs.product_image'), 'data:image/png;base64,'));
+        && str_starts_with(data_get($request->data(), 'inputs.product_image'), 'data:image/png;base64,')
+        && ! array_key_exists('prompt', data_get($request->data(), 'inputs', [])));
+});
+
+it('passes a supplied prompt to FASHN try-on inputs', function () {
+    Http::preventStrayRequests();
+    Http::fake([
+        'api.fashn.ai/v1/run' => Http::response(['id' => 'prediction-with-prompt'], 200),
+    ]);
+    config(['services.fashn.key' => 'test-fashn-key']);
+
+    $this->actingAs(User::factory()->admin()->create())
+        ->post('/admin/tryon', [
+            'model_image' => UploadedFile::fake()->image('model.png'),
+            'product_image' => UploadedFile::fake()->image('product.png'),
+            'prompt' => 'Tuck in the shirt',
+        ], ['Accept' => 'application/json'])
+        ->assertStatus(202);
+
+    Http::assertSent(fn (Request $request): bool => $request->url() === 'https://api.fashn.ai/v1/run'
+        && data_get($request->data(), 'inputs.prompt') === 'Tuck in the shirt');
 });
 
 it('rejects invalid try-on image uploads', function () {

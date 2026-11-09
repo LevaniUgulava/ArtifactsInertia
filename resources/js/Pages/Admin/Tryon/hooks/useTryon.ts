@@ -7,7 +7,7 @@ import adminTryon from '@/routes/admin/tryon';
 
 export function useTryon({ credits: initialCredits, predictions: initialPredictions }: TryonProps) {
     const { t } = useTranslation('admin');
-    const startRequest = useHttp<TryonFormData, TryonStartedResponse>({ model_image: null, product_image: null });
+    const startRequest = useHttp<TryonFormData, TryonStartedResponse>({ model_image: null, product_image: null, prompt: '' });
     const refreshRequest = useHttp<Record<string, never>, TryonRefreshResponse>({});
     const creditsRequest = useHttp<Record<string, never>, TryonCreditsResponse>({});
     const [predictions, setPredictions] = useState<TryonHistoryItem[]>(initialPredictions);
@@ -169,6 +169,10 @@ export function useTryon({ credits: initialCredits, predictions: initialPredicti
         setImage('product_image', image);
     }
 
+    function onPromptChange(event: ChangeEvent<HTMLTextAreaElement>): void {
+        startRequest.setData('prompt', event.currentTarget.value);
+    }
+
     function submit(): void {
         if (!startRequest.data.model_image || !startRequest.data.product_image || startRequest.processing) {
             return;
@@ -256,7 +260,7 @@ export function useTryon({ credits: initialCredits, predictions: initialPredicti
     }
 
     function clear(): void {
-        startRequest.setData({ model_image: null, product_image: null });
+        startRequest.setData({ model_image: null, product_image: null, prompt: '' });
         setPredictionStatus(null);
         setResultUrl(null);
         setErrorMessage(null);
@@ -272,10 +276,12 @@ export function useTryon({ credits: initialCredits, predictions: initialPredicti
         modelPreviewUrl,
         onModelImageChange,
         onProductImageChange,
+        onPromptChange,
         predictions,
         predictionStatus,
         productImage: startRequest.data.product_image,
         productPreviewUrl,
+        prompt: startRequest.data.prompt,
         refreshingPredictionId,
         resultUrl,
         refreshRequestProcessing: refreshRequest.processing,

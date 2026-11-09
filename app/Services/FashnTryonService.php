@@ -46,17 +46,23 @@ class FashnTryonService
     /**
      * @return array{id: string}
      */
-    public function startPrediction(UploadedFile $modelImage, UploadedFile $productImage): array
+    public function startPrediction(UploadedFile $modelImage, UploadedFile $productImage, ?string $prompt = null): array
     {
+        $inputs = [
+            'model_image' => $this->imageDataUrl($modelImage),
+            'product_image' => $this->imageDataUrl($productImage),
+        ];
+
+        if (is_string($prompt) && trim($prompt) !== '') {
+            $inputs['prompt'] = trim($prompt);
+        }
+
         try {
             $response = $this->request()
                 ->timeout(30)
                 ->post('/run', [
                     'model_name' => 'tryon-max',
-                    'inputs' => [
-                        'model_image' => $this->imageDataUrl($modelImage),
-                        'product_image' => $this->imageDataUrl($productImage),
-                    ],
+                    'inputs' => $inputs,
                 ]);
         } catch (ConnectionException) {
             throw new FashnApiException('Could not connect to the FASHN API.', 502);

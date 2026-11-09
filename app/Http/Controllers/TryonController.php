@@ -44,6 +44,7 @@ class TryonController extends Controller
             $prediction = $this->tryonService->startPrediction(
                 $request->file('model_image'),
                 $request->file('product_image'),
+                $request->validated('prompt'),
             );
 
             return response()->json([
