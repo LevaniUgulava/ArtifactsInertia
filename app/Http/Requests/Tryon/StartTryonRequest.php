@@ -23,8 +23,8 @@ class StartTryonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'model_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
-            'product_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
+            'model_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+            'product_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
             'prompt' => ['sometimes', 'nullable', 'string', 'max:1000'],
         ];
     }

@@ -124,6 +124,16 @@ it('rejects invalid try-on image uploads', function () {
         ->assertJsonValidationErrors('model_image');
 });
 
+it('rejects try-on images larger than 10 MB', function () {
+    $this->actingAs(User::factory()->admin()->create())
+        ->post('/admin/tryon', [
+            'model_image' => UploadedFile::fake()->image('model.png')->size(10241),
+            'product_image' => UploadedFile::fake()->image('product.png'),
+        ], ['Accept' => 'application/json'])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors('model_image');
+});
+
 it('refreshes a saved prediction and persists its status and result url', function () {
     $prediction = TryonPrediction::factory()->create(['prediction_id' => 'prediction-123']);
     Http::preventStrayRequests();
