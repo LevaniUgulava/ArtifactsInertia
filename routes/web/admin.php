@@ -7,6 +7,7 @@ use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TryonController;
 
 Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::get('/login', [AuthController::class, 'showAdminLogin'])->name('login');
@@ -27,4 +28,9 @@ Route::prefix('admin')
         Route::resource('categories', CategoryController::class)->except(['show']);
         Route::resource('collections', CollectionController::class)->except(['show']);
         Route::get('/media', [MediaController::class, 'index'])->name('media.index');
+        Route::get('/tryon', [TryonController::class, 'index'])->name('tryon.index');
+        Route::post('/tryon', [TryonController::class, 'store'])->middleware('throttle:10,1')->name('tryon.store');
+        Route::post('/tryon/predictions/{tryonPrediction}/refresh', [TryonController::class, 'refresh'])
+            ->middleware('throttle:120,1')
+            ->name('tryon.refresh');
     });

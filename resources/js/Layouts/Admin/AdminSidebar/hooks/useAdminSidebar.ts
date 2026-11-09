@@ -1,5 +1,5 @@
 import { usePage } from '@inertiajs/react';
-import { FolderKanban, Images, LayoutDashboard, MessagesSquare, Package, Tags } from 'lucide-react';
+import { FolderKanban, Images, LayoutDashboard, MessagesSquare, Package, Tags, WandSparkles } from 'lucide-react';
 import { useState } from 'react';
 import type { AdminNavItem } from '@/Layouts/Admin/AdminSidebar/AdminSidebarTypes';
 import admin from '@/routes/admin';
@@ -16,6 +16,7 @@ export function useAdminSidebar() {
         { icon: FolderKanban, label: 'collections', href: admin.collections.index.url() },
         { icon: Images, label: 'media', href: admin.media.index.url() },
         { icon: MessagesSquare, label: 'chat', href: admin.chat.index.url() },
+        { icon: WandSparkles, label: 'tryon', href: admin.tryon.index.url() },
     ];
 
     function toggleSidebar() {

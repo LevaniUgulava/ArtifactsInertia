@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'fashn' => [
+        'base_url' => env('FASHN_API_BASE_URL', 'https://api.fashn.ai/v1'),
+        'key' => env('FASHN_API_KEY'),
+    ],
+
 ];

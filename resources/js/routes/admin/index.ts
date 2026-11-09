@@ -5,6 +5,7 @@ import products from './products'
 import categories from './categories'
 import collections from './collections'
 import media from './media'
+import tryon from './tryon'
 /**
 * @see \App\Http\Controllers\Auth\AuthController::login
 * @see app/Http/Controllers/Auth/AuthController.php:30
@@ -206,6 +207,7 @@ const admin = {
     categories: Object.assign(categories, categories),
     collections: Object.assign(collections, collections),
     media: Object.assign(media, media),
+    tryon: Object.assign(tryon, tryon),
 }
 
 export default admin

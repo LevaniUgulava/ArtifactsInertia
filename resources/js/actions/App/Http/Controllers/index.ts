@@ -5,6 +5,7 @@ import ProductController from './ProductController'
 import CategoryController from './CategoryController'
 import CollectionController from './CollectionController'
 import MediaController from './MediaController'
+import TryonController from './TryonController'
 import HomeController from './HomeController'
 import CatalogController from './CatalogController'
 import CartController from './CartController'
@@ -20,6 +21,7 @@ const Controllers = {
     CategoryController: Object.assign(CategoryController, CategoryController),
     CollectionController: Object.assign(CollectionController, CollectionController),
     MediaController: Object.assign(MediaController, MediaController),
+    TryonController: Object.assign(TryonController, TryonController),
     HomeController: Object.assign(HomeController, HomeController),
     CatalogController: Object.assign(CatalogController, CatalogController),
     CartController: Object.assign(CartController, CartController),
